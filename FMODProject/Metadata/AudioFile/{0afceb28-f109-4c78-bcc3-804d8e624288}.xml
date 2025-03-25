@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{0afceb28-f109-4c78-bcc3-804d8e624288}">
+		<property name="assetPath">
+			<value>Kick.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>1.33281179138322</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{0947b70a-fbc5-40ee-aa2b-c84a7ce2e9d1}</destination>
+		</relationship>
+	</object>
+</objects>
