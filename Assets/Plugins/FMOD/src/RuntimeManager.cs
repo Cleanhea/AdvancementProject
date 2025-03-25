@@ -336,10 +336,14 @@ retry:
             result = coreSystem.setSoftwareFormat(sampleRate, speakerMode, 0);
             CheckInitResult(result, "FMOD.System.setSoftwareFormat");
 
-            if (dspBufferLength > 0 && dspBufferCount > 0)
-            {
-                result = coreSystem.setDSPBufferSize(dspBufferLength, dspBufferCount);
-                CheckInitResult(result, "FMOD.System.setDSPBufferSize");
+            // if (dspBufferLength > 0 && dspBufferCount > 0)
+            // {
+            //     result = coreSystem.setDSPBufferSize(dspBufferLength, dspBufferCount);
+            //     CheckInitResult(result, "FMOD.System.setDSPBufferSize");
+            // }
+            if(true){
+                result = coreSystem.setDSPBufferSize(64,2);
+                CheckInitResult(result,"FMOD.System.setDSPBufferSize");
             }
 
             result = coreSystem.setAdvancedSettings(ref advancedSettings);
