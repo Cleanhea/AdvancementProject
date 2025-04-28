@@ -42,7 +42,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638785309037694837
+  lastModified: 638814742318429982
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -65,12 +65,13 @@ MonoBehaviour:
   - {fileID: 8919382533530419305}
   EditorEvents:
   - {fileID: -8651009820645577372}
+  - {fileID: 7605252290987865621}
   EditorParameters: []
   MasterBanks:
   - {fileID: -2862972496294479044}
   StringsBanks:
   - {fileID: 6528054813473459205}
-  cacheTime: 638785309038607002
+  cacheTime: 638814742318818948
   cacheVersion: 131623
 --- !u!114 &6528054813473459205
 MonoBehaviour:
@@ -87,11 +88,38 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638785309037804830
+  lastModified: 638814742318469880
   FileSizes:
   - Name: Desktop
-    Value: 800
+    Value: 850
   Exists: 1
+--- !u!114 &7605252290987865621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TmpStep
+  m_EditorClassIdentifier: 
+  Path: event:/TmpStep
+  Guid:
+    Data1: 925176088
+    Data2: 1107372596
+    Data3: -19351662
+    Data4: -1432041244
+  Banks:
+  - {fileID: 8919382533530419305}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 600
 --- !u!114 &8919382533530419305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,8 +135,8 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638785309038607002
+  lastModified: 638814742318818948
   FileSizes:
   - Name: Desktop
-    Value: 9472
+    Value: 10912
   Exists: 1

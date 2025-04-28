@@ -1,37 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using FMODUnity;
+using FMOD.Studio;
 using UnityEngine;
 
 public class Test1 : MonoBehaviour
 {
-    [SerializeField]
-    private EventReference test1;
-    bool check = false;
-
-
+    private EventInstance test;
+    void Start()
+    {
+        test = AudioManager.instance.CreateInstance(FmodEvent.instance.LoopSFX);
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("??");
-            StartCoroutine(test2());
+            AudioManager.instance.PlayOneShot(FmodEvent.instance.KickSFX, transform.position);
         }
-        if (check == false)
-        {
-            Debug.Log("테스트");
-            AudioManager.instance.PlayOneShot(test1, transform.position);
-            check = true;
-        }
+
+        UpdateSound();
     }
 
-    IEnumerator test2()
+    private void UpdateSound()
     {
-        for (int i = 0; i < 10; i++)
+        PLAYBACK_STATE state;
+        test.getPlaybackState(out state);
+        if (state.Equals(PLAYBACK_STATE.STOPPED))
         {
-            Debug.Log("뭐지");
-            AudioManager.instance.PlayOneShot(test1, transform.position);
-            yield return new WaitForSeconds(1f);
+            test.start();
+        }
+        else
+        {
+            test.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 }
