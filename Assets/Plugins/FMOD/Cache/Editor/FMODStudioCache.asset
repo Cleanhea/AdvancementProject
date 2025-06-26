@@ -27,6 +27,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6036873956604757182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SoHappy
+  m_EditorClassIdentifier: 
+  Path: event:/SoHappy
+  Guid:
+    Data1: 107800957
+    Data2: 1291822890
+    Data3: 808271765
+    Data4: 1159593254
+  Banks:
+  - {fileID: -1907117335244470613}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 161044
 --- !u!114 &-2862972496294479044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,10 +69,30 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638814742318429982
+  lastModified: 638863104038354894
   FileSizes:
   - Name: Desktop
     Value: 1036
+  Exists: 1
+--- !u!114 &-1907117335244470613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SoHappy.bank
+  m_EditorClassIdentifier: 
+  Path: FMODProject/Build/Desktop/SoHappy.bank
+  Name: SoHappy
+  StudioPath: bank:/SoHappy
+  lastModified: 638864882214431829
+  FileSizes:
+  - Name: Desktop
+    Value: 2292992
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -63,15 +110,17 @@ MonoBehaviour:
   - {fileID: 6528054813473459205}
   - {fileID: -2862972496294479044}
   - {fileID: 8919382533530419305}
+  - {fileID: -1907117335244470613}
   EditorEvents:
   - {fileID: -8651009820645577372}
   - {fileID: 7605252290987865621}
+  - {fileID: -6036873956604757182}
   EditorParameters: []
   MasterBanks:
   - {fileID: -2862972496294479044}
   StringsBanks:
   - {fileID: 6528054813473459205}
-  cacheTime: 638814742318818948
+  cacheTime: 638864882214431829
   cacheVersion: 131623
 --- !u!114 &6528054813473459205
 MonoBehaviour:
@@ -88,10 +137,10 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638814742318469880
+  lastModified: 638863104038394771
   FileSizes:
   - Name: Desktop
-    Value: 850
+    Value: 936
   Exists: 1
 --- !u!114 &7605252290987865621
 MonoBehaviour:
