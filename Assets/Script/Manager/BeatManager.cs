@@ -5,8 +5,10 @@ using UnityEngine;
 public class BeatManager : MonoBehaviour
 {
     public static BeatManager instance;
-    public List<Notes> notes;
+    public NotesData notes;
     Queue<Notes> noteQueue;
+    string Playname;
+    float bpm;
 
     private void Awake()
     {
@@ -21,8 +23,10 @@ public class BeatManager : MonoBehaviour
     public void BeatStart()
     {
         notes = NotesLoader.LoadChart(SongName.SoHappy);
+        bpm = notes.bpm;
+        Playname = notes.name;
         AudioManager.OnBeat += HandleOnBeat;
-        noteQueue = new Queue<Notes>(notes);
+        noteQueue = new Queue<Notes>(notes.notes);
     }
 
     void OnDestroy() => AudioManager.OnBeat -= HandleOnBeat;
@@ -30,7 +34,6 @@ public class BeatManager : MonoBehaviour
     // 비트 발생시 처리 함수
     void HandleOnBeat(int bar, int beatIndex)
     {
-
         while (noteQueue.Count > 0 && noteQueue.Peek().bar == bar && noteQueue.Peek().beat == beatIndex)
         {
             Notes note = noteQueue.Dequeue();

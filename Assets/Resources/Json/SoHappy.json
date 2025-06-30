@@ -1,4 +1,6 @@
 {
+  "name": "SoHappy",
+  "bpm": 126,
   "notes":[{ "bar": 2, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1},
           { "bar": 2, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
           { "bar": 3, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1},

@@ -12,9 +12,9 @@ public class BeatEvent : MonoBehaviour
     Vector3 leftPoint;
     Vector3 rightPoint;
     [SerializeField]
-    Vector3 leftCirclePosition = new Vector3(-1.0f, -3.0f, 0);
+    Vector3 leftCirclePosition = new Vector3(-3.5f, -3.0f, 0);
     [SerializeField]
-    Vector3 rightCirclePosition = new Vector3(1.0f, -3.0f, 0);
+    Vector3 rightCirclePosition = new Vector3(3.5f, -3.0f, 0);
     [SerializeField]
     float pointOffset = 6.0f;
     [SerializeField]
@@ -43,18 +43,26 @@ public class BeatEvent : MonoBehaviour
     public void BeatHandling(Notes notes)
     {
         ref Vector3 point = ref leftPoint;
-        ref Queue<GameObject> footHoldQueue = ref leftFootHoldQueue;
         if (notes.type == 1)
         {
             point = ref rightPoint;
-            footHoldQueue = ref rightFootHoldQueue;
         }
         GameObject footHold = FootHoldObjectFool.instance.GetFootHold();
-        footHoldQueue.Enqueue(footHold);
+        NoteCreate noteCreate = footHold.GetComponent<NoteCreate>();
+        if (notes.type == 0)
+        {
+            noteCreate.isLeft = true;
+            leftFootHoldQueue.Enqueue(footHold);
+        }
+        else
+        {
+            noteCreate.isLeft = false;
+            rightFootHoldQueue.Enqueue(footHold);
+        }
         switch (notes.direction)
         {
             case 0:
-                footHold.transform.rotation = Quaternion.Euler(0, 0, 90f);
+                footHold.transform.rotation = Quaternion.Euler(0, 0, 270f);
                 footHold.transform.position = point + new Vector3(footHoldOffset, 0, 0);
                 point += new Vector3(pointOffset, 0, 0);
                 break;
@@ -69,14 +77,10 @@ public class BeatEvent : MonoBehaviour
                 point += new Vector3(0, pointOffset, 0);
                 break;
             case 3:
-                footHold.transform.rotation = Quaternion.Euler(0, 0, 0);
+                footHold.transform.rotation = Quaternion.Euler(0, 0, 180f);
                 footHold.transform.position = point + new Vector3(0, -footHoldOffset, 0);
                 point += new Vector3(0, -pointOffset, 0);
                 break;
-        }
-        if (footHoldQueue.Count > 3)
-        {
-            FootHoldObjectFool.instance.ReturnFootHold(footHoldQueue.Dequeue());
         }
     }
 }

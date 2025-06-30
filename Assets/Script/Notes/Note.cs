@@ -16,7 +16,9 @@ public class Notes
 }
 
 [System.Serializable]
-public class NotesList
+public class NotesData
 {
+    public string name;
+    public float bpm;
     public List<Notes> notes;
 }

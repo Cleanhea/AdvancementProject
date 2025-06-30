@@ -10,6 +10,7 @@ public enum SongName
 public class NotesLoader : MonoBehaviour
 {
     public static NotesLoader instance;
+    public float bpm;
     private void Awake()
     {
         if (instance == null)
@@ -22,9 +23,9 @@ public class NotesLoader : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public static List<Notes> LoadChart(SongName songName)
+    public static NotesData LoadChart(SongName songName)
     {
-        List<Notes> temp;
+        NotesData temp;
         string path = $"Json/{songName}";
         TextAsset jsonFile = Resources.Load<TextAsset>(path);
         if (jsonFile == null)
@@ -32,7 +33,7 @@ public class NotesLoader : MonoBehaviour
             Debug.LogError($"파일을 찾을 수 없습니다: Resources/{path}.json");
             return null;
         }
-        temp = JsonUtility.FromJson<NotesList>(jsonFile.text).notes;
+        temp = JsonUtility.FromJson<NotesData>(jsonFile.text);
         return temp;
     }
 }
