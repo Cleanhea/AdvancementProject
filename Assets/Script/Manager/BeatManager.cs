@@ -7,8 +7,8 @@ public class BeatManager : MonoBehaviour
     public static BeatManager instance;
     public NotesData notes;
     Queue<Notes> noteQueue;
-    string Playname;
-    float bpm;
+    public string Playname;
+    public float bpm;
 
     private void Awake()
     {

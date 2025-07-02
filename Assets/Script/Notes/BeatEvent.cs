@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BeatEvent : MonoBehaviour
 {
@@ -19,8 +21,8 @@ public class BeatEvent : MonoBehaviour
     float pointOffset = 6.0f;
     [SerializeField]
     float footHoldOffset = 3.0f;
-    Queue<GameObject> leftFootHoldQueue = new Queue<GameObject>();
-    Queue<GameObject> rightFootHoldQueue = new Queue<GameObject>();
+    public Queue<NoteCreate> leftFootHoldQueue = new Queue<NoteCreate>();
+    public Queue<NoteCreate> rightFootHoldQueue = new Queue<NoteCreate>();
 
     void Awake()
     {
@@ -49,27 +51,28 @@ public class BeatEvent : MonoBehaviour
         }
         GameObject footHold = FootHoldObjectFool.instance.GetFootHold();
         NoteCreate noteCreate = footHold.GetComponent<NoteCreate>();
+        noteCreate.noteData = notes;
         if (notes.type == 0)
         {
             noteCreate.isLeft = true;
-            leftFootHoldQueue.Enqueue(footHold);
+            leftFootHoldQueue.Enqueue(noteCreate);
         }
         else
         {
             noteCreate.isLeft = false;
-            rightFootHoldQueue.Enqueue(footHold);
+            rightFootHoldQueue.Enqueue(noteCreate);
         }
         switch (notes.direction)
         {
             case 0:
-                footHold.transform.rotation = Quaternion.Euler(0, 0, 270f);
-                footHold.transform.position = point + new Vector3(footHoldOffset, 0, 0);
-                point += new Vector3(pointOffset, 0, 0);
-                break;
-            case 1:
                 footHold.transform.rotation = Quaternion.Euler(0, 0, 90f);
                 footHold.transform.position = point + new Vector3(-footHoldOffset, 0, 0);
                 point += new Vector3(-pointOffset, 0, 0);
+                break;
+            case 1:
+                footHold.transform.rotation = Quaternion.Euler(0, 0, 270f);
+                footHold.transform.position = point + new Vector3(footHoldOffset, 0, 0);
+                point += new Vector3(pointOffset, 0, 0);
                 break;
             case 2:
                 footHold.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -82,5 +85,35 @@ public class BeatEvent : MonoBehaviour
                 point += new Vector3(0, -pointOffset, 0);
                 break;
         }
+    }
+    public void MoveCircle(int dir, int type)
+    {
+        GameObject circle = leftCircle;
+        if (type == 1)
+        {
+            circle = rightCircle;
+        }
+        Transform tr = circle.transform;
+        Vector3 position = tr.position;
+        if (dir == 0)
+        {
+            MoveCircleStart(tr, position + new Vector3(-pointOffset, 0, 0));
+        }
+        else if (dir == 1)
+        {
+            MoveCircleStart(tr, position + new Vector3(pointOffset, 0, 0));
+        }
+        else if (dir == 2)
+        {
+            MoveCircleStart(tr, position + new Vector3(0, pointOffset, 0));
+        }
+        else if (dir == 3)
+        {
+            MoveCircleStart(tr, position + new Vector3(0, -pointOffset, 0));
+        }
+    }
+
+    void MoveCircleStart(Transform tr,Vector3 vec) {
+        tr.DOMove(vec, 0.08f);
     }
 }

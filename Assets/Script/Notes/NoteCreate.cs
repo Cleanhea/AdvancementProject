@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+
+public enum NoteState
+{
+    Ready,
+    Available,
+    Clear,
+}
 public class NoteCreate : MonoBehaviour
 {
     SpriteRenderer[] sr;
@@ -17,6 +24,8 @@ public class NoteCreate : MonoBehaviour
     [SerializeField]
     float destroyTime = 0.5f;
     float bpm;
+    public NoteState noteState = NoteState.Ready;
+    public Notes noteData;
     
 
     void Awake()
@@ -36,9 +45,12 @@ public class NoteCreate : MonoBehaviour
     }
     void OnEnable()
     {
+        noteState = NoteState.Ready;
         bpm = BeatManager.instance.notes.bpm;
         delayTime = 60f / bpm * 2;
         duration = 60f / bpm * 1;
+        guideCircle.SetActive(true);
+        guideCircle.transform.localPosition = new Vector3(0, -3f, 0);
         StartCoroutine(CreateNote());
     }
 
@@ -68,11 +80,11 @@ public class NoteCreate : MonoBehaviour
             c.a = 1f;
             sr[i].color = c;
         }
+        noteState = NoteState.Available;
         guideCircle.transform.DOLocalMove(new Vector3(0, 3f, 0), duration).SetEase(Ease.InOutSine).OnComplete(() =>
         {
             StartCoroutine(SetCircle());
         });
-
         yield return new WaitForSeconds(destroyDuration);
         StartCoroutine(DestroyNote());
     }
@@ -106,9 +118,16 @@ public class NoteCreate : MonoBehaviour
         Debug.Log("Destroy Note");
         FootHoldObjectFool.instance.ReturnFootHold(this.gameObject);
     }
+
     IEnumerator SetCircle()
     {
         yield return new WaitForSeconds(0.1f);
+        //게임오버
+        if (noteState == NoteState.Available)
+        {
+            Debug.Log("게임오버");
+        }
+
         guideCircle.SetActive(false);
     }
 }
