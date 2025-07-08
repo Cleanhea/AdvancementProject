@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         BeatEvent.instance.SetPoint(saveState.leftCirclePosition, saveState.rightCirclePosition);
         BeatEvent.instance.leftFootHoldQueue = saveState.leftFootHoldQueue;
         BeatEvent.instance.rightFootHoldQueue = saveState.rightFootHoldQueue;
+        Debug.Log(BeatEvent.instance.leftFootHoldQueue.Peek().noteData.direction);
         AudioManager.instance.PlayMusic("event:/" + BeatManager.instance.Playname, saveState.musicTime);
     }    
 }

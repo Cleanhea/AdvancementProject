@@ -274,6 +274,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &89459835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 89459837}
+  - component: {fileID: 89459836}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &89459836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89459835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ededb9ffc62f84390ba1c7ecaabf7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveState:
+    musicTime: 0
+    currentBar: 0
+    currentBeat: 0
+    cameraPosition: {x: 0, y: 0}
+    leftCirclePosition: {x: 0, y: 0, z: 0}
+    rightCirclePosition: {x: 0, y: 0, z: 0}
+--- !u!4 &89459837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89459835}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 429.75952, y: 345.07858, z: -0.055296946}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &290950722
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +359,8 @@ MonoBehaviour:
   rightCirclePrefab: {fileID: 573705413558754986, guid: 41ee8d7e1c3853740ae5784ab56c1bdc, type: 3}
   leftCircle: {fileID: 0}
   rightCircle: {fileID: 0}
+  leftPoint: {x: 0, y: 0, z: 0}
+  rightPoint: {x: 0, y: 0, z: 0}
   leftCirclePosition: {x: -3, y: -3, z: 0}
   rightCirclePosition: {x: 3, y: -3, z: 0}
   pointOffset: 6
@@ -343,7 +396,7 @@ MonoBehaviour:
     name: 
     bpm: 0
     notes: []
-  Playname: 
+  Playname: 0
   bpm: 0
 --- !u!1 &490985936
 GameObject:
@@ -1745,3 +1798,4 @@ SceneRoots:
   - {fileID: 290950724}
   - {fileID: 1026709972}
   - {fileID: 490985938}
+  - {fileID: 89459837}

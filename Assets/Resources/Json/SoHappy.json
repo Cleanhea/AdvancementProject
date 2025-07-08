@@ -3,7 +3,7 @@
   "bpm": 126,
   "notes":[{ "bar": 1, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1, "cameraPosition" : {"x" : 0, "y" : 0}},
           { "bar": 1, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0, "cameraPosition" : {"x" : 0, "y" : 0}},
-          { "bar": 5, "beat": 1,"direction" : 2,"sevent" : "save", "type" : 1, "cameraPosition" : {"x" : 0, "y" : 0}},
+          { "bar": 5, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1, "cameraPosition" : {"x" : 0, "y" : 0}},
           { "bar": 5, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0, "cameraPosition" : {"x" : 0, "y" : 0}},
           { "bar": 9, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1, "cameraPosition" : {"x" : 0, "y" : 0}},
           { "bar": 9, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0, "cameraPosition" : {"x" : 0, "y" : 0}},
