@@ -7,6 +7,7 @@ public class FootHoldObjectFool : MonoBehaviour
     public static FootHoldObjectFool instance;
     public GameObject FootHoldPrefab;
     Queue<GameObject> footHoldQueue = new Queue<GameObject>();
+    List<GameObject> footHoldList = new List<GameObject>();
     [SerializeField]
     int maxFootHoldCount = 20;
 
@@ -15,9 +16,10 @@ public class FootHoldObjectFool : MonoBehaviour
         instance = this;
         for (int i = 0; i < maxFootHoldCount; i++)
         {
-            GameObject footHold = Instantiate(FootHoldPrefab, Vector3.zero, Quaternion.identity,transform);
+            GameObject footHold = Instantiate(FootHoldPrefab, Vector3.zero, Quaternion.identity, transform);
             footHold.SetActive(false);
             footHoldQueue.Enqueue(footHold);
+            footHoldList.Add(footHold);
         }
     }
     public GameObject GetFootHold()
@@ -30,5 +32,16 @@ public class FootHoldObjectFool : MonoBehaviour
     {
         footHold.SetActive(false);
         footHoldQueue.Enqueue(footHold);
+    }
+    public void ResetQueue()
+    {
+        foreach(var footHold in footHoldList)
+        {
+            if(footHold.activeSelf)
+            {
+                footHold.SetActive(false);
+                footHoldQueue.Enqueue(footHold);
+            }
+        }
     }
 }

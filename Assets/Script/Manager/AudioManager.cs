@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
     private FMOD.Studio.EVENT_CALLBACK beatCallback;
-    EventInstance bgmInstance;
+    public EventInstance bgmInstance;
     string currentBGMPath;
     public static event Action<int, int> OnBeat; // bar, beat
 
@@ -28,13 +28,17 @@ public class AudioManager : MonoBehaviour
         }
     }
     // 재생
-    public void PlayMusic(string eventPath)
+    public void PlayMusic(string eventPath, int startTime)
     {
-        if (currentBGMPath == eventPath)
+        if (currentBGMPath == eventPath && bgmInstance.isValid())
+        {
+            bgmInstance.setTimelinePosition(startTime);
             return;
+        }
         StopMusic();
         bgmInstance = RuntimeManager.CreateInstance(eventPath);
         beatCallback = OnTimelineBeat;
+        bgmInstance.setTimelinePosition(startTime);
         bgmInstance.setCallback(beatCallback, EVENT_CALLBACK_TYPE.TIMELINE_BEAT);
         bgmInstance.start();
         currentBGMPath = eventPath;

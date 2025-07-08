@@ -11,8 +11,8 @@ public class BeatEvent : MonoBehaviour
     public GameObject rightCirclePrefab;
     public GameObject leftCircle;//유저가 조정하는것
     public GameObject rightCircle;// 유저가 조정하는것
-    Vector3 leftPoint;
-    Vector3 rightPoint;
+    public Vector3 leftPoint;
+    public Vector3 rightPoint;
     [SerializeField]
     Vector3 leftCirclePosition = new Vector3(-3.5f, -3.0f, 0);
     [SerializeField]
@@ -52,6 +52,10 @@ public class BeatEvent : MonoBehaviour
         GameObject footHold = FootHoldObjectFool.instance.GetFootHold();
         NoteCreate noteCreate = footHold.GetComponent<NoteCreate>();
         noteCreate.noteData = notes;
+        if (notes.sevent == "save")
+        {
+            GameManager.instance.SavePoint(notes.bar, notes.beat);
+        }
         if (notes.type == 0)
         {
             noteCreate.isLeft = true;
@@ -113,7 +117,16 @@ public class BeatEvent : MonoBehaviour
         }
     }
 
-    void MoveCircleStart(Transform tr,Vector3 vec) {
+    void MoveCircleStart(Transform tr, Vector3 vec)
+    {
         tr.DOMove(vec, 0.08f);
+    }
+    
+    public void SetPoint(Vector3 left, Vector3 right)
+    {
+        leftPoint = left;
+        rightPoint = right;
+        leftCircle.transform.position = leftPoint;
+        rightCircle.transform.position = rightPoint;
     }
 }

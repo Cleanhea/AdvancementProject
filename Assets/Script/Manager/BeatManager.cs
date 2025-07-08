@@ -6,8 +6,8 @@ public class BeatManager : MonoBehaviour
 {
     public static BeatManager instance;
     public NotesData notes;
-    Queue<Notes> noteQueue;
-    public string Playname;
+    public Queue<Notes> noteQueue;
+    public SongName Playname;
     public float bpm;
 
     private void Awake()
@@ -20,13 +20,14 @@ public class BeatManager : MonoBehaviour
         instance = this;
     }
     // FMOD에서 비트 읽어옴
-    public void BeatStart()
+    public void BeatStart(SongName songName)
     {
-        notes = NotesLoader.LoadChart(SongName.SoHappy);
+        AudioManager.OnBeat -= HandleOnBeat;
+        notes = NotesLoader.LoadChart(songName);
         bpm = notes.bpm;
-        Playname = notes.name;
-        AudioManager.OnBeat += HandleOnBeat;
+        Playname = songName;
         noteQueue = new Queue<Notes>(notes.notes);
+        AudioManager.OnBeat += HandleOnBeat;
     }
 
     void OnDestroy() => AudioManager.OnBeat -= HandleOnBeat;
@@ -38,6 +39,16 @@ public class BeatManager : MonoBehaviour
         {
             Notes note = noteQueue.Dequeue();
             BeatEvent.instance.BeatHandling(note);
+        }
+    }
+
+    public void RestartHandleBeat(int bar, int beatIndex)
+    {
+        while (noteQueue.Count > 0 &&
+        (noteQueue.Peek().bar < bar ||
+        (noteQueue.Peek().bar == bar && noteQueue.Peek().beat < beatIndex)))
+        {
+            noteQueue.Dequeue();
         }
     }
 }

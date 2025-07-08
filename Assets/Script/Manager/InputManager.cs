@@ -32,7 +32,8 @@ public class InputManager : MonoBehaviour
             }
             else if (queue.Peek().noteState == NoteState.Ready)
             {
-                Debug.Log("게임 오버");
+                Debug.Log("over");
+                GameManager.instance.RestartGame();
             }
         }
     }

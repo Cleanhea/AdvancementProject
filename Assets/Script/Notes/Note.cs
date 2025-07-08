@@ -11,8 +11,7 @@ public class Notes
     public int direction;//0: left, 1: right, 2: up, 3: down
     public string sevent;
     public int type;// 0 : left, 1 : right
-    public int cameraX;
-    public int cameraY;
+    public Vector2 cameraPosition;
 }
 
 [System.Serializable]

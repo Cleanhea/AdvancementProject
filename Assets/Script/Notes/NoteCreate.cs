@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public enum NoteState
 {
+    Normal,
     Ready,
     Available,
     Clear,
@@ -45,7 +46,7 @@ public class NoteCreate : MonoBehaviour
     }
     void OnEnable()
     {
-        noteState = NoteState.Ready;
+        noteState = NoteState.Normal;
         bpm = BeatManager.instance.notes.bpm;
         delayTime = 60f / bpm * 2;
         duration = 60f / bpm * 1;
@@ -60,6 +61,10 @@ public class NoteCreate : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < duration)
         {
+            if(elapsed> duration * 0.5f && noteState == NoteState.Normal)
+            {
+                noteState = NoteState.Ready;
+            }
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
             float alpha = Mathf.Pow(t, 0.7f);
@@ -115,7 +120,6 @@ public class NoteCreate : MonoBehaviour
         Color d = circleRenderer.color;
         d.a = 0f;
         circleRenderer.color = d;
-        Debug.Log("Destroy Note");
         FootHoldObjectFool.instance.ReturnFootHold(this.gameObject);
     }
 
@@ -125,7 +129,9 @@ public class NoteCreate : MonoBehaviour
         //게임오버
         if (noteState == NoteState.Available)
         {
-            Debug.Log("게임오버");
+            Debug.Log("시간초과로 인한 게임오버");
+            GameManager.instance.RestartGame();
+            yield break;
         }
 
         guideCircle.SetActive(false);
