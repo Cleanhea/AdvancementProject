@@ -1,15 +1,18 @@
 {
   "name": "SoHappy",
   "bpm": 126,
-  "notes":[{ "bar": 1, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1, "cameraPosition" : {"x" : 0, "y" : 0}},
-          { "bar": 1, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0, "cameraPosition" : {"x" : 0, "y" : 0}},
-          { "bar": 5, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1, "cameraPosition" : {"x" : 0, "y" : 0}},
-          { "bar": 5, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0, "cameraPosition" : {"x" : 0, "y" : 0}},
-          { "bar": 9, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1, "cameraPosition" : {"x" : 0, "y" : 0}},
-          { "bar": 9, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0, "cameraPosition" : {"x" : 0, "y" : 0}},
-          { "bar": 13, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 1, "cameraPosition" : {"x" : 0, "y" : 0}},
-          { "bar": 13, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 0, "cameraPosition" : {"x" : 0, "y" : 0}},
-          { "bar": 17, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 0, "cameraPosition" : {"x" : 0, "y" : 0}},
-          { "bar": 19, "beat": 1,"direction" : 0,"sevent" : "save", "type" : 1, "cameraPosition" : {"x" : 0, "y" : 0}}
+  "notes":[
+  { "bar": 1, "beat": 1,"direction" : 1,"sevent" : "save", "type" : 1},
+  { "bar": 2, "beat": 2,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 5, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1},
+  { "bar": 5, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0, "cameraPosition" : {"x" : 0, "y" : 3}},
+  { "bar": 9, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1},
+  { "bar": 9, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
+
+  { "bar": 13, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 1, "cameraPosition" : {"x" : 0, "y" : -5}},
+  { "bar": 13, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 0},
+
+  { "bar": 17, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 0},
+  { "bar": 18, "beat": 1,"direction" : 3,"sevent" : "save", "type" : 1}
   ]
 }

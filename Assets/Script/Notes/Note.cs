@@ -4,6 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public class CameraPos
+{
+    public float x;
+    public float y;
+}
+
+
+[System.Serializable]
 public class Notes
 {
     public int bar;
@@ -11,7 +19,7 @@ public class Notes
     public int direction;//0: left, 1: right, 2: up, 3: down
     public string sevent;
     public int type;// 0 : left, 1 : right
-    public Vector2 cameraPosition;
+    public CameraPos cameraPosition;
 }
 
 [System.Serializable]

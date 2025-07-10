@@ -2,21 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class BeatEvent : MonoBehaviour
 {
     public static BeatEvent instance;
     public GameObject leftCirclePrefab;
     public GameObject rightCirclePrefab;
-    public GameObject leftCircle;//유저가 조정하는것
-    public GameObject rightCircle;// 유저가 조정하는것
+    public GameObject guideCirclePrefab;
+
+    GameObject leftGuideCircle;
+    GameObject rightGuideCircle;
+    GameObject leftCircle;//유저가 조정하는것
+    GameObject rightCircle;// 유저가 조정하는것
     public Vector3 leftPoint;
     public Vector3 rightPoint;
-    [SerializeField]
-    Vector3 leftCirclePosition = new Vector3(-3.5f, -3.0f, 0);
-    [SerializeField]
-    Vector3 rightCirclePosition = new Vector3(3.5f, -3.0f, 0);
+    public Camera mainCamera;
+    public float cameraSpeedOffset = 0.2f;
+
+    public Vector3 startLeftCirclePosition = new Vector3(-3.5f, -3.0f, 0);
+    public Vector3 startRightCirclePosition = new Vector3(3.5f, -3.0f, 0);
+
     [SerializeField]
     float pointOffset = 6.0f;
     [SerializeField]
@@ -36,8 +41,10 @@ public class BeatEvent : MonoBehaviour
 
     void Start()
     {
-        leftCircle = Instantiate(leftCirclePrefab, leftCirclePosition, Quaternion.identity);
-        rightCircle = Instantiate(rightCirclePrefab, rightCirclePosition, Quaternion.identity);
+        leftCircle = Instantiate(leftCirclePrefab, startLeftCirclePosition, Quaternion.identity);
+        rightCircle = Instantiate(rightCirclePrefab, startRightCirclePosition, Quaternion.identity);
+        leftGuideCircle = Instantiate(guideCirclePrefab, startLeftCirclePosition, Quaternion.identity);
+        rightGuideCircle = Instantiate(guideCirclePrefab, startRightCirclePosition, Quaternion.identity);
         leftPoint = leftCircle.transform.position;
         rightPoint = rightCircle.transform.position;
     }
@@ -121,12 +128,70 @@ public class BeatEvent : MonoBehaviour
     {
         tr.DOMove(vec, 0.08f);
     }
-    
+
     public void SetPoint(Vector3 left, Vector3 right)
     {
         leftPoint = left;
         rightPoint = right;
         leftCircle.transform.position = leftPoint;
         rightCircle.transform.position = rightPoint;
+    }
+    public void MoveCamera(Vector3 vec)
+    {
+        Debug.Log(vec);
+        mainCamera.transform.DOMove(mainCamera.transform.position + new Vector3(vec.x, vec.y, -10), cameraSpeedOffset).SetEase(Ease.InOutSine);
+    }
+
+    public void SetCameraPos(Vector3 vec)
+    {
+        mainCamera.transform.position = vec;
+    }
+
+    public CameraPos GetCameraPos()
+    {
+        CameraPos temp = new CameraPos();
+        temp.x = mainCamera.transform.position.x;
+        temp.y = mainCamera.transform.position.y;
+        return temp;
+    }
+
+    public void SetCircle()
+    {
+        leftCircle.transform.position = startLeftCirclePosition;
+        rightCircle.transform.position = startRightCirclePosition;
+        leftPoint = startLeftCirclePosition;
+        rightPoint = startRightCirclePosition;
+    }
+
+    public Tween MoveGuideCircle(int dir, int type, float duration)
+    {
+        GameObject guideCircle = leftGuideCircle;
+        if (type == 1)
+        {
+            guideCircle = rightGuideCircle;
+        }
+        Transform tr = guideCircle.transform;
+        Vector3 position = tr.position;
+        if (dir == 0)
+        {
+            return guideCircle.transform.DOLocalMove(position + new Vector3(-pointOffset, 0, 0), duration).SetEase(Ease.InOutSine);
+        }
+        else if (dir == 1)
+        {
+            return guideCircle.transform.DOLocalMove(position + new Vector3(pointOffset, 0, 0), duration).SetEase(Ease.InOutSine);
+        }
+        else if (dir == 2)
+        {
+            return guideCircle.transform.DOLocalMove(position + new Vector3(0, pointOffset, 0), duration).SetEase(Ease.InOutSine);
+
+        }
+        else if (dir == 3)
+        {
+            return guideCircle.transform.DOLocalMove(position + new Vector3(0, -pointOffset, 0), duration).SetEase(Ease.InOutSine);
+        }
+        else
+        {
+            return null;
+        }
     }
 }

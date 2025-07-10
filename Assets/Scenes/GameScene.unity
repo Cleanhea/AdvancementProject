@@ -307,7 +307,9 @@ MonoBehaviour:
     musicTime: 0
     currentBar: 0
     currentBeat: 0
-    cameraPosition: {x: 0, y: 0}
+    cameraPosition:
+      x: 0
+      y: 0
     leftCirclePosition: {x: 0, y: 0, z: 0}
     rightCirclePosition: {x: 0, y: 0, z: 0}
 --- !u!4 &89459837
@@ -357,12 +359,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftCirclePrefab: {fileID: 5292164441359427953, guid: 4679cad6828b20547a92b82cdea8a1cb, type: 3}
   rightCirclePrefab: {fileID: 573705413558754986, guid: 41ee8d7e1c3853740ae5784ab56c1bdc, type: 3}
-  leftCircle: {fileID: 0}
-  rightCircle: {fileID: 0}
+  guideCirclePrefab: {fileID: 5666079340442837444, guid: 1b5b774ef2a149d4b922d1dfb7d5c529, type: 3}
   leftPoint: {x: 0, y: 0, z: 0}
   rightPoint: {x: 0, y: 0, z: 0}
-  leftCirclePosition: {x: -3, y: -3, z: 0}
-  rightCirclePosition: {x: 3, y: -3, z: 0}
+  mainCamera: {fileID: 519420031}
+  cameraSpeedOffset: 0.2
+  startLeftCirclePosition: {x: -3.5, y: 0, z: 0}
+  startRightCirclePosition: {x: 3.5, y: 0, z: 0}
   pointOffset: 6
   footHoldOffset: 3
 --- !u!4 &290950724
@@ -538,7 +541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
-  - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -556,7 +559,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.9411765, g: 0.972549, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -612,7 +615,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
+--- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -621,11 +624,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nonRigidbodyVelocity: 0
-  attenuationObject: {fileID: 0}
+  m_AssetsPPU: 64
+  m_RefResolutionX: 1920
+  m_RefResolutionY: 1080
+  m_UpscaleRT: 0
+  m_PixelSnapping: 0
+  m_CropFrameX: 0
+  m_CropFrameY: 0
+  m_StretchFill: 0
 --- !u!1 &597183949
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,8 +840,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 58.857544, y: 136.30136}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: 496.33765}
+  m_SizeDelta: {x: 578.134, y: 87.3248}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &758874832
 MonoBehaviour:
@@ -1398,7 +1407,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Music Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1425,8 +1434,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

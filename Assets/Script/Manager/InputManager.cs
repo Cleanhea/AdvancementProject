@@ -22,10 +22,16 @@ public class InputManager : MonoBehaviour
         if (queue.Count == 0)
             return;
         int dir = queue.Peek().noteData.direction;
+        Notes noteData = queue.Peek().noteData;
         if (Input.GetKeyDown(keys[dir]))
         {
+            //성공시
             if (queue.Peek().noteState == NoteState.Available)
             {
+                if (noteData.cameraPosition.y != 0 || noteData.cameraPosition.x != 0)
+                {
+                    BeatEvent.instance.MoveCamera(new Vector3(noteData.cameraPosition.x, noteData.cameraPosition.y, -10));
+                }
                 BeatEvent.instance.MoveCircle(dir, type);
                 queue.Peek().noteState = NoteState.Clear;
                 queue.Dequeue();

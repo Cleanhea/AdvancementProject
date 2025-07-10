@@ -13,8 +13,6 @@ public enum NoteState
 public class NoteCreate : MonoBehaviour
 {
     SpriteRenderer[] sr;
-    SpriteRenderer circleRenderer;
-    GameObject guideCircle;
     public bool isLeft;
     [SerializeField]
     float delayTime;
@@ -32,17 +30,12 @@ public class NoteCreate : MonoBehaviour
     void Awake()
     {
         sr = GetComponentsInChildren<SpriteRenderer>(includeInactive: true);
-        circleRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        guideCircle = transform.GetChild(1).gameObject;
-        for (int i = 1; i < sr.Length; i++)
+        for (int i = 0; i < sr.Length; i++)
         {
             Color c = sr[i].color;
             c.a = 0f;
             sr[i].color = c;
         }
-        Color d = circleRenderer.color;
-        d.a = 0f;
-        circleRenderer.color = d;
     }
     void OnEnable()
     {
@@ -50,8 +43,6 @@ public class NoteCreate : MonoBehaviour
         bpm = BeatManager.instance.notes.bpm;
         delayTime = 60f / bpm * 2;
         duration = 60f / bpm * 1;
-        guideCircle.SetActive(true);
-        guideCircle.transform.localPosition = new Vector3(0, -3f, 0);
         StartCoroutine(CreateNote());
     }
 
@@ -59,37 +50,32 @@ public class NoteCreate : MonoBehaviour
     {
         yield return new WaitForSeconds(delayTime);
         float elapsed = 0f;
+        noteState = NoteState.Ready;
         while (elapsed < duration)
         {
-            if(elapsed> duration * 0.5f && noteState == NoteState.Normal)
-            {
-                noteState = NoteState.Ready;
-            }
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
             float alpha = Mathf.Pow(t, 0.7f);
-            for (int i = 1; i < sr.Length; i++)
+            for (int i = 0; i < sr.Length; i++)
             {
                 Color c = sr[i].color;
                 c.a = alpha;
                 sr[i].color = c;
             }
-            Color d = circleRenderer.color;
-            d.a = alpha * 0.5f;
-            circleRenderer.color = d;
             yield return null;
         }
-        for (int i = 1; i < sr.Length; i++)
+        for (int i = 0; i < sr.Length; i++)
         {
             Color c = sr[i].color;
             c.a = 1f;
             sr[i].color = c;
         }
         noteState = NoteState.Available;
-        guideCircle.transform.DOLocalMove(new Vector3(0, 3f, 0), duration).SetEase(Ease.InOutSine).OnComplete(() =>
-        {
-            StartCoroutine(SetCircle());
-        });
+        Tween move = BeatEvent.instance.MoveGuideCircle(noteData.direction, noteData.type, duration);
+        if (move != null)
+            yield return move.WaitForCompletion();
+        if (isActiveAndEnabled)
+                StartCoroutine(SetCircle());
         yield return new WaitForSeconds(destroyDuration);
         StartCoroutine(DestroyNote());
     }
@@ -100,31 +86,26 @@ public class NoteCreate : MonoBehaviour
         while (elapsed < destroyTime)
         {
             elapsed += Time.deltaTime;
-            for (int i = 1; i < sr.Length; i++)
+            for (int i = 0; i < sr.Length; i++)
             {
                 Color c = sr[i].color;
                 c.a = Mathf.Clamp01(1f - elapsed / destroyTime);
                 sr[i].color = c;
             }
-            Color e = circleRenderer.color;
-            e.a = Mathf.Clamp01(1f - elapsed / destroyTime);
-            circleRenderer.color = e / 2;
             yield return null;
         }
-        for (int i = 1; i < sr.Length; i++)
+        for (int i = 0; i < sr.Length; i++)
         {
             Color c = sr[i].color;
             c.a = 0f;
             sr[i].color = c;
         }
-        Color d = circleRenderer.color;
-        d.a = 0f;
-        circleRenderer.color = d;
         FootHoldObjectFool.instance.ReturnFootHold(this.gameObject);
     }
 
     IEnumerator SetCircle()
     {
+        Debug.Log(noteData.cameraPosition.x + " "+ noteData.cameraPosition.y);
         yield return new WaitForSeconds(0.1f);
         //게임오버
         if (noteState == NoteState.Available)
@@ -133,7 +114,5 @@ public class NoteCreate : MonoBehaviour
             GameManager.instance.RestartGame();
             yield break;
         }
-
-        guideCircle.SetActive(false);
     }
 }

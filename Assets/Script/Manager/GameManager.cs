@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
         saveState.currentBeat = beat;
         saveState.leftCirclePosition = BeatEvent.instance.leftPoint;
         saveState.rightCirclePosition = BeatEvent.instance.rightPoint;
+        saveState.cameraPosition = BeatEvent.instance.GetCameraPos();
         saveState.leftFootHoldQueue.Clear();
         saveState.rightFootHoldQueue.Clear();
         foreach (var item in BeatEvent.instance.leftFootHoldQueue)
@@ -44,10 +46,11 @@ public class GameManager : MonoBehaviour
         saveState.musicTime = ms-1000;
     }
 
-    //게임오버시 재시작 *** 카메라 위치 초기화 아직 안함
     public void RestartGame()
     {
         SongName playname = BeatManager.instance.Playname;
+        BeatEvent.instance.SetCameraPos(new Vector3(saveState.cameraPosition.x,saveState.cameraPosition.y,-10));
+        DOTween.KillAll(false);
         //오브젝트 풀 리셋
         FootHoldObjectFool.instance.ResetQueue();
         AudioManager.instance.StopMusic();
@@ -56,7 +59,6 @@ public class GameManager : MonoBehaviour
         BeatEvent.instance.SetPoint(saveState.leftCirclePosition, saveState.rightCirclePosition);
         BeatEvent.instance.leftFootHoldQueue = saveState.leftFootHoldQueue;
         BeatEvent.instance.rightFootHoldQueue = saveState.rightFootHoldQueue;
-        Debug.Log(BeatEvent.instance.leftFootHoldQueue.Peek().noteData.direction);
         AudioManager.instance.PlayMusic("event:/" + BeatManager.instance.Playname, saveState.musicTime);
     }    
 }
