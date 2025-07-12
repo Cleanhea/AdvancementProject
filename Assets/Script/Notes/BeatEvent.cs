@@ -18,6 +18,7 @@ public class BeatEvent : MonoBehaviour
     public Vector3 rightPoint;
     public Camera mainCamera;
     public float cameraSpeedOffset = 0.2f;
+    public Vector3 cameraPoint = new Vector3(0, 0, -10);
 
     public Vector3 startLeftCirclePosition = new Vector3(-3.5f, -3.0f, 0);
     public Vector3 startRightCirclePosition = new Vector3(3.5f, -3.0f, 0);
@@ -61,6 +62,7 @@ public class BeatEvent : MonoBehaviour
         noteCreate.noteData = notes;
         if (notes.sevent == "save")
         {
+            Debug.Log("SavePoint");
             GameManager.instance.SavePoint(notes.bar, notes.beat);
         }
         if (notes.type == 0)
@@ -135,10 +137,13 @@ public class BeatEvent : MonoBehaviour
         rightPoint = right;
         leftCircle.transform.position = leftPoint;
         rightCircle.transform.position = rightPoint;
+        leftGuideCircle.transform.position = leftPoint;
+        rightGuideCircle.transform.position = rightPoint;
     }
     public void MoveCamera(Vector3 vec)
     {
         Debug.Log(vec);
+        cameraPoint += new Vector3(vec.x, vec.y);
         mainCamera.transform.DOMove(mainCamera.transform.position + new Vector3(vec.x, vec.y, -10), cameraSpeedOffset).SetEase(Ease.InOutSine);
     }
 
@@ -150,8 +155,8 @@ public class BeatEvent : MonoBehaviour
     public CameraPos GetCameraPos()
     {
         CameraPos temp = new CameraPos();
-        temp.x = mainCamera.transform.position.x;
-        temp.y = mainCamera.transform.position.y;
+        temp.x = cameraPoint.x;
+        temp.y = cameraPoint.y;
         return temp;
     }
 

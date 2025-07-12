@@ -310,8 +310,8 @@ MonoBehaviour:
     cameraPosition:
       x: 0
       y: 0
-    leftCirclePosition: {x: 0, y: 0, z: 0}
-    rightCirclePosition: {x: 0, y: 0, z: 0}
+    leftCirclePosition: {x: -3, y: 0, z: 0}
+    rightCirclePosition: {x: 3, y: 0, z: 0}
 --- !u!4 &89459837
 Transform:
   m_ObjectHideFlags: 0
@@ -364,8 +364,9 @@ MonoBehaviour:
   rightPoint: {x: 0, y: 0, z: 0}
   mainCamera: {fileID: 519420031}
   cameraSpeedOffset: 0.2
-  startLeftCirclePosition: {x: -3.5, y: 0, z: 0}
-  startRightCirclePosition: {x: 3.5, y: 0, z: 0}
+  cameraPoint: {x: 0, y: 0, z: -10}
+  startLeftCirclePosition: {x: -3, y: 0, z: 0}
+  startRightCirclePosition: {x: 3, y: 0, z: 0}
   pointOffset: 6
   footHoldOffset: 3
 --- !u!4 &290950724
@@ -542,6 +543,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420034}
+  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -584,7 +586,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -622,7 +624,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
@@ -635,6 +637,20 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &597183949
 GameObject:
   m_ObjectHideFlags: 0

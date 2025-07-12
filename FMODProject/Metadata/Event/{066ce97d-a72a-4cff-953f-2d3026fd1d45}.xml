@@ -123,6 +123,9 @@
 		<property name="tempo">
 			<value>504</value>
 		</property>
+		<property name="timeSignatureDenominator">
+			<value>8</value>
+		</property>
 		<relationship name="timeline">
 			<destination>{f59775bb-13b6-4661-94b0-5aef0951124e}</destination>
 		</relationship>

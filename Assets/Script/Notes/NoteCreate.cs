@@ -39,6 +39,12 @@ public class NoteCreate : MonoBehaviour
     }
     void OnEnable()
     {
+        for (int i = 0; i < sr.Length; i++)
+        {
+            Color c = sr[i].color;
+            c.a = 0f;
+            sr[i].color = c;
+        }
         noteState = NoteState.Normal;
         bpm = BeatManager.instance.notes.bpm;
         delayTime = 60f / bpm * 2;

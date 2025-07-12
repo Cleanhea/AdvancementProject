@@ -35,6 +35,7 @@ public class BeatManager : MonoBehaviour
     // 비트 발생시 처리 함수
     void HandleOnBeat(int bar, int beatIndex)
     {
+        
         while (noteQueue.Count > 0 && noteQueue.Peek().bar == bar && noteQueue.Peek().beat == beatIndex)
         {
             Notes note = noteQueue.Dequeue();

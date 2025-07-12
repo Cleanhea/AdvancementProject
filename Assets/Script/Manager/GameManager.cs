@@ -57,8 +57,8 @@ public class GameManager : MonoBehaviour
         BeatManager.instance.BeatStart(playname);
         BeatManager.instance.RestartHandleBeat(saveState.currentBar, saveState.currentBeat);
         BeatEvent.instance.SetPoint(saveState.leftCirclePosition, saveState.rightCirclePosition);
-        BeatEvent.instance.leftFootHoldQueue = saveState.leftFootHoldQueue;
-        BeatEvent.instance.rightFootHoldQueue = saveState.rightFootHoldQueue;
+        BeatEvent.instance.leftFootHoldQueue = new Queue<NoteCreate>(saveState.leftFootHoldQueue);
+        BeatEvent.instance.rightFootHoldQueue = new Queue<NoteCreate>(saveState.rightFootHoldQueue);
         AudioManager.instance.PlayMusic("event:/" + BeatManager.instance.Playname, saveState.musicTime);
     }    
 }

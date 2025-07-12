@@ -89,7 +89,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/SoHappy.bank
   Name: SoHappy
   StudioPath: bank:/SoHappy
-  lastModified: 638877962417295607
+  lastModified: 638879486910211492
   FileSizes:
   - Name: Desktop
     Value: 2292992
@@ -120,7 +120,7 @@ MonoBehaviour:
   - {fileID: -2862972496294479044}
   StringsBanks:
   - {fileID: 6528054813473459205}
-  cacheTime: 638877962417295607
+  cacheTime: 638879486910211492
   cacheVersion: 131623
 --- !u!114 &6528054813473459205
 MonoBehaviour:
