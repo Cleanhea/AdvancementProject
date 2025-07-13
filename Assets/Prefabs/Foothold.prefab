@@ -132,7 +132,7 @@ MonoBehaviour:
   isLeft: 0
   delayTime: 0
   duration: 1.905
-  destroyDuration: 2
+  destroyDuration: 1
   destroyTime: 0.5
   noteState: 1
   noteData:

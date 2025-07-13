@@ -10,8 +10,8 @@ public class BeatEvent : MonoBehaviour
     public GameObject rightCirclePrefab;
     public GameObject guideCirclePrefab;
 
-    GameObject leftGuideCircle;
-    GameObject rightGuideCircle;
+    public GameObject leftGuideCircle;
+    public GameObject rightGuideCircle;
     GameObject leftCircle;//유저가 조정하는것
     GameObject rightCircle;// 유저가 조정하는것
     public Vector3 leftPoint;
@@ -60,11 +60,6 @@ public class BeatEvent : MonoBehaviour
         GameObject footHold = FootHoldObjectFool.instance.GetFootHold();
         NoteCreate noteCreate = footHold.GetComponent<NoteCreate>();
         noteCreate.noteData = notes;
-        if (notes.sevent == "save")
-        {
-            Debug.Log("SavePoint");
-            GameManager.instance.SavePoint(notes.bar, notes.beat);
-        }
         if (notes.type == 0)
         {
             noteCreate.isLeft = true;
@@ -142,18 +137,19 @@ public class BeatEvent : MonoBehaviour
     }
     public void MoveCamera(Vector3 vec)
     {
-        Debug.Log(vec);
         cameraPoint += new Vector3(vec.x, vec.y);
         mainCamera.transform.DOMove(mainCamera.transform.position + new Vector3(vec.x, vec.y, -10), cameraSpeedOffset).SetEase(Ease.InOutSine);
     }
 
     public void SetCameraPos(Vector3 vec)
     {
-        mainCamera.transform.position = vec;
+        mainCamera.transform.position = new Vector3(vec.x, vec.y, -10);
+        cameraPoint = new Vector3(vec.x, vec.y, -10);
     }
 
     public CameraPos GetCameraPos()
     {
+        Debug.Log("GetCameraPos: " + cameraPoint);
         CameraPos temp = new CameraPos();
         temp.x = cameraPoint.x;
         temp.y = cameraPoint.y;

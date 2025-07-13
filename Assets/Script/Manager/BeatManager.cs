@@ -20,22 +20,25 @@ public class BeatManager : MonoBehaviour
         instance = this;
     }
     // FMOD에서 비트 읽어옴
-    public void BeatStart(SongName songName)
+    public void BeatStart(SongName songName,int resumeBar = 0, int resumeBeat = 0)
     {
-        AudioManager.OnBeat -= HandleOnBeat;
+        LinkDisable();
         notes = NotesLoader.LoadChart(songName);
         bpm = notes.bpm;
         Playname = songName;
         noteQueue = new Queue<Notes>(notes.notes);
-        AudioManager.OnBeat += HandleOnBeat;
+        RestartHandleBeat(resumeBar, resumeBeat);
+        LinkEnable();
     }
 
-    void OnDestroy() => AudioManager.OnBeat -= HandleOnBeat;
+    void OnDestroy() => LinkDisable();
 
     // 비트 발생시 처리 함수
     void HandleOnBeat(int bar, int beatIndex)
     {
-        
+        if (noteQueue.Count == 0) return;
+        //Debug.Log("HandleOnBeat: " + bar + " " + beatIndex);
+        //Debug.Log(noteQueue.Peek().bar + " " + noteQueue.Peek().beat);
         while (noteQueue.Count > 0 && noteQueue.Peek().bar == bar && noteQueue.Peek().beat == beatIndex)
         {
             Notes note = noteQueue.Dequeue();
@@ -47,9 +50,21 @@ public class BeatManager : MonoBehaviour
     {
         while (noteQueue.Count > 0 &&
         (noteQueue.Peek().bar < bar ||
-        (noteQueue.Peek().bar == bar && noteQueue.Peek().beat < beatIndex)))
+        (noteQueue.Peek().bar == bar && noteQueue.Peek().beat <= beatIndex)))
         {
+            Debug.Log("RestartHandleBeat: " + noteQueue.Peek().bar + " " + noteQueue.Peek().beat);
             noteQueue.Dequeue();
         }
+    }
+
+    public void LinkDisable()
+    {
+        Debug.Log("LinkDisable");
+        AudioManager.OnBeat -= HandleOnBeat;
+    }
+    public void LinkEnable()
+    {
+        Debug.Log("LinkEnable");
+        AudioManager.OnBeat += HandleOnBeat;
     }
 }

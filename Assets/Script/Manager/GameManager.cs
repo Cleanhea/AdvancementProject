@@ -23,42 +23,51 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void SavePoint(int bar, int beat)
+    public void SavePoint()
     {
-        Debug.Log("SavePoint");
-        saveState.currentBar = bar;
-        saveState.currentBeat = beat;
-        saveState.leftCirclePosition = BeatEvent.instance.leftPoint;
-        saveState.rightCirclePosition = BeatEvent.instance.rightPoint;
-        saveState.cameraPosition = BeatEvent.instance.GetCameraPos();
-        saveState.leftFootHoldQueue.Clear();
-        saveState.rightFootHoldQueue.Clear();
-        foreach (var item in BeatEvent.instance.leftFootHoldQueue)
-        {
-            saveState.leftFootHoldQueue.Enqueue(item);
-        }
-        foreach (var item in BeatEvent.instance.rightFootHoldQueue)
-        {
-            saveState.rightFootHoldQueue.Enqueue(item);
-        }
+        saveState.currentBar = AudioManager.CurrentBar-4;
+        saveState.currentBeat = AudioManager.CurrentBeat;
         int ms;
         AudioManager.instance.bgmInstance.getTimelinePosition(out ms);
-        saveState.musicTime = ms-1000;
+        float beatLenMs = 60000f / BeatManager.instance.bpm;
+        int beatsPerBar = 4;
+        ms -= (int)(ms % beatLenMs);
+        ms = Mathf.Max(ms - Mathf.RoundToInt(beatsPerBar * beatLenMs), 0);
+        saveState.musicTime = ms;
+
+        //오차 보정
+        Vector3 pl = BeatEvent.instance.leftGuideCircle.transform.position;
+        Vector3 pr = BeatEvent.instance.rightGuideCircle.transform.position;
+        pl.x = (float)Math.Round(pl.x, 1);
+        pr.x = (float)Math.Round(pr.x, 1);
+        pl.y = (float)Math.Round(pl.y, 1);
+        pr.y = (float)Math.Round(pr.y, 1);
+        saveState.leftCirclePosition = pl;
+        saveState.rightCirclePosition = pr;
+
+        saveState.cameraPosition = BeatEvent.instance.GetCameraPos();
     }
 
     public void RestartGame()
     {
+        StartCoroutine(ResetGame());
+    }
+    IEnumerator ResetGame()
+    {
+        BeatManager.instance.LinkDisable();
         SongName playname = BeatManager.instance.Playname;
-        BeatEvent.instance.SetCameraPos(new Vector3(saveState.cameraPosition.x,saveState.cameraPosition.y,-10));
+        BeatEvent.instance.SetCameraPos(new Vector3(saveState.cameraPosition.x, saveState.cameraPosition.y, -10));
         DOTween.KillAll(false);
         //오브젝트 풀 리셋
         FootHoldObjectFool.instance.ResetQueue();
         AudioManager.instance.StopMusic();
-        BeatManager.instance.BeatStart(playname);
-        BeatManager.instance.RestartHandleBeat(saveState.currentBar, saveState.currentBeat);
+        //BeatManager.instance.RestartHandleBeat(saveState.currentBar, saveState.currentBeat);
         BeatEvent.instance.SetPoint(saveState.leftCirclePosition, saveState.rightCirclePosition);
-        BeatEvent.instance.leftFootHoldQueue = new Queue<NoteCreate>(saveState.leftFootHoldQueue);
-        BeatEvent.instance.rightFootHoldQueue = new Queue<NoteCreate>(saveState.rightFootHoldQueue);
+        BeatEvent.instance.leftFootHoldQueue.Clear();
+        BeatEvent.instance.rightFootHoldQueue.Clear();
+        yield return null;
+        BeatManager.instance.BeatStart(playname, saveState.currentBar, saveState.currentBeat);
+        yield return null;
         AudioManager.instance.PlayMusic("event:/" + BeatManager.instance.Playname, saveState.musicTime);
     }    
 }

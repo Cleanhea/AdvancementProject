@@ -111,7 +111,11 @@ public class NoteCreate : MonoBehaviour
 
     IEnumerator SetCircle()
     {
-        Debug.Log(noteData.cameraPosition.x + " "+ noteData.cameraPosition.y);
+        if (noteData.sevent == "save")
+        {
+            Debug.Log("SavePoint");
+            GameManager.instance.SavePoint();
+        }
         yield return new WaitForSeconds(0.1f);
         //게임오버
         if (noteState == NoteState.Available)

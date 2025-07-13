@@ -2,7 +2,7 @@
   "name": "SoHappy",
   "bpm": 126,
   "notes":[
-  { "bar": 1, "beat": 1,"direction" : 1,"sevent" : "save", "type" : 1},
+  { "bar": 1, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1},
   { "bar": 3, "beat": 2,"direction" : 0,"sevent" : "default", "type" : 0},
   { "bar": 9, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1},
   { "bar": 9, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0, "cameraPosition" : {"x" : 0, "y" : 6}},
@@ -22,9 +22,9 @@
   { "bar": 51, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1},
 
   { "bar": 57, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
-  { "bar": 59, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+  { "bar": 59, "beat": 1,"direction" : 2,"sevent" : "save", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
 
-  { "bar": 73, "beat": 1,"direction" : 2,"sevent" : "save", "type" : 0},
+  { "bar": 73, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
   { "bar": 75, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
 
   { "bar": 77, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
@@ -80,9 +80,9 @@
   { "bar": 134, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1},
 
   { "bar": 135, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
-  { "bar": 136, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+  { "bar": 136, "beat": 1,"direction" : 2,"sevent" : "save", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
 
-  { "bar": 143, "beat": 1,"direction" : 2,"sevent" : "save", "type" : 0},
+  { "bar": 143, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
   { "bar": 143, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
 
   { "bar": 147, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},

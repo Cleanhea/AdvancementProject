@@ -14,6 +14,8 @@ public class AudioManager : MonoBehaviour
     public EventInstance bgmInstance;
     string currentBGMPath;
     public static event Action<int, int> OnBeat; // bar, beat
+    public static int CurrentBar  { get; private set; }
+    public static int CurrentBeat { get; private set; }
 
     void Awake()
     {
@@ -58,9 +60,10 @@ public class AudioManager : MonoBehaviour
             int bar = beat.bar;
             int beatIndex = beat.beat;
             int positionMs = beat.position;
-
             UnityMainThreadDispatcher.Instance().Enqueue(() =>
             {
+                CurrentBar = bar;
+                CurrentBeat = beatIndex;
                 OnBeat?.Invoke(bar, beatIndex);
             });
         }
