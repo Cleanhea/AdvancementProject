@@ -89,7 +89,57 @@
   { "bar": 147, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
 
   { "bar": 151, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
-  { "bar": 151, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}}
+  { "bar": 151, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
 
+  { "bar": 155, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 155, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1,"cameraZoom" : 1.5},
+
+  { "bar": 159, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 159, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1,"cameraZoom" : 2},
+
+  { "bar": 163, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 163, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1,"cameraZoom" : 2.25},
+
+  { "bar": 167, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 167, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1,"cameraZoom" : 2.5},
+
+  { "bar": 171, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+  { "bar": 171, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 7.5}},
+
+  { "bar": 173, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+  { "bar": 173, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 7.5}},
+
+  { "bar": 175, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+  { "bar": 175, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 7.5}},
+
+  { "bar": 177, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+  { "bar": 177, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 7.5}},
+
+  { "bar": 179, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+  { "bar": 179, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 7.5}},
+
+  { "bar": 181, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+  { "bar": 181, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 7.5}},
+
+  { "bar": 183, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+  { "bar": 183, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 7.25}},
+
+  { "bar": 185, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0,"guideCircleSpeed" : 2.0},
+  { "bar": 185, "beat": 3,"direction" : 0,"sevent" : "default", "type" : 1,"guideCircleSpeed": 2.0},
+  { "bar": 186, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0,"guideCircleSpeed": 2.0},
+  { "bar": 186, "beat": 3,"direction" : 0,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
+  { "bar": 187, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0,"guideCircleSpeed" : 2.0},
+  { "bar": 187, "beat": 3,"direction" : 0,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
+  { "bar": 188, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0,"guideCircleSpeed" : 2.0},
+  { "bar": 188, "beat": 3,"direction" : 0,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
+
+  { "bar": 189, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0,"guideCircleSpeed" : 2.0},
+  { "bar": 189, "beat": 3,"direction" : 2,"sevent" : "default", "type" : 1,"guideCircleSpeed": 2.0},
+  { "bar": 190, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0,"guideCircleSpeed": 2.0},
+  { "bar": 190, "beat": 3,"direction" : 2,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
+  { "bar": 191, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0,"guideCircleSpeed" : 2.0},
+  { "bar": 191, "beat": 3,"direction" : 2,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
+  { "bar": 192, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0,"guideCircleSpeed" : 2.0},
+  { "bar": 192, "beat": 3,"direction" : 2,"sevent" : "save", "type" : 1,"guideCircleSpeed" : 2.0}
   ]
 }

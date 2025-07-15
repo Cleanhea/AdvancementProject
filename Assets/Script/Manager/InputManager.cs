@@ -32,6 +32,10 @@ public class InputManager : MonoBehaviour
                 {
                     BeatEvent.instance.MoveCamera(new Vector3(noteData.cameraPosition.x, noteData.cameraPosition.y, -10));
                 }
+                if (noteData.cameraZoom != 0)
+                {
+                    BeatEvent.instance.SetCameraZoom(noteData.cameraZoom);
+                }
                 BeatEvent.instance.MoveCircle(dir, type);
                 queue.Peek().noteState = NoteState.Clear;
                 queue.Dequeue();

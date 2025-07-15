@@ -5,6 +5,7 @@ using UnityEngine;
 public enum SongName
 {
     SoHappy,
+    Stay,
 }
 
 public class NotesLoader : MonoBehaviour

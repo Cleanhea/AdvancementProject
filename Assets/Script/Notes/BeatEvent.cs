@@ -156,6 +156,11 @@ public class BeatEvent : MonoBehaviour
         return temp;
     }
 
+    public void SetCameraZoom(float set)
+    {
+        mainCamera.DOOrthoSize(mainCamera.orthographicSize+set,cameraSpeedOffset).SetEase(Ease.InOutSine);
+    }
+
     public void SetCircle()
     {
         leftCircle.transform.position = startLeftCirclePosition;

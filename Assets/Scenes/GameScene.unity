@@ -967,7 +967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51821a7553ebc414b87ab4b5cfab465e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTime: 0
+  startTime: 33000
 --- !u!1 &783354429
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,7 +1268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FootHoldPrefab: {fileID: 8837742909404766996, guid: eb438ef71fd6275408362483a321574a, type: 3}
-  maxFootHoldCount: 20
+  maxFootHoldCount: 40
 --- !u!4 &1026709972
 Transform:
   m_ObjectHideFlags: 0

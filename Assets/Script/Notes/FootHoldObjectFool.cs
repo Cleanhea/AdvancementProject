@@ -9,7 +9,7 @@ public class FootHoldObjectFool : MonoBehaviour
     Queue<GameObject> footHoldQueue = new Queue<GameObject>();
     List<GameObject> footHoldList = new List<GameObject>();
     [SerializeField]
-    int maxFootHoldCount = 20;
+    int maxFootHoldCount = 40;
 
     void Awake()
     {

@@ -9,6 +9,7 @@ public class SaveState
     public int currentBar = 0;
     public int currentBeat = 0;
     public CameraPos cameraPosition;
+    public float CameraZoom;
     public Vector3 leftCirclePosition;
     public Vector3 rightCirclePosition;
     public Queue<NoteCreate> leftFootHoldQueue = new Queue<NoteCreate>();

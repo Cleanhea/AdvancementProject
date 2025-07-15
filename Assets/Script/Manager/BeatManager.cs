@@ -44,6 +44,13 @@ public class BeatManager : MonoBehaviour
             Notes note = noteQueue.Dequeue();
             BeatEvent.instance.BeatHandling(note);
         }
+        
+        while (noteQueue.Count > 0 &&
+        (noteQueue.Peek().bar < bar ||
+        (noteQueue.Peek().bar == bar && noteQueue.Peek().beat <= beatIndex)))
+        {
+            noteQueue.Dequeue();
+        }
     }
 
     public void RestartHandleBeat(int bar, int beatIndex)

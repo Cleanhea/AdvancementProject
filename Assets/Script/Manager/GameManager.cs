@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     {
         saveState.currentBar = AudioManager.CurrentBar-4;
         saveState.currentBeat = AudioManager.CurrentBeat;
+        saveState.CameraZoom = BeatEvent.instance.mainCamera.orthographicSize;
         int ms;
         AudioManager.instance.bgmInstance.getTimelinePosition(out ms);
         float beatLenMs = 60000f / BeatManager.instance.bpm;
@@ -65,6 +66,7 @@ public class GameManager : MonoBehaviour
         BeatEvent.instance.SetPoint(saveState.leftCirclePosition, saveState.rightCirclePosition);
         BeatEvent.instance.leftFootHoldQueue.Clear();
         BeatEvent.instance.rightFootHoldQueue.Clear();
+        BeatEvent.instance.mainCamera.orthographicSize = saveState.CameraZoom;
         yield return null;
         BeatManager.instance.BeatStart(playname, saveState.currentBar, saveState.currentBeat);
         yield return null;

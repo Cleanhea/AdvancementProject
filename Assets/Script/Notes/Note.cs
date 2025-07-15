@@ -20,6 +20,8 @@ public class Notes
     public string sevent;
     public int type;// 0 : left, 1 : right
     public CameraPos cameraPosition;
+    public float cameraZoom;
+    public float guideCircleSpeed;
 }
 
 [System.Serializable]

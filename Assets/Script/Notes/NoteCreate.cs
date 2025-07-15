@@ -25,7 +25,7 @@ public class NoteCreate : MonoBehaviour
     float bpm;
     public NoteState noteState = NoteState.Ready;
     public Notes noteData;
-    
+    public float guideCircleSpeed;
 
     void Awake()
     {
@@ -77,11 +77,18 @@ public class NoteCreate : MonoBehaviour
             sr[i].color = c;
         }
         noteState = NoteState.Available;
-        Tween move = BeatEvent.instance.MoveGuideCircle(noteData.direction, noteData.type, duration);
+        guideCircleSpeed = noteData.guideCircleSpeed;
+        Debug.Log(guideCircleSpeed);
+        if (guideCircleSpeed == 0)
+            guideCircleSpeed = 1;
+        float guideCircleDuration = duration / guideCircleSpeed;
+        yield return new WaitForSeconds((duration - guideCircleDuration)/2);
+        Tween move = BeatEvent.instance.MoveGuideCircle(noteData.direction, noteData.type, guideCircleDuration);
         if (move != null)
             yield return move.WaitForCompletion();
         if (isActiveAndEnabled)
                 StartCoroutine(SetCircle());
+        yield return new WaitForSeconds((duration - guideCircleDuration) / 2);
         yield return new WaitForSeconds(destroyDuration);
         StartCoroutine(DestroyNote());
     }
