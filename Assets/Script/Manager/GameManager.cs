@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         saveState.leftCirclePosition = pl;
         saveState.rightCirclePosition = pr;
 
-        saveState.cameraPosition = BeatEvent.instance.GetCameraPos();
+        //saveState.cameraPosition = BeatEvent.instance.GetCameraPos();
     }
 
     public void RestartGame()
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         BeatEvent.instance.SetPoint(saveState.leftCirclePosition, saveState.rightCirclePosition);
         BeatEvent.instance.leftFootHoldQueue.Clear();
         BeatEvent.instance.rightFootHoldQueue.Clear();
-        BeatEvent.instance.mainCamera.orthographicSize = saveState.CameraZoom;
+        //BeatEvent.instance.mainCamera.orthographicSize = saveState.CameraZoom;
         yield return null;
         BeatManager.instance.BeatStart(playname, saveState.currentBar, saveState.currentBeat);
         yield return null;
