@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3c25de089f7e28b48a2af863d801a3fe
+guid: bef7acb4ddb50764884c18733413c385
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 2
@@ -93,17 +93,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI Circle_0
+      name: BigCircle2_0
       rect:
         serializedVersion: 2
-        x: 100
-        y: 112
-        width: 505
-        height: 505
+        x: 30
+        y: 24
+        width: 999
+        height: 999
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6aa89fdca64d334ca3613eea7bb03a9
-      internalID: 1729254076
+      spriteID: 9a6a28809f5c66c4481a5d454c1b776f
+      internalID: 1228060892
       vertices: []
       indices: 
       edges: []
@@ -128,7 +141,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      UI Circle_0: 1729254076
+      BigCircle2_0: 1228060892
+      BigCircle2_1: 2079543713
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
