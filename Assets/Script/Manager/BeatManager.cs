@@ -49,11 +49,6 @@ public class BeatManager : MonoBehaviour
     void HandleOnBeat(int bar, int beatIndex)
     {
         if (noteQueue.Count == 0) return;
-        while (noteQueue.Count > 0 && noteQueue.Peek().bar < bar || 
-               (noteQueue.Peek().bar == bar && noteQueue.Peek().beat < beatIndex))
-        {
-            noteQueue.Dequeue();
-        }
         while (noteQueue.Count > 0 && noteQueue.Peek().bar == bar && noteQueue.Peek().beat == beatIndex)
         {
             Notes note = noteQueue.Dequeue();
