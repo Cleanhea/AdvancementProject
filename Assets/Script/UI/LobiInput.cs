@@ -81,14 +81,12 @@ public class LobiInput : MonoBehaviour
         int S = buttonSlots.Length;
         int center = S / 2;
         GameObject[] desired = new GameObject[S];
-        bool[] isCenterArr = new bool[S];
 
         for (int slotIdx = 0; slotIdx < S; slotIdx++)
         {
             int dataIndex = selectIndex + (slotIdx - center);
             GameObject btn = (dataIndex >= 0 && dataIndex < N) ? firstUIButton[dataIndex] : null;
             desired[slotIdx] = btn;
-            isCenterArr[slotIdx] = (slotIdx == center);
         }
         for (int i = 0; i < N; i++)
         {
@@ -106,8 +104,6 @@ public class LobiInput : MonoBehaviour
             {
                 ShowButtonInSlot(newBtn, slot.ButtonTransform);
             }
-
-            slot.ButtonTransform.localScale = isCenterArr[slotIdx] ? Vector3.one * 1.1f : Vector3.one;
         }
     }
 
