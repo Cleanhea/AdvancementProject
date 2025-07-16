@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(0)]
 public class BeatManager : MonoBehaviour
 {
     public static BeatManager instance;
+    public event Action<Notes> OnNoteSpawn;
     public NotesData notes;
     public Queue<Notes> noteQueue;
     public SongName Playname;
@@ -20,40 +23,53 @@ public class BeatManager : MonoBehaviour
         instance = this;
     }
     // FMOD에서 비트 읽어옴
-    public void BeatStart(SongName songName,int resumeBar = 0, int resumeBeat = 0)
+    public void BeatStart(SongName songName)
     {
         LinkDisable();
         notes = NotesLoader.LoadChart(songName);
         bpm = notes.bpm;
         Playname = songName;
         noteQueue = new Queue<Notes>(notes.notes);
-        RestartHandleBeat(resumeBar, resumeBeat);
+        GameManager.instance.saveState.remainingNotes = new List<Notes>(noteQueue);
+        GameManager.instance.saveState.CameraZoom = 10f;
         LinkEnable();
     }
-
+    public void BeatStartFromSave(SongName songName, SaveState s)
+    {
+        LinkDisable();
+        notes = NotesLoader.LoadChart(songName);
+        bpm = notes.bpm;
+        Playname = songName;
+        noteQueue = new Queue<Notes>(s.remainingNotes);
+        LinkEnable();
+    }
     void OnDestroy() => LinkDisable();
 
     // 비트 발생시 처리 함수
     void HandleOnBeat(int bar, int beatIndex)
     {
         if (noteQueue.Count == 0) return;
-        //Debug.Log("HandleOnBeat: " + bar + " " + beatIndex);
-        //Debug.Log(noteQueue.Peek().bar + " " + noteQueue.Peek().beat);
+        while (noteQueue.Count > 0 && noteQueue.Peek().bar < bar || 
+               (noteQueue.Peek().bar == bar && noteQueue.Peek().beat < beatIndex))
+        {
+            noteQueue.Dequeue();
+        }
         while (noteQueue.Count > 0 && noteQueue.Peek().bar == bar && noteQueue.Peek().beat == beatIndex)
         {
             Notes note = noteQueue.Dequeue();
-            BeatEvent.instance.BeatHandling(note);
+            OnNoteSpawn?.Invoke(note);
         }
     }
-
-    public void RestartHandleBeat(int bar, int beatIndex)
+    void RestartHandleBeat(int bar, int beatIndex)
     {
-        while (noteQueue.Count > 0 &&
-        (noteQueue.Peek().bar < bar ||
-        (noteQueue.Peek().bar == bar && noteQueue.Peek().beat <= beatIndex)))
+        while (noteQueue.Count > 0 && noteQueue.Peek().bar < bar || 
+            (noteQueue.Peek().bar == bar && noteQueue.Peek().beat < beatIndex))
         {
-            Debug.Log("RestartHandleBeat: " + noteQueue.Peek().bar + " " + noteQueue.Peek().beat);
             noteQueue.Dequeue();
+        }
+        {
+            Notes note = noteQueue.Dequeue();
+            OnNoteSpawn?.Invoke(note);
         }
     }
 

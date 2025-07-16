@@ -22,7 +22,8 @@
   { "bar": 51, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1},
 
   { "bar": 57, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
-  { "bar": 59, "beat": 1,"direction" : 2,"sevent" : "save", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+  { "bar": 59, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+  { "bar": 59, "beat": 1,"sevent" : "save", "type" : 2},
 
   { "bar": 73, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
   { "bar": 75, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
@@ -80,7 +81,8 @@
   { "bar": 134, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1},
 
   { "bar": 135, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
-  { "bar": 136, "beat": 1,"direction" : 2,"sevent" : "save", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+  { "bar": 136, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+  { "bar": 136, "beat": 1,"sevent" : "save", "type" : 2},
 
   { "bar": 143, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
   { "bar": 143, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
@@ -140,6 +142,14 @@
   { "bar": 191, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0,"guideCircleSpeed" : 2.0},
   { "bar": 191, "beat": 3,"direction" : 2,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
   { "bar": 192, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0,"guideCircleSpeed" : 2.0},
-  { "bar": 192, "beat": 3,"direction" : 2,"sevent" : "save", "type" : 1,"guideCircleSpeed" : 2.0}
+  { "bar": 192, "beat": 3,"direction" : 2,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
+  { "bar": 192, "beat": 3,"sevent" : "save", "type" : 2},
+
+  { "bar": 196, "beat": 3,"sevent" : "setCamera", "type" : 2,"cameraPosition" : {"x":0, "y":120}, "cameraZoom" : 10},
+
+  { "bar": 200, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
+  { "bar": 200, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1,"cameraPosition" : {"x":6, "y":0}},
+  { "bar": 204, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 204, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1,"cameraPosition" : {"x":-6, "y":0}}
   ]
 }

@@ -311,8 +311,9 @@ MonoBehaviour:
       x: 0
       y: 0
     CameraZoom: 0
-    leftCirclePosition: {x: -3, y: 0, z: 0}
-    rightCirclePosition: {x: 3, y: 0, z: 0}
+    leftCirclePosition: {x: -3.5, y: 0, z: 0}
+    rightCirclePosition: {x: 3.5, y: 0, z: 0}
+    remainingNotes: []
 --- !u!4 &89459837
 Transform:
   m_ObjectHideFlags: 0
@@ -368,8 +369,8 @@ MonoBehaviour:
   mainCamera: {fileID: 519420031}
   cameraSpeedOffset: 0.2
   cameraPoint: {x: 0, y: 0, z: -10}
-  startLeftCirclePosition: {x: -3, y: 0, z: 0}
-  startRightCirclePosition: {x: 3, y: 0, z: 0}
+  startLeftCirclePosition: {x: -3.5, y: 0, z: 0}
+  startRightCirclePosition: {x: 3.5, y: 0, z: 0}
   pointOffset: 6
   footHoldOffset: 3
 --- !u!4 &290950724

@@ -10,7 +10,7 @@ public class LobiInput : MonoBehaviour
     // W, A, S, D, J(클릭), K(취소) 순
     KeyCode[] UIKey = new KeyCode[] { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.J, KeyCode.K };
     public static LobiInput instance;
-    public bool isOK;
+    public bool isOK=true;
     public LobiState lobiState;
     //Start, Quit, Setting
     public GameObject[] firstUIButton = new GameObject[3];
@@ -30,14 +30,18 @@ public class LobiInput : MonoBehaviour
 
     void Update()
     {
-        switch (lobiState)
+        if (isOK == true)
         {
-            case LobiState.FirstUI:
-                break;
-            case LobiState.MusicSelect:
-                break;
-            case LobiState.Option:
-                break;
+            switch (lobiState)
+            {
+                case LobiState.FirstUI:
+                    FirstUIInput();
+                    break;
+                case LobiState.MusicSelect:
+                    break;
+                case LobiState.Option:
+                    break;
+            }
         }
     }
 

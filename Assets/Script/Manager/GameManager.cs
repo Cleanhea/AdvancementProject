@@ -23,19 +23,24 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void SavePoint()
+    public void SaveGame()
     {
-        saveState.currentBar = AudioManager.CurrentBar-4;
+        StartCoroutine(SavePoint());
+    }
+    IEnumerator SavePoint()
+    {
+        saveState.remainingNotes.Clear();
+        saveState.currentBar = AudioManager.CurrentBar;
         saveState.currentBeat = AudioManager.CurrentBeat;
-        saveState.CameraZoom = BeatEvent.instance.mainCamera.orthographicSize;
         int ms;
         AudioManager.instance.bgmInstance.getTimelinePosition(out ms);
-        float beatLenMs = 60000f / BeatManager.instance.bpm;
-        int beatsPerBar = 4;
-        ms -= (int)(ms % beatLenMs);
-        ms = Mathf.Max(ms - Mathf.RoundToInt(beatsPerBar * beatLenMs), 0);
         saveState.musicTime = ms;
-
+        foreach (var note in BeatManager.instance.noteQueue)
+        {
+            saveState.remainingNotes.Add(note);
+        }
+        yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
+        Debug.Log("SavePoint");
         //오차 보정
         Vector3 pl = BeatEvent.instance.leftGuideCircle.transform.position;
         Vector3 pr = BeatEvent.instance.rightGuideCircle.transform.position;
@@ -45,8 +50,8 @@ public class GameManager : MonoBehaviour
         pr.y = (float)Math.Round(pr.y, 1);
         saveState.leftCirclePosition = pl;
         saveState.rightCirclePosition = pr;
-
-        //saveState.cameraPosition = BeatEvent.instance.GetCameraPos();
+        saveState.cameraPosition = BeatEvent.instance.GetCameraPos();
+        saveState.CameraZoom = BeatEvent.instance.GetCameraZoom();
     }
 
     public void RestartGame()
@@ -62,13 +67,14 @@ public class GameManager : MonoBehaviour
         //오브젝트 풀 리셋
         FootHoldObjectFool.instance.ResetQueue();
         AudioManager.instance.StopMusic();
-        //BeatManager.instance.RestartHandleBeat(saveState.currentBar, saveState.currentBeat);
         BeatEvent.instance.SetPoint(saveState.leftCirclePosition, saveState.rightCirclePosition);
         BeatEvent.instance.leftFootHoldQueue.Clear();
         BeatEvent.instance.rightFootHoldQueue.Clear();
-        //BeatEvent.instance.mainCamera.orthographicSize = saveState.CameraZoom;
+        BeatEvent.instance.leftCirclePositionQueue.Clear();
+        BeatEvent.instance.rightCirclePositionQueue.Clear();
+        BeatEvent.instance.mainCamera.orthographicSize = saveState.CameraZoom;
         yield return null;
-        BeatManager.instance.BeatStart(playname, saveState.currentBar, saveState.currentBeat);
+        BeatManager.instance.BeatStartFromSave(playname, saveState);
         yield return null;
         AudioManager.instance.PlayMusic("event:/" + BeatManager.instance.Playname, saveState.musicTime);
     }    

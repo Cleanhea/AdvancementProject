@@ -32,6 +32,7 @@ public class InputManager : MonoBehaviour
                 {
                     BeatEvent.instance.MoveCamera(new Vector3(noteData.cameraPosition.x, noteData.cameraPosition.y, -10));
                 }
+                StartCoroutine(queue.Peek().SetPointCircle());
                 if (noteData.cameraZoom != 0)
                 {
                     BeatEvent.instance.SetCameraZoom(noteData.cameraZoom);

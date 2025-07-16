@@ -55,39 +55,34 @@ public class NoteCreate : MonoBehaviour
     IEnumerator CreateNote()
     {
         yield return new WaitForSeconds(delayTime);
-        float elapsed = 0f;
         noteState = NoteState.Ready;
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = elapsed / duration;
-            float alpha = Mathf.Pow(t, 0.7f);
-            for (int i = 0; i < sr.Length; i++)
-            {
-                Color c = sr[i].color;
-                c.a = alpha;
-                sr[i].color = c;
-            }
-            yield return null;
-        }
+        transform.localScale = Vector3.one * 0.4f;
         for (int i = 0; i < sr.Length; i++)
         {
             Color c = sr[i].color;
-            c.a = 1f;
+            c.a = 0f;
             sr[i].color = c;
         }
+        Sequence seq = DOTween.Sequence();
+        seq.Append(transform.DOScale(1f, duration)
+            .SetEase(Ease.OutBack, 1f));
+        for (int i = 0; i < sr.Length; i++)
+        {
+            SpriteRenderer rend = sr[i];
+            seq.Join(rend
+                .DOFade(1f, duration)
+                .SetEase(Ease.Linear));
+        }
+        yield return seq.WaitForCompletion();
         noteState = NoteState.Available;
-        guideCircleSpeed = noteData.guideCircleSpeed;
-        Debug.Log(guideCircleSpeed);
-        if (guideCircleSpeed == 0)
-            guideCircleSpeed = 1;
+        guideCircleSpeed = noteData.guideCircleSpeed == 0 ? 1 : noteData.guideCircleSpeed;
         float guideCircleDuration = duration / guideCircleSpeed;
-        yield return new WaitForSeconds((duration - guideCircleDuration)/2);
+        yield return new WaitForSeconds((duration - guideCircleDuration) / 2);
         Tween move = BeatEvent.instance.MoveGuideCircle(noteData.direction, noteData.type, guideCircleDuration);
         if (move != null)
             yield return move.WaitForCompletion();
         if (isActiveAndEnabled)
-                StartCoroutine(SetCircle());
+            StartCoroutine(SetCircle());
         yield return new WaitForSeconds((duration - guideCircleDuration) / 2);
         yield return new WaitForSeconds(destroyDuration);
         StartCoroutine(DestroyNote());
@@ -99,7 +94,7 @@ public class NoteCreate : MonoBehaviour
         while (elapsed < destroyTime)
         {
             elapsed += Time.deltaTime;
-            for (int i = 0; i < sr.Length; i++)
+            for (int i = 0; i < sr.Length-1; i++)
             {
                 Color c = sr[i].color;
                 c.a = Mathf.Clamp01(1f - elapsed / destroyTime);
@@ -118,11 +113,6 @@ public class NoteCreate : MonoBehaviour
 
     IEnumerator SetCircle()
     {
-        if (noteData.sevent == "save")
-        {
-            Debug.Log("SavePoint");
-            GameManager.instance.SavePoint();
-        }
         yield return new WaitForSeconds(0.1f);
         //게임오버
         if (noteState == NoteState.Available)
@@ -131,5 +121,21 @@ public class NoteCreate : MonoBehaviour
             GameManager.instance.RestartGame();
             yield break;
         }
+    }
+    public IEnumerator SetPointCircle()
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Clamp01(1f - (elapsed / duration));
+            Color c = sr[1].color;
+            c.a = alpha;
+            sr[1].color = c;
+            yield return null;
+        }
+        Color c2 = sr[1].color;
+        c2.a = 0f;
+        sr[1].color = c2;
     }
 }

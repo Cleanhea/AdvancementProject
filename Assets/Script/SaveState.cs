@@ -12,7 +12,5 @@ public class SaveState
     public float CameraZoom;
     public Vector3 leftCirclePosition;
     public Vector3 rightCirclePosition;
-    public Queue<NoteCreate> leftFootHoldQueue = new Queue<NoteCreate>();
-    public Queue<NoteCreate> rightFootHoldQueue = new Queue<NoteCreate>();
-
+    public List<Notes> remainingNotes = new List<Notes>();
 }
