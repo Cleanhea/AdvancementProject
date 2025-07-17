@@ -1544,14 +1544,19 @@ MonoBehaviour:
   buttonSlots:
   - ButtonTransform: {fileID: 1369059933}
     UIButton: {fileID: 0}
+    TextSize: 50
   - ButtonTransform: {fileID: 683069346}
     UIButton: {fileID: 0}
+    TextSize: 60
   - ButtonTransform: {fileID: 400228833}
     UIButton: {fileID: 0}
+    TextSize: 100
   - ButtonTransform: {fileID: 1452179351}
     UIButton: {fileID: 0}
+    TextSize: 60
   - ButtonTransform: {fileID: 20909399}
     UIButton: {fileID: 0}
+    TextSize: 50
   selectIndex: 0
   hiddenParent: {fileID: 481670420}
 --- !u!4 &1876488421

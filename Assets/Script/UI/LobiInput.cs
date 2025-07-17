@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class ButtonSlot
 {
     public Transform ButtonTransform;
     public GameObject UIButton;
+    public float TextSize;
 }
 
 public class LobiInput : MonoBehaviour
@@ -102,14 +104,17 @@ public class LobiInput : MonoBehaviour
 
             if (newBtn != null)
             {
-                ShowButtonInSlot(newBtn, slot.ButtonTransform);
+                ShowButtonInSlot(newBtn, slot);
             }
         }
     }
 
-    void ShowButtonInSlot(GameObject go, Transform parent)
+    void ShowButtonInSlot(GameObject go, ButtonSlot slot)
     {
         if (!go.activeSelf) go.SetActive(true);
+        TextMeshProUGUI text = go.GetComponentInChildren<TextMeshProUGUI>();
+        text.fontSize = slot.TextSize;
+        Transform parent = slot.ButtonTransform;
         go.transform.SetParent(parent, false);
         go.transform.localPosition = Vector3.zero;
         go.transform.localScale = Vector3.one;
