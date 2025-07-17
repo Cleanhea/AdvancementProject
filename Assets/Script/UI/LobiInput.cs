@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -59,11 +60,22 @@ public class LobiInput : MonoBehaviour
                     SlotInput();
                     break;
                 case LobiState.Option:
+                    OptionInput();
                     break;
             }
         }
     }
-
+    void OptionInput()
+    {
+        if (Input.GetKeyDown(UIKey[5]))
+        {
+            if (lobiState == LobiState.Option)
+            {
+                LobiUI.instance.StartCoroutine(LobiUI.instance.OutOptionReady());
+                lobiState = LobiState.FirstUI;
+            }
+        }
+    }
     void SlotInput()
     {
         if (Input.GetKeyDown(UIKey[0]))
@@ -102,7 +114,7 @@ public class LobiInput : MonoBehaviour
         {
             if (lobiState == LobiState.MusicSelect)
             {
-                FirstUISetting();
+                StartCoroutine(FirstUISetting());
             }
         }
     }
@@ -170,8 +182,12 @@ public class LobiInput : MonoBehaviour
         // 표시되지 않게
         go.SetActive(false);
     }
-    public void MusicSelectSetting()
+    public IEnumerator MusicSelectSetting()
     {
+        isOK = false;
+        LobiUI.instance.isLogo = true;
+        Sequence anim = LobiUI.instance.OutButtonSelect();
+        yield return anim.WaitForCompletion();
         lobiState = LobiState.MusicSelect;
         selectIndex = 0;
         for (int i = 0; i < buttonSlots.Length; i++)
@@ -184,9 +200,16 @@ public class LobiInput : MonoBehaviour
             firstUIButton[i].transform.SetParent(firstUIParent, false);
         }
         RefreshSlots();
+        anim = LobiUI.instance.InButtonSelect();
+        yield return anim.WaitForCompletion();
+        isOK = true;
     }
-    public void FirstUISetting()
+    public IEnumerator FirstUISetting()
     {
+        isOK = false;
+        LobiUI.instance.isLogo = false;
+        Sequence anim = LobiUI.instance.OutButtonSelect();
+        yield return anim.WaitForCompletion();
         lobiState = LobiState.FirstUI;
         selectIndex = 0;
         for (int i = 0; i < buttonSlots.Length; i++)
@@ -199,5 +222,8 @@ public class LobiInput : MonoBehaviour
             musicSelectUIButton[i].transform.SetParent(musicSelectUIParent, false);
         }
         RefreshSlots();
+        anim = LobiUI.instance.InButtonSelect();
+        yield return anim.WaitForCompletion();
+        isOK = true;
     }
 }

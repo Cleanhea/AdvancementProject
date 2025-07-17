@@ -42,7 +42,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Stay.bank
   Name: Stay
   StudioPath: bank:/Stay
-  lastModified: 638884047662389170
+  lastModified: 638884090793349134
   FileSizes:
   - Name: Desktop
     Value: 2896576
@@ -62,10 +62,10 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638884047614656375
+  lastModified: 638884090792191889
   FileSizes:
   - Name: Desktop
-    Value: 1036
+    Value: 1324
   Exists: 1
 --- !u!114 &-1907117335244470613
 MonoBehaviour:
@@ -82,7 +82,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/SoHappy.bank
   Name: SoHappy
   StudioPath: bank:/SoHappy
-  lastModified: 638879486910211492
+  lastModified: 638884090792870423
   FileSizes:
   - Name: Desktop
     Value: 2292992
@@ -105,16 +105,45 @@ MonoBehaviour:
   - {fileID: 8919382533530419305}
   - {fileID: -1907117335244470613}
   - {fileID: -3242976124175020057}
+  - {fileID: 8956037587107370485}
   EditorEvents:
   - {fileID: -6036873956604757182}
   - {fileID: 5312220912306853145}
+  - {fileID: 4511435844718851650}
   EditorParameters: []
   MasterBanks:
   - {fileID: -2862972496294479044}
   StringsBanks:
   - {fileID: 6528054813473459205}
-  cacheTime: 638884047662389170
+  cacheTime: 638884090880297413
   cacheVersion: 131623
+--- !u!114 &4511435844718851650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Lobi
+  m_EditorClassIdentifier: 
+  Path: event:/Lobi
+  Guid:
+    Data1: 1884873747
+    Data2: 1292150303
+    Data3: -2070383714
+    Data4: 1975040232
+  Banks:
+  - {fileID: 8956037587107370485}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 371382
 --- !u!114 &5312220912306853145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,10 +186,10 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638884047614689963
+  lastModified: 638884090792231798
   FileSizes:
   - Name: Desktop
-    Value: 932
+    Value: 1088
   Exists: 1
 --- !u!114 &8919382533530419305
 MonoBehaviour:
@@ -181,4 +210,24 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 494
+  Exists: 1
+--- !u!114 &8956037587107370485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Lobi.bank
+  m_EditorClassIdentifier: 
+  Path: FMODProject/Build/Desktop/Lobi.bank
+  Name: Lobi
+  StudioPath: bank:/Lobi
+  lastModified: 638884090880297413
+  FileSizes:
+  - Name: Desktop
+    Value: 4689408
   Exists: 1

@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BtnLogic : MonoBehaviour
 {
     public void GoMusicSelect()
     {
         Debug.Log("GoMusicSelect");
-        LobiInput.instance.MusicSelectSetting();
+        LobiInput.instance.StartCoroutine(LobiInput.instance.MusicSelectSetting());
     }
 
     public void GoOption()
     {
         Debug.Log("GoOption");
         LobiInput.instance.lobiState = LobiState.Option;
+        LobiUI.instance.StartCoroutine(LobiUI.instance.GoOptionReady());
     }
 
     public void QuitGame()
@@ -28,20 +30,12 @@ public class BtnLogic : MonoBehaviour
     {
         DOTween.KillAll();
         StageLoadContext.Set(SongName.SoHappy);
-        StartCoroutine(GoStageReady());
+        LobiUI.instance.StartCoroutine(LobiUI.instance.GoStageReady());
     }
     public void GoStage2()
     {
         DOTween.KillAll();
         StageLoadContext.Set(SongName.Stay);
-        StartCoroutine(GoStageReady());
-    }
-
-
-    public IEnumerator GoStageReady()
-    {
-        Sequence anim = LobiUI.instance.GoStageAnimation();
-        yield return anim.WaitForCompletion();
-        SceneManager.LoadScene("GameScene");
+        LobiUI.instance.StartCoroutine(LobiUI.instance.GoStageReady());
     }
 }

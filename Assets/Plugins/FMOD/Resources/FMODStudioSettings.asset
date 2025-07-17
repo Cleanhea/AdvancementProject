@@ -342,6 +342,7 @@ MonoBehaviour:
   MasterBanks:
   - Master
   Banks:
+  - Lobi
   - SFX
   - SoHappy
   - Stay

@@ -10,11 +10,16 @@ public class AudioManager : MonoBehaviour
 {
 
     public static AudioManager instance;
+
+    string MUSIC_VCA_PATH = "vca:/Music";
+    VCA musicVCA;
+    float musicVol = 1f;
+    public float MusicVolume => musicVol;
     private FMOD.Studio.EVENT_CALLBACK beatCallback;
     public EventInstance bgmInstance;
     string currentBGMPath;
     public static event Action<int, int> OnBeat; // bar, beat
-    public static int CurrentBar  { get; private set; }
+    public static int CurrentBar { get; private set; }
     public static int CurrentBeat { get; private set; }
 
     void Awake()
@@ -23,11 +28,18 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            musicVCA = RuntimeManager.GetVCA(MUSIC_VCA_PATH);
+            musicVol = PlayerPrefs.GetFloat("MusicVol", 1f);
+            ApplyMusicVolume();
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+    void Start()
+    {
+        PlayMusic("event:/Lobi", 0);
     }
     // 재생
     public void PlayMusic(string eventPath, int startTime)
@@ -49,9 +61,10 @@ public class AudioManager : MonoBehaviour
     {
         if (type == EVENT_CALLBACK_TYPE.TIMELINE_BEAT)
         {
-            if(!Application.isPlaying)
+            if (!Application.isPlaying)
                 return FMOD.RESULT.OK;
-            if (!PimDeWitte.UnityMainThreadDispatcher.UnityMainThreadDispatcher.Exists()) {
+            if (!PimDeWitte.UnityMainThreadDispatcher.UnityMainThreadDispatcher.Exists())
+            {
                 return FMOD.RESULT.OK;
             }
             var beat = (FMOD.Studio.TIMELINE_BEAT_PROPERTIES)
@@ -79,5 +92,18 @@ public class AudioManager : MonoBehaviour
             bgmInstance.release();
         }
         currentBGMPath = null;
+    }
+
+    public void SetMusicVolume(float v)
+    {
+        musicVol = Mathf.Clamp01(v);
+        ApplyMusicVolume();
+        PlayerPrefs.SetFloat("MusicVol", musicVol);
+        PlayerPrefs.Save();
+
+    }
+    void ApplyMusicVolume()
+    {
+        musicVCA.setVolume(musicVol);
     }
 }
