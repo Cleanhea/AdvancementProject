@@ -5,15 +5,15 @@ using UnityEngine;
 public class PlaySoHappy : MonoBehaviour
 {
     public int startTime = 0;
-    public void MusicStart()
+    public void MusicStart(SongName songName)
     {
-        if(BeatManager.instance.noteQueue != null)
+        if (BeatManager.instance.noteQueue != null)
         {
             BeatManager.instance.noteQueue.Clear();
         }
         BeatEvent.instance.leftPoint = BeatEvent.instance.startLeftCirclePosition;
         BeatEvent.instance.rightPoint = BeatEvent.instance.startRightCirclePosition;
-        AudioManager.instance.PlayMusic("event:/SoHappy", startTime);
-        BeatManager.instance.BeatStart(SongName.SoHappy);
+        AudioManager.instance.PlayMusic("event:/"+songName.ToString(), startTime);
+        BeatManager.instance.BeatStart(songName);
     }
 }

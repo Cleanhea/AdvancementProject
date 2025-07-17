@@ -84,8 +84,15 @@ public class NoteCreate : MonoBehaviour
         if (isActiveAndEnabled)
             StartCoroutine(SetCircle());
         yield return new WaitForSeconds((duration - guideCircleDuration) / 2);
-        yield return new WaitForSeconds(destroyDuration);
-        StartCoroutine(DestroyNote());
+        if (noteData.sevent == "quick")
+        {
+            StartCoroutine(DestroyNote());
+        }
+        else
+        {
+            yield return new WaitForSeconds(destroyDuration);
+            StartCoroutine(DestroyNote());
+        }
     }
 
     IEnumerator DestroyNote()

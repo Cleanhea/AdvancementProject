@@ -22,10 +22,15 @@ public class LobiInput : MonoBehaviour
     public LobiState lobiState;
     //Start, Quit, Setting
     public GameObject[] firstUIButton = new GameObject[3];
+    public GameObject[] musicSelectUIButton = new GameObject[6];
     public ButtonSlot[] buttonSlots = new ButtonSlot[5];
     public int selectIndex = 0;
     [SerializeField]
     Transform hiddenParent;
+    [SerializeField]
+    Transform firstUIParent;
+    [SerializeField]
+    Transform musicSelectUIParent;
 
     void Awake()
     {
@@ -48,9 +53,10 @@ public class LobiInput : MonoBehaviour
             switch (lobiState)
             {
                 case LobiState.FirstUI:
-                    FirstUIInput();
+                    SlotInput();
                     break;
                 case LobiState.MusicSelect:
+                    SlotInput();
                     break;
                 case LobiState.Option:
                     break;
@@ -58,7 +64,7 @@ public class LobiInput : MonoBehaviour
         }
     }
 
-    void FirstUIInput()
+    void SlotInput()
     {
         if (Input.GetKeyDown(UIKey[0]))
         {
@@ -70,16 +76,45 @@ public class LobiInput : MonoBehaviour
         }
         else if (Input.GetKeyDown(UIKey[2]))
         {
-            if (selectIndex < firstUIButton.Length - 1)
+            if (lobiState == LobiState.MusicSelect)
             {
-                selectIndex++;
-                RefreshSlots();
+                if (selectIndex < musicSelectUIButton.Length - 1)
+                {
+                    selectIndex++;
+                    RefreshSlots();
+                }
+            }
+            else
+            {
+                if (selectIndex < firstUIButton.Length - 1)
+                {
+                    selectIndex++;
+                    RefreshSlots();
+                }
+            }
+        }
+        else if (Input.GetKeyDown(UIKey[4]))
+        {
+            GameObject selectedButton = buttonSlots[2].UIButton;
+            selectedButton?.GetComponent<Button>()?.onClick.Invoke();
+        }
+        else if (Input.GetKeyDown(UIKey[5]))
+        {
+            if (lobiState == LobiState.MusicSelect)
+            {
+                FirstUISetting();
             }
         }
     }
-    void RefreshSlots()
+
+    public void RefreshSlots()
     {
         int N = firstUIButton.Length;
+        if (lobiState == LobiState.MusicSelect)
+        {
+            N = musicSelectUIButton.Length;
+        }
+
         int S = buttonSlots.Length;
         int center = S / 2;
         GameObject[] desired = new GameObject[S];
@@ -87,12 +122,19 @@ public class LobiInput : MonoBehaviour
         for (int slotIdx = 0; slotIdx < S; slotIdx++)
         {
             int dataIndex = selectIndex + (slotIdx - center);
-            GameObject btn = (dataIndex >= 0 && dataIndex < N) ? firstUIButton[dataIndex] : null;
+            GameObject btn;
+            if (lobiState == LobiState.MusicSelect)
+                btn = (dataIndex >= 0 && dataIndex < N) ? musicSelectUIButton[dataIndex] : null;
+            else
+                btn = (dataIndex >= 0 && dataIndex < N) ? firstUIButton[dataIndex] : null;
             desired[slotIdx] = btn;
         }
         for (int i = 0; i < N; i++)
         {
-            HideButton(firstUIButton[i]);
+            if (lobiState == LobiState.MusicSelect)
+                HideButton(musicSelectUIButton[i]);
+            else
+                HideButton(firstUIButton[i]);
         }
         for (int slotIdx = 0; slotIdx < S; slotIdx++)
         {
@@ -127,5 +169,35 @@ public class LobiInput : MonoBehaviour
         }
         // 표시되지 않게
         go.SetActive(false);
+    }
+    public void MusicSelectSetting()
+    {
+        lobiState = LobiState.MusicSelect;
+        selectIndex = 0;
+        for (int i = 0; i < buttonSlots.Length; i++)
+        {
+            buttonSlots[i].UIButton = null;
+        }
+        for (int i = 0; i < firstUIButton.Length; i++)
+        {
+            firstUIButton[i].SetActive(false);
+            firstUIButton[i].transform.SetParent(firstUIParent, false);
+        }
+        RefreshSlots();
+    }
+    public void FirstUISetting()
+    {
+        lobiState = LobiState.FirstUI;
+        selectIndex = 0;
+        for (int i = 0; i < buttonSlots.Length; i++)
+        {
+            buttonSlots[i].UIButton = null;
+        }
+        for (int i = 0; i < musicSelectUIButton.Length; i++)
+        {
+            musicSelectUIButton[i].SetActive(false);
+            musicSelectUIButton[i].transform.SetParent(musicSelectUIParent, false);
+        }
+        RefreshSlots();
     }
 }
