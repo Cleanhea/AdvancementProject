@@ -942,7 +942,7 @@ MonoBehaviour:
     currentBeat: 0
     cameraPosition:
       x: 0
-      y: 0
+      y: 120
     CameraZoom: 0
     leftCirclePosition: {x: -3.5, y: 0, z: 0}
     rightCirclePosition: {x: 3.5, y: 0, z: 0}

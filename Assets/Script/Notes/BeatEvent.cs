@@ -104,9 +104,13 @@ public class BeatEvent : MonoBehaviour
             {
                 GameManager.instance.SaveGame();
             }
+            else if (notes.sevent == "setCameraZoom")
+            {
+                StartCoroutine(AbsSetCameraZoom(notes.cameraZoom));
+            }
             else if (notes.sevent == "setCamera")
             {
-                StartCoroutine(AbsSetCameraPos(new Vector3(notes.cameraPosition.x, notes.cameraPosition.y, -10), notes.cameraZoom));
+                StartCoroutine(AbsSetCameraPos(new Vector3(notes.cameraPosition.x, notes.cameraPosition.y, -10)));
             }
             return;
         }
@@ -178,14 +182,17 @@ public class BeatEvent : MonoBehaviour
         mainCamera.transform.position = new Vector3(vec.x, vec.y, -10);
         cameraPoint = new Vector3(vec.x, vec.y, -10);
     }
+    public IEnumerator AbsSetCameraZoom(float cameraZoom)
+    {
+        yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
+        mainCamera.DOOrthoSize(cameraZoom, cameraSpeedOffset).SetEase(Ease.InOutSine);
+    }
 
-    public IEnumerator AbsSetCameraPos(Vector3 vec,float cameraZoom)
+    public IEnumerator AbsSetCameraPos(Vector3 vec)
     {
         yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
         cameraPoint = new Vector3(vec.x, vec.y, -10);
         mainCamera.transform.DOMove(new Vector3(vec.x, vec.y, -10), cameraSpeedOffset).SetEase(Ease.InOutSine);
-        mainCamera.DOOrthoSize(cameraZoom, cameraSpeedOffset).SetEase(Ease.InOutSine);
-        
     }
 
     public CameraPos GetCameraPos()

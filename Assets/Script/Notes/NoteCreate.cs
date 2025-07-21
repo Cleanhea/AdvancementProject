@@ -13,6 +13,9 @@ public enum NoteState
 public class NoteCreate : MonoBehaviour
 {
     SpriteRenderer[] sr;
+    SpriteRenderer footHoldImage;
+    [SerializeField]
+    Sprite[] sprite;
     public bool isLeft;
     [SerializeField]
     float delayTime;
@@ -30,6 +33,7 @@ public class NoteCreate : MonoBehaviour
     void Awake()
     {
         sr = GetComponentsInChildren<SpriteRenderer>(includeInactive: true);
+        footHoldImage = transform.GetChild(0).GetComponent<SpriteRenderer>();
         for (int i = 0; i < sr.Length; i++)
         {
             Color c = sr[i].color;
@@ -55,6 +59,18 @@ public class NoteCreate : MonoBehaviour
     IEnumerator CreateNote()
     {
         yield return new WaitForSeconds(delayTime);
+        if (noteData.image == "Double")
+        {
+            footHoldImage.sprite = sprite[1];
+        }
+        else if (noteData.image == "Triple")
+        {
+            footHoldImage.sprite = sprite[2];
+        }
+        else
+        {
+            footHoldImage.sprite = sprite[0];
+        }
         noteState = NoteState.Ready;
         transform.localScale = Vector3.one * 0.4f;
         for (int i = 0; i < sr.Length; i++)

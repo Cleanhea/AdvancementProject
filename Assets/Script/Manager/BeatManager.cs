@@ -12,6 +12,8 @@ public class BeatManager : MonoBehaviour
     public Queue<Notes> noteQueue;
     public SongName Playname;
     public float bpm;
+    [SerializeField]
+    bool isCheck = false;
 
     private void Awake()
     {
@@ -49,9 +51,12 @@ public class BeatManager : MonoBehaviour
     void HandleOnBeat(int bar, int beatIndex)
     {
         if (noteQueue.Count == 0) return;
-        //RestartHandleBeat(bar, beatIndex);
+        if(isCheck == true)
+            RestartHandleBeat(bar, beatIndex);
         while (noteQueue.Count > 0 && noteQueue.Peek().bar == bar && noteQueue.Peek().beat == beatIndex)
         {
+            if(isCheck)
+                Debug.Log("bar = " + bar + " beat =" +beatIndex);
             Notes note = noteQueue.Dequeue();
             OnNoteSpawn?.Invoke(note);
         }

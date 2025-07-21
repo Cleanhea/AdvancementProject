@@ -22,6 +22,7 @@ public class Notes
     public CameraPos cameraPosition;
     public float cameraZoom;
     public float guideCircleSpeed;
+    public string image;
 }
 
 [System.Serializable]

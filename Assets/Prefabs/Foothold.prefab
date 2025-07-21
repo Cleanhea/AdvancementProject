@@ -73,12 +73,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4c582901c23024448aa0da561ce43bb8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 26a684082afcd2841bdbe194ff69f73c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 7}
+  m_Size: {x: 0.64, y: 4.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -130,6 +130,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7214a42c2fecd4240b7a1e6e02001d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite:
+  - {fileID: 21300000, guid: 26a684082afcd2841bdbe194ff69f73c, type: 3}
+  - {fileID: 21300000, guid: c15e9f8b0ff37374c9a69852787f328b, type: 3}
+  - {fileID: 21300000, guid: dff3be15746bfbc47b5b98e64c4560a9, type: 3}
   isLeft: 0
   delayTime: 0
   duration: 1.905
@@ -147,6 +151,7 @@ MonoBehaviour:
       y: 0
     cameraZoom: 0
     guideCircleSpeed: 0
+    image: 
   guideCircleSpeed: 0
 --- !u!1 &8963186800177824212
 GameObject:
@@ -222,7 +227,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.82725763, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
