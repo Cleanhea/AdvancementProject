@@ -99,18 +99,40 @@ public class NoteCreate : MonoBehaviour
             yield return move.WaitForCompletion();
         if (isActiveAndEnabled)
             StartCoroutine(SetCircle());
-        yield return new WaitForSeconds((duration - guideCircleDuration) / 2);
         if (noteData.sevent == "quick")
         {
-            StartCoroutine(DestroyNote());
+            StartCoroutine(FastDestroyNote());
         }
-        else
+        yield return new WaitForSeconds((duration - guideCircleDuration) / 2);
+        if(noteData.sevent!="quick")
         {
             yield return new WaitForSeconds(destroyDuration);
             StartCoroutine(DestroyNote());
         }
     }
-
+    IEnumerator FastDestroyNote()
+    {
+        float elapsed = 0f;
+        float tempTime = destroyTime / 3;
+        while (elapsed < tempTime)
+        {
+            elapsed += Time.deltaTime;
+            for (int i = 0; i < sr.Length - 1; i++)
+            {
+                Color c = sr[i].color;
+                c.a = Mathf.Clamp01(1f - elapsed / tempTime);
+                sr[i].color = c;
+            }
+            yield return null;
+        }
+        for (int i = 0; i < sr.Length; i++)
+        {
+            Color c = sr[i].color;
+            c.a = 0f;
+            sr[i].color = c;
+        }
+        FootHoldObjectFool.instance.ReturnFootHold(this.gameObject);
+    }
     IEnumerator DestroyNote()
     {
         float elapsed = 0f;
