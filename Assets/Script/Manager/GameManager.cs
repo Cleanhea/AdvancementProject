@@ -29,15 +29,16 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator SavePoint()
     {
-        saveState.remainingNotes.Clear();
-        saveState.currentBar = AudioManager.CurrentBar;
-        saveState.currentBeat = AudioManager.CurrentBeat;
+        SaveState temp = new SaveState();
+        //saveState.remainingNotes.Clear();
+        temp.currentBar = AudioManager.CurrentBar;
+        temp.currentBeat = AudioManager.CurrentBeat;
         int ms;
         AudioManager.instance.bgmInstance.getTimelinePosition(out ms);
-        saveState.musicTime = ms;
+        temp.musicTime = ms - 100;
         foreach (var note in BeatManager.instance.noteQueue)
         {
-            saveState.remainingNotes.Add(note);
+            temp.remainingNotes.Add(note);
         }
         yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
         Debug.Log("SavePoint");
@@ -48,10 +49,11 @@ public class GameManager : MonoBehaviour
         pr.x = (float)Math.Round(pr.x, 1);
         pl.y = (float)Math.Round(pl.y, 1);
         pr.y = (float)Math.Round(pr.y, 1);
-        saveState.leftCirclePosition = pl;
-        saveState.rightCirclePosition = pr;
-        saveState.cameraPosition = BeatEvent.instance.GetCameraPos();
-        saveState.CameraZoom = BeatEvent.instance.GetCameraZoom();
+        temp.leftCirclePosition = pl;
+        temp.rightCirclePosition = pr;
+        temp.cameraPosition = BeatEvent.instance.GetCameraPos();
+        temp.CameraZoom = BeatEvent.instance.GetCameraZoom();
+        saveState = temp;
     }
 
     public void RestartGame()

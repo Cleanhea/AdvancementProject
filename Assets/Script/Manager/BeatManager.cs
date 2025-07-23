@@ -33,7 +33,7 @@ public class BeatManager : MonoBehaviour
         Playname = songName;
         noteQueue = new Queue<Notes>(notes.notes);
         GameManager.instance.saveState.remainingNotes = new List<Notes>(noteQueue);
-        GameManager.instance.saveState.CameraZoom = 10f;
+        GameManager.instance.saveState.CameraZoom = 12f;
         LinkEnable();
     }
     public void BeatStartFromSave(SongName songName, SaveState s)
@@ -55,7 +55,7 @@ public class BeatManager : MonoBehaviour
             RestartHandleBeat(bar, beatIndex);
         while (noteQueue.Count > 0 && noteQueue.Peek().bar == bar && noteQueue.Peek().beat == beatIndex)
         {
-            if(isCheck)
+            //if(isCheck)
                 Debug.Log("bar = " + bar + " beat =" +beatIndex);
             Notes note = noteQueue.Dequeue();
             OnNoteSpawn?.Invoke(note);

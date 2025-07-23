@@ -304,15 +304,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveState:
-    musicTime: 120000
+    musicTime: 0
     currentBar: 0
     currentBeat: 0
     cameraPosition:
       x: 0
-      y: 150
+      y: 0
     CameraZoom: 12
-    leftCirclePosition: {x: -3.5, y: 150, z: 0}
-    rightCirclePosition: {x: 3.5, y: 150, z: 0}
+    leftCirclePosition: {x: -3.5, y: 0, z: 0}
+    rightCirclePosition: {x: 3.5, y: 0, z: 0}
     remainingNotes: []
 --- !u!4 &89459837
 Transform:
@@ -406,7 +406,7 @@ MonoBehaviour:
     notes: []
   Playname: 0
   bpm: 0
-  isCheck: 1
+  isCheck: 0
 --- !u!1 &490985936
 GameObject:
   m_ObjectHideFlags: 0
