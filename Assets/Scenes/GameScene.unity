@@ -304,15 +304,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveState:
-    musicTime: 90050
+    musicTime: 120000
     currentBar: 0
     currentBeat: 0
     cameraPosition:
       x: 0
-      y: 102
-    CameraZoom: 0
-    leftCirclePosition: {x: -9.5, y: 102, z: 0}
-    rightCirclePosition: {x: 9.5, y: 102, z: 0}
+      y: 150
+    CameraZoom: 12
+    leftCirclePosition: {x: -3.5, y: 150, z: 0}
+    rightCirclePosition: {x: 3.5, y: 150, z: 0}
     remainingNotes: []
 --- !u!4 &89459837
 Transform:
