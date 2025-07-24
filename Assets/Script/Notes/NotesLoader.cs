@@ -11,7 +11,6 @@ public enum SongName
 public class NotesLoader : MonoBehaviour
 {
     public static NotesLoader instance;
-    public float bpm;
     private void Awake()
     {
         if (instance == null)

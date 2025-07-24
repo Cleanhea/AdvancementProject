@@ -33,6 +33,13 @@ public class LobiInput : MonoBehaviour
     [SerializeField]
     Transform musicSelectUIParent;
 
+    public TextMeshProUGUI songName;
+    public TextMeshProUGUI composer;
+    public TextMeshProUGUI bpm;
+    public TextMeshProUGUI level;
+    public GameObject clearPanel;
+    public TextMeshProUGUI death;
+
     void Awake()
     {
         if (instance == null)
@@ -161,6 +168,10 @@ public class LobiInput : MonoBehaviour
                 ShowButtonInSlot(newBtn, slot);
             }
         }
+        if (lobiState == LobiState.MusicSelect)
+        {
+            RefreshSongInformation();
+        }
     }
 
     void ShowButtonInSlot(GameObject go, ButtonSlot slot)
@@ -225,5 +236,22 @@ public class LobiInput : MonoBehaviour
         anim = LobiUI.instance.InButtonSelect();
         yield return anim.WaitForCompletion();
         isOK = true;
+    }
+    public void RefreshSongInformation()
+    {
+        SongInformation songInformation = buttonSlots[2].UIButton.GetComponent<SongInformation>();
+        songName.text = songInformation.songName;
+        bpm.text = songInformation.Bpm.ToString();
+        level.text = songInformation.level.ToString();
+        composer.text = songInformation.composer;
+        if (songInformation.clear)
+        {
+            clearPanel.SetActive(true);
+            death.text = songInformation.death.ToString();
+        }
+        else
+        {
+            clearPanel.SetActive(false);
+        }
     }
 }

@@ -6,8 +6,14 @@ using UnityEngine;
 [DefaultExecutionOrder(1000)]
 public class StageLoadCaller : MonoBehaviour
 {
+    [SerializeField]
+    bool testMode = false;
     void Start()
     {
+        if (testMode)
+        {
+            StageLoadContext.songName = BeatManager.instance.Playname;
+        }
         StartCoroutine(RunSceneLoad());
     }
     public void MusicStart(SongName songName)
