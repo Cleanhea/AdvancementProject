@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public static Action OnPauseRequest;
     public SaveState saveState = new SaveState();
     public GameState gameState;
+    public bool saveOK = false;
+    Coroutine saveCoroutine;
 
     private void Awake()
     {
@@ -32,9 +34,12 @@ public class GameManager : MonoBehaviour
         }
         gameState = GameState.lobi;
     }
+
     public void SaveGame()
     {
-        StartCoroutine(SavePoint());
+        if (saveCoroutine != null)
+            StopCoroutine(saveCoroutine);
+        saveCoroutine = StartCoroutine(SavePoint());
     }
     IEnumerator SavePoint()
     {
@@ -62,11 +67,18 @@ public class GameManager : MonoBehaviour
         temp.rightCirclePosition = pr;
         temp.cameraPosition = BeatEvent.instance.GetCameraPos();
         temp.CameraZoom = BeatEvent.instance.GetCameraZoom();
+        yield return new WaitUntil(() => saveOK);
         saveState = temp;
+        saveOK = false;
     }
 
     public void RestartGame()
     {
+        if (saveCoroutine != null)
+        {
+            StopCoroutine(saveCoroutine);
+            saveCoroutine = null;
+        }
         StartCoroutine(ResetGame());
     }
     IEnumerator ResetGame()
@@ -88,5 +100,10 @@ public class GameManager : MonoBehaviour
         BeatManager.instance.BeatStartFromSave(playname, saveState);
         yield return null;
         AudioManager.instance.PlayMusic("event:/" + BeatManager.instance.Playname, saveState.musicTime);
+    }
+
+    public void MarkSaveOK()
+    {
+        saveOK = true;
     }
 }

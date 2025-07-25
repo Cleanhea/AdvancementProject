@@ -112,6 +112,10 @@ public class BeatEvent : MonoBehaviour
             {
                 StartCoroutine(AbsSetCameraPos(new Vector3(notes.cameraPosition.x, notes.cameraPosition.y, -10)));
             }
+            else if (notes.sevent == "inversion")
+            {
+                AnimationManager.instance.InversionMode();
+            }
             return;
         }
         

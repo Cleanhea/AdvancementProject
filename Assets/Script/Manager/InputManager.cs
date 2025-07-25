@@ -48,6 +48,11 @@ public class InputManager : MonoBehaviour
                     BeatEvent.instance.SetCameraZoom(noteData.cameraZoom);
                 }
                 BeatEvent.instance.MoveCircle(dir, type);
+                if (noteData.sevent == "saveOK")
+                {
+                    Debug.Log("SAVEOK");
+                    GameManager.instance.MarkSaveOK();
+                }
                 queue.Peek().noteState = NoteState.Clear;
                 queue.Dequeue();
             }

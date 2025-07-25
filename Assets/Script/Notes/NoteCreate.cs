@@ -29,6 +29,7 @@ public class NoteCreate : MonoBehaviour
     public NoteState noteState = NoteState.Ready;
     public Notes noteData;
     public float guideCircleSpeed;
+    public int spriteIndex = 0;
 
     void Awake()
     {
@@ -43,6 +44,11 @@ public class NoteCreate : MonoBehaviour
     }
     void OnEnable()
     {
+        if (AnimationManager.instance.inversion)
+        {
+            SpriteRenderer destinationCircle = transform.GetChild(1).GetComponent<SpriteRenderer>();
+            destinationCircle.color = Color.white;
+        }
         for (int i = 0; i < sr.Length; i++)
         {
             Color c = sr[i].color;
@@ -59,18 +65,19 @@ public class NoteCreate : MonoBehaviour
     IEnumerator CreateNote()
     {
         yield return new WaitForSeconds(delayTime);
+        if (AnimationManager.instance.inversion)
+        {
+            spriteIndex += 3;
+        }
         if (noteData.image == "Double")
         {
-            footHoldImage.sprite = sprite[1];
+            spriteIndex += 1;
         }
         else if (noteData.image == "Triple")
         {
-            footHoldImage.sprite = sprite[2];
+            spriteIndex += 2;
         }
-        else
-        {
-            footHoldImage.sprite = sprite[0];
-        }
+        footHoldImage.sprite = sprite[spriteIndex];
         noteState = NoteState.Ready;
         transform.localScale = Vector3.one * 0.4f;
         for (int i = 0; i < sr.Length; i++)
