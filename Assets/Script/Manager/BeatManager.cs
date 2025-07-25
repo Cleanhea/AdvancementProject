@@ -72,12 +72,10 @@ public class BeatManager : MonoBehaviour
 
     public void LinkDisable()
     {
-        Debug.Log("LinkDisable");
         AudioManager.OnBeat -= HandleOnBeat;
     }
     public void LinkEnable()
     {
-        Debug.Log("LinkEnable");
         AudioManager.OnBeat += HandleOnBeat;
     }
 }

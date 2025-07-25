@@ -4,21 +4,27 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Text.RegularExpressions;
 
 public class InGameUIManager : MonoBehaviour
 {
+    public static InGameUIManager instance;
     [SerializeField] GameObject pausePanel;
     [SerializeField] GameObject timeCount;
     [SerializeField] GameObject saveText;
     [SerializeField] GameObject saveCircle;
+    [SerializeField] GameObject musicNameInform;
     [SerializeField] float saveCircleTime = 3f;
     [SerializeField] float saveCircleSize = 25f;
-    Vector3 originSaveCircleSize;
     bool isPaused = false;
-
     void Awake()
     {
-        originSaveCircleSize = saveCircle.transform.localScale;
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
     }
     void OnEnable()
     {
@@ -107,7 +113,7 @@ public class InGameUIManager : MonoBehaviour
         while (t < 0.4f)
         {
             t += Time.deltaTime;
-            float alpha = Mathf.Clamp01(t / 0.2f);
+            float alpha = Mathf.Clamp01(t / 0.4f);
             Color bg = BeatEvent.instance.mainCamera.backgroundColor;
             c = new Color(1f - bg.r, 1f - bg.g, 1f - bg.b, alpha);
             text.color = c;
@@ -128,7 +134,7 @@ public class InGameUIManager : MonoBehaviour
         while (t < 0.4f)
         {
             t += Time.deltaTime;
-            c.a = Mathf.Clamp01(1f - t / 0.2f);
+            c.a = Mathf.Clamp01(1f - t / 0.4f);
             text.color = c;
             yield return null;
         }
@@ -152,5 +158,49 @@ public class InGameUIManager : MonoBehaviour
         }
 
         saveCircle.SetActive(false);
+    }
+
+    public void SetMusicInformation(SongName songName)
+    {
+        string name = SplitCamelCase(songName.ToString());
+        TextMeshProUGUI text = musicNameInform.GetComponent<TextMeshProUGUI>();
+        text.text = name;
+        StartCoroutine(FadeInMusicInformation());
+    }
+
+    IEnumerator FadeInMusicInformation()
+    {
+        TextMeshProUGUI text = musicNameInform.GetComponent<TextMeshProUGUI>();
+        float t = 0f;
+        Color c = text.color;
+        c.a = 0f;
+        text.color = c;
+        musicNameInform.SetActive(true);
+        while (t < 1f)
+        {
+            t += Time.deltaTime;
+            c.a = Mathf.Clamp01(t / 0.5f);
+            text.color = c;
+            yield return null;
+        }
+        t = 0f;
+        yield return new WaitForSecondsRealtime(2f);
+        while (t < 0.5f)
+        {
+            t += Time.deltaTime;
+            c.a = Mathf.Clamp01(1f - t / 0.5f);
+            text.color = c;
+            yield return null;
+        }
+    }
+
+
+
+
+    //--------------부가기능-----------------
+    //대문자 띄어주는 함수
+    public static string SplitCamelCase(string input)
+    {
+        return Regex.Replace(input, "(\\B[A-Z])", " $1");
     }
 }

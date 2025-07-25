@@ -100,7 +100,11 @@ public class AudioManager : MonoBehaviour
         ApplyMusicVolume();
         PlayerPrefs.SetFloat("MusicVol", musicVol);
         PlayerPrefs.Save();
+    }
 
+    public void SetMusicVolumeInGame(float v)
+    {
+        musicVCA.setVolume(v);
     }
     void ApplyMusicVolume()
     {

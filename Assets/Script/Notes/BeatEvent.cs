@@ -97,15 +97,48 @@ public class BeatEvent : MonoBehaviour
         }
     }
 
-    void Start()
+    public void BeatStart()
+    {
+        StartCoroutine(MusicStartSetCircle());
+    }
+    IEnumerator MusicStartSetCircle()
     {
         leftCircle = Instantiate(leftCirclePrefab, startLeftCirclePosition, Quaternion.identity);
         rightCircle = Instantiate(rightCirclePrefab, startRightCirclePosition, Quaternion.identity);
         leftGuideCircle = Instantiate(guideCirclePrefab, startLeftCirclePosition, Quaternion.identity);
         rightGuideCircle = Instantiate(guideCirclePrefab, startRightCirclePosition, Quaternion.identity);
+        SpriteRenderer l = leftCircle.GetComponent<SpriteRenderer>();
+        SpriteRenderer r = rightCircle.GetComponent<SpriteRenderer>();
+        SpriteRenderer lg = leftGuideCircle.GetComponent<SpriteRenderer>();
+        SpriteRenderer rg = rightGuideCircle.GetComponent<SpriteRenderer>();
+        Color lc = l.color;
+        Color rc = r.color;
+        Color lgc = lg.color;
+        Color rgc = rg.color;
+        lc.a = 0f;
+        rc.a = 0f;
+        lgc.a = 0f;
+        rgc.a = 0f;
+        float t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime;
+            float alpha = Mathf.Clamp01(t / 1f);
+            lc.a = alpha;
+            rc.a = alpha;
+            lgc.a = alpha;
+            rgc.a = alpha;
+            l.color = lc;
+            r.color = rc;
+            lg.color = lgc;
+            rg.color = rgc;
+
+            yield return null;
+        }
         leftPoint = leftCircle.transform.position;
         rightPoint = rightCircle.transform.position;
     }
+
     // 비트 발생시 처리 기능
     public void BeatHandling(Notes notes)
     {

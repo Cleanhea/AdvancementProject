@@ -48,6 +48,7 @@ public class LobiUI : MonoBehaviour
     {
         Sequence anim = GoStageAnimation();
         yield return anim.WaitForCompletion();
+        yield return new WaitForSecondsRealtime(0.5f);
         SceneManager.LoadScene("GameScene");
     }
     public IEnumerator GoOptionReady()
