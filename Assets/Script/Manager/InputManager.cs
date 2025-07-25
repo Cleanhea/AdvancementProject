@@ -42,15 +42,15 @@ public class InputManager : MonoBehaviour
                 {
                     BeatEvent.instance.MoveCamera(new Vector3(noteData.cameraPosition.x, noteData.cameraPosition.y, -10));
                 }
+                BeatEvent.instance.ClearNote(noteData.type);
                 StartCoroutine(queue.Peek().SetPointCircle());
                 if (noteData.cameraZoom != 0)
                 {
                     BeatEvent.instance.SetCameraZoom(noteData.cameraZoom);
                 }
                 BeatEvent.instance.MoveCircle(dir, type);
-                if (noteData.sevent == "saveOK")
+                if (noteData.input == "saveOK")
                 {
-                    Debug.Log("SAVEOK");
                     GameManager.instance.MarkSaveOK();
                 }
                 queue.Peek().noteState = NoteState.Clear;

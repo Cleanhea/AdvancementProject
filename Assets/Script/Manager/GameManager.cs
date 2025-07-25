@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public static Action OnPauseRequest;
+    public static Action OnSaveAlarm;
     public SaveState saveState = new SaveState();
     public GameState gameState;
     public bool saveOK = false;
@@ -68,6 +69,7 @@ public class GameManager : MonoBehaviour
         temp.cameraPosition = BeatEvent.instance.GetCameraPos();
         temp.CameraZoom = BeatEvent.instance.GetCameraZoom();
         yield return new WaitUntil(() => saveOK);
+        OnSaveAlarm?.Invoke();
         saveState = temp;
         saveOK = false;
     }

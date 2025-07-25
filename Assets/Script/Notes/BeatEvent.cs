@@ -34,6 +34,10 @@ public class BeatEvent : MonoBehaviour
 
     //---------포인트 관련-----------
     [SerializeField]
+    Color defaultColor;
+    [SerializeField]
+    Color inversionColor;
+    [SerializeField]
     float pointOffset = 6.0f;
     [SerializeField]
     float footHoldOffset = 3.0f;
@@ -58,6 +62,16 @@ public class BeatEvent : MonoBehaviour
     public Queue<Vector3> leftCirclePositionQueue = new Queue<Vector3>();
     public Queue<Vector3> rightCirclePositionQueue = new Queue<Vector3>();
 
+    //---------모드 bool값-----------
+    public bool inversion = false;
+
+    //---------연출 관련 값-----------
+    [SerializeField] float ClearCircleTime = 0.05f;
+    [SerializeField] float ClearCircleSize = 1.15f;
+
+    Vector3 originCircleSize;
+
+
     void Awake()
     {
         if (instance != null && instance != this)
@@ -66,6 +80,7 @@ public class BeatEvent : MonoBehaviour
             return;
         }
         instance = this;
+        originCircleSize = transform.localScale;
     }
     void OnEnable()
     {
@@ -114,13 +129,17 @@ public class BeatEvent : MonoBehaviour
             }
             else if (notes.sevent == "inversion")
             {
-                AnimationManager.instance.InversionMode();
+                StartCoroutine(InversionMode());
+            }
+            else if (notes.sevent == "disInversion")
+            {
+                StartCoroutine(DefaultMode());
             }
             return;
         }
-        
     }
 
+    //--------------------------------------------노트 생성--------------------------------------------------
     public void CreateNote(Notes notes)
     {
         ref Vector3 point = ref leftPoint;
@@ -149,6 +168,7 @@ public class BeatEvent : MonoBehaviour
         queue.Enqueue(point);
     }
 
+    //---------------------------------------원 이동 관련 로직--------------------------------------------
     public void MoveCircle(int dir, int type)
     {
         GameObject circle = leftCircle;
@@ -160,12 +180,10 @@ public class BeatEvent : MonoBehaviour
         Vector3 position = tr.position;
         MoveCircleStart(tr, position + dirUnit[dir] * pointOffset);
     }
-
     void MoveCircleStart(Transform tr, Vector3 vec)
     {
         tr.DOMove(vec, 0.08f);
     }
-
     public void SetPoint(Vector3 left, Vector3 right)
     {
         leftPoint = left;
@@ -175,6 +193,29 @@ public class BeatEvent : MonoBehaviour
         leftGuideCircle.transform.position = leftPoint;
         rightGuideCircle.transform.position = rightPoint;
     }
+    public void SetCircle()
+    {
+        leftCircle.transform.position = startLeftCirclePosition;
+        rightCircle.transform.position = startRightCirclePosition;
+        leftPoint = startLeftCirclePosition;
+        rightPoint = startRightCirclePosition;
+    }
+
+    public Tween MoveGuideCircle(int dir, int type, float duration)
+    {
+        GameObject guideCircle = leftGuideCircle;
+        Queue<Vector3> positionQueue = leftCirclePositionQueue;
+        if (type == 1)
+        {
+            guideCircle = rightGuideCircle;
+            positionQueue = rightCirclePositionQueue;
+        }
+        Vector3 position = positionQueue.Peek();
+        positionQueue.Dequeue();
+        return guideCircle.transform.DOMove(position, duration).SetEase(Ease.InOutSine);
+    }
+
+    //------------------------------------카메라 관련 로직--------------------------------------
     public void MoveCamera(Vector3 vec)
     {
         cameraPoint += new Vector3(vec.x, vec.y);
@@ -201,7 +242,6 @@ public class BeatEvent : MonoBehaviour
 
     public CameraPos GetCameraPos()
     {
-        Debug.Log("GetCameraPos: " + cameraPoint);
         CameraPos temp = new CameraPos();
         temp.x = cameraPoint.x;
         temp.y = cameraPoint.y;
@@ -216,25 +256,28 @@ public class BeatEvent : MonoBehaviour
         mainCamera.DOOrthoSize(mainCamera.orthographicSize + set, cameraSpeedOffset).SetEase(Ease.InOutSine);
     }
 
-    public void SetCircle()
+    //---------------------------------------- 연출 관련 로직 -----------------------------------------------------
+    IEnumerator InversionMode()
     {
-        leftCircle.transform.position = startLeftCirclePosition;
-        rightCircle.transform.position = startRightCirclePosition;
-        leftPoint = startLeftCirclePosition;
-        rightPoint = startRightCirclePosition;
+        inversion = true;
+        yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
+        mainCamera.backgroundColor = inversionColor;
     }
-
-    public Tween MoveGuideCircle(int dir, int type, float duration)
+    IEnumerator DefaultMode()
     {
-        GameObject guideCircle = leftGuideCircle;
-        Queue<Vector3> positionQueue = leftCirclePositionQueue;
+        inversion = false;
+        yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
+        mainCamera.backgroundColor = defaultColor;
+    }
+    public void ClearNote(int type)
+    {
+        Transform circle = leftCircle.transform;
         if (type == 1)
         {
-            guideCircle = rightGuideCircle;
-            positionQueue = rightCirclePositionQueue;
+            circle = rightCircle.transform;
         }
-        Vector3 position = positionQueue.Peek();
-        positionQueue.Dequeue();
-        return guideCircle.transform.DOMove(position, duration).SetEase(Ease.InOutSine);
+        circle.DOKill();
+        circle.localScale = originCircleSize;
+        circle.DOScale(originCircleSize * ClearCircleSize, ClearCircleTime).SetEase(Ease.OutQuad).SetLoops(2, LoopType.Yoyo);
     }
 }

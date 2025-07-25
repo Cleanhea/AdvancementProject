@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(2)]
 public class FootHoldObjectFool : MonoBehaviour
 {
     public static FootHoldObjectFool instance;
@@ -35,9 +36,9 @@ public class FootHoldObjectFool : MonoBehaviour
     }
     public void ResetQueue()
     {
-        foreach(var footHold in footHoldList)
+        foreach (var footHold in footHoldList)
         {
-            if(footHold.activeSelf)
+            if (footHold.activeSelf)
             {
                 footHold.SetActive(false);
                 footHoldQueue.Enqueue(footHold);

@@ -55,7 +55,7 @@ public class BeatManager : MonoBehaviour
             RestartHandleBeat(bar, beatIndex);
         while (noteQueue.Count > 0 && noteQueue.Peek().bar == bar && noteQueue.Peek().beat == beatIndex)
         {
-            //if(isCheck)
+            if(isCheck)
                 Debug.Log("bar = " + bar + " beat =" +beatIndex);
             Notes note = noteQueue.Dequeue();
             OnNoteSpawn?.Invoke(note);
