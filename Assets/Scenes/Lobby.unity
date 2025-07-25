@@ -959,11 +959,12 @@ MonoBehaviour:
     currentBeat: 0
     cameraPosition:
       x: 0
-      y: 120
+      y: 0
     CameraZoom: 0
     leftCirclePosition: {x: -3.5, y: 0, z: 0}
     rightCirclePosition: {x: 3.5, y: 0, z: 0}
     remainingNotes: []
+  gameState: 0
 --- !u!4 &259579397
 Transform:
   m_ObjectHideFlags: 0
