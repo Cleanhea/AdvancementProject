@@ -4,12 +4,20 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
+public enum GameState
+{
+    lobi,
+    inGame,
+    pause,
+    option
+}
+
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager instance;
+    public static Action OnPauseRequest;
     public SaveState saveState = new SaveState();
-
+    public GameState gameState;
 
     private void Awake()
     {
@@ -22,6 +30,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        gameState = GameState.lobi;
     }
     public void SaveGame()
     {
@@ -79,5 +88,5 @@ public class GameManager : MonoBehaviour
         BeatManager.instance.BeatStartFromSave(playname, saveState);
         yield return null;
         AudioManager.instance.PlayMusic("event:/" + BeatManager.instance.Playname, saveState.musicTime);
-    }    
+    }
 }

@@ -9,11 +9,21 @@ public class InputManager : MonoBehaviour
     KeyCode[] leftKeys = new KeyCode[4];
     [SerializeField]
     KeyCode[] rightKeys = new KeyCode[4];
+    [SerializeField]
+    KeyCode ESC = KeyCode.Escape;
 
     void Update()
     {
-        HandleInput(BeatEvent.instance.leftFootHoldQueue, leftKeys, 0);
-        HandleInput(BeatEvent.instance.rightFootHoldQueue, rightKeys, 1);
+        if (Input.GetKeyDown(ESC))
+        {
+            GameManager.OnPauseRequest?.Invoke();
+            return;
+        }
+        if (GameManager.instance.gameState == GameState.inGame)
+        {
+            HandleInput(BeatEvent.instance.leftFootHoldQueue, leftKeys, 0);
+            HandleInput(BeatEvent.instance.rightFootHoldQueue, rightKeys, 1);
+        }
     }
 
     //유저 인풋 처리

@@ -30,5 +30,6 @@ public class StageLoadCaller : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         var song = StageLoadContext.songName;
         MusicStart(song);
+        GameManager.instance.gameState = GameState.inGame;
     }
 }
