@@ -28,7 +28,6 @@ public class StageLoadCaller : MonoBehaviour
     IEnumerator RunSceneLoad()
     {
         var song = StageLoadContext.songName;
-        BeatEvent.instance.BeatStart();
         InGameUIManager.instance.SetMusicInformation(song);
         float t = 0f;
         while (t < 2f)
@@ -38,6 +37,7 @@ public class StageLoadCaller : MonoBehaviour
             AudioManager.instance.SetMusicVolumeInGame(volume);
             yield return null;
         }
+        BeatEvent.instance.BeatStart();
         yield return new WaitForSeconds(1.5f);
         AudioManager.instance.SetMusicVolume(AudioManager.instance.MusicVolume);
         MusicStart(song);
