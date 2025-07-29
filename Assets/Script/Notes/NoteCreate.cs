@@ -16,6 +16,8 @@ public class NoteCreate : MonoBehaviour
     SpriteRenderer footHoldImage;
     [SerializeField]
     Sprite[] sprite;
+    [SerializeField]
+    Sprite[] circleSprite;
     public bool isLeft;
     [SerializeField]
     float delayTime;
@@ -30,12 +32,14 @@ public class NoteCreate : MonoBehaviour
     public Notes noteData;
     public float guideCircleSpeed;
     Color defaultColor;
+    [SerializeField]
+    float defaultCircleSize = 0.5f;
 
     void Awake()
     {
         sr = GetComponentsInChildren<SpriteRenderer>(includeInactive: true);
         footHoldImage = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        for (int i = 0; i < sr.Length; i++)
+        for (int i = 0; i < sr.Length-1; i++)
         {
             Color c = sr[i].color;
             c.a = 0f;
@@ -61,6 +65,7 @@ public class NoteCreate : MonoBehaviour
             c.a = 0f;
             sr[i].color = c;
         }
+        sr[2].transform.localScale = Vector3.one * defaultCircleSize;
         noteState = NoteState.Normal;
         bpm = BeatManager.instance.notes.bpm;
         delayTime = 60f / bpm * 2;
@@ -71,9 +76,15 @@ public class NoteCreate : MonoBehaviour
     IEnumerator CreateNote()
     {
         int spriteIndex = 0;
+        SpriteRenderer circleSpriteRenderer = transform.GetChild(2).GetComponent<SpriteRenderer>();
         if (BeatEvent.instance.inversion)
         {
             spriteIndex += 3;
+            circleSpriteRenderer.sprite = circleSprite[1];
+        }
+        else
+        {
+            circleSpriteRenderer.sprite = circleSprite[0];
         }
         yield return new WaitForSeconds(delayTime);
         if (noteData.image == "Double")
@@ -84,6 +95,7 @@ public class NoteCreate : MonoBehaviour
         {
             spriteIndex += 2;
         }
+        
         footHoldImage.sprite = sprite[spriteIndex];
         noteState = NoteState.Ready;
         transform.localScale = Vector3.one * 0.4f;
@@ -96,19 +108,21 @@ public class NoteCreate : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         seq.Append(transform.DOScale(1f, duration)
             .SetEase(Ease.OutBack, 1f));
-        for (int i = 0; i < sr.Length; i++)
+        for (int i = 0; i < sr.Length-1; i++)
         {
             SpriteRenderer rend = sr[i];
             seq.Join(rend
                 .DOFade(1f, duration)
                 .SetEase(Ease.Linear));
         }
+        seq.Join(sr[2].DOFade(1f, duration));
         yield return seq.WaitForCompletion();
         noteState = NoteState.Available;
         guideCircleSpeed = noteData.guideCircleSpeed == 0 ? 1 : noteData.guideCircleSpeed;
         float guideCircleDuration = duration / guideCircleSpeed;
         yield return new WaitForSeconds((duration - guideCircleDuration) / 2);
         Tween move = BeatEvent.instance.MoveGuideCircle(noteData.direction, noteData.type, guideCircleDuration);
+        sr[2].transform.DOScale(0.1f, guideCircleDuration);
         if (move != null)
             yield return move.WaitForCompletion();
         if (isActiveAndEnabled)

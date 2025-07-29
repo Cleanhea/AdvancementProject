@@ -42,7 +42,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Stay.bank
   Name: Stay
   StudioPath: bank:/Stay
-  lastModified: 638884090793349134
+  lastModified: 638893969595635847
   FileSizes:
   - Name: Desktop
     Value: 2896576
@@ -62,7 +62,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638884090792191889
+  lastModified: 638893969595077349
   FileSizes:
   - Name: Desktop
     Value: 1324
@@ -82,7 +82,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/SoHappy.bank
   Name: SoHappy
   StudioPath: bank:/SoHappy
-  lastModified: 638884090792870423
+  lastModified: 638893969595396504
   FileSizes:
   - Name: Desktop
     Value: 2292992
@@ -115,7 +115,7 @@ MonoBehaviour:
   - {fileID: -2862972496294479044}
   StringsBanks:
   - {fileID: 6528054813473459205}
-  cacheTime: 638884090880297413
+  cacheTime: 638893969595635847
   cacheVersion: 131623
 --- !u!114 &4511435844718851650
 MonoBehaviour:
@@ -186,7 +186,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638884090792231798
+  lastModified: 638893969595087316
   FileSizes:
   - Name: Desktop
     Value: 1088
@@ -206,7 +206,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638884045585751634
+  lastModified: 638893969595097284
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -226,7 +226,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Lobi.bank
   Name: Lobi
   StudioPath: bank:/Lobi
-  lastModified: 638884090880297413
+  lastModified: 638893969595057416
   FileSizes:
   - Name: Desktop
     Value: 4689408
