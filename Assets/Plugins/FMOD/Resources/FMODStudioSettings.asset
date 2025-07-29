@@ -346,6 +346,7 @@ MonoBehaviour:
   - SFX
   - SoHappy
   - Stay
+  - ZeroTwo
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

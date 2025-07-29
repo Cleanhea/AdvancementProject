@@ -13,11 +13,20 @@ public enum NoteState
 public class NoteCreate : MonoBehaviour
 {
     SpriteRenderer[] sr;
+    [SerializeField]
     SpriteRenderer footHoldImage;
+    [SerializeField]
+    SpriteRenderer footHoldCircle;
+    [SerializeField]
+    SpriteRenderer shirkingCircle;
+    [SerializeField]
+    Transform footHoldTransform;
+
     [SerializeField]
     Sprite[] sprite;
     [SerializeField]
     Sprite[] circleSprite;
+
     public bool isLeft;
     [SerializeField]
     float delayTime;
@@ -37,27 +46,24 @@ public class NoteCreate : MonoBehaviour
 
     void Awake()
     {
-        sr = GetComponentsInChildren<SpriteRenderer>(includeInactive: true);
-        footHoldImage = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        for (int i = 0; i < sr.Length-1; i++)
+        sr = new[] { footHoldImage, footHoldCircle };
+        for (int i = 0; i < sr.Length; i++)
         {
             Color c = sr[i].color;
             c.a = 0f;
             sr[i].color = c;
         }
-        defaultColor = transform.GetChild(1).GetComponent<SpriteRenderer>().color;
+        defaultColor = footHoldCircle.color;
     }
     void OnEnable()
     {
         if (BeatEvent.instance.inversion)
         {
-            SpriteRenderer destinationCircle = transform.GetChild(1).GetComponent<SpriteRenderer>();
-            destinationCircle.color = Color.white;
+            footHoldCircle.color = Color.white;
         }
         else
         {
-            SpriteRenderer destinationCircle = transform.GetChild(1).GetComponent<SpriteRenderer>();
-            destinationCircle.color = defaultColor;
+            footHoldCircle.color = defaultColor;
         }
         for (int i = 0; i < sr.Length; i++)
         {
@@ -65,7 +71,10 @@ public class NoteCreate : MonoBehaviour
             c.a = 0f;
             sr[i].color = c;
         }
-        sr[2].transform.localScale = Vector3.one * defaultCircleSize;
+        shirkingCircle.transform.localScale = Vector3.one * defaultCircleSize;
+        Color sc = shirkingCircle.color;
+        sc.a = 0f;
+        shirkingCircle.color = sc;
         noteState = NoteState.Normal;
         bpm = BeatManager.instance.notes.bpm;
         delayTime = 60f / bpm * 2;
@@ -75,16 +84,16 @@ public class NoteCreate : MonoBehaviour
 
     IEnumerator CreateNote()
     {
+        //---스프라이트 설정 결정---
         int spriteIndex = 0;
-        SpriteRenderer circleSpriteRenderer = transform.GetChild(2).GetComponent<SpriteRenderer>();
         if (BeatEvent.instance.inversion)
         {
             spriteIndex += 3;
-            circleSpriteRenderer.sprite = circleSprite[1];
+            shirkingCircle.sprite = circleSprite[1];
         }
         else
         {
-            circleSpriteRenderer.sprite = circleSprite[0];
+            shirkingCircle.sprite = circleSprite[0];
         }
         yield return new WaitForSeconds(delayTime);
         if (noteData.image == "Double")
@@ -95,10 +104,10 @@ public class NoteCreate : MonoBehaviour
         {
             spriteIndex += 2;
         }
-        
         footHoldImage.sprite = sprite[spriteIndex];
         noteState = NoteState.Ready;
-        transform.localScale = Vector3.one * 0.4f;
+        footHoldTransform.localScale = Vector3.one * 0.4f;
+        //초기화
         for (int i = 0; i < sr.Length; i++)
         {
             Color c = sr[i].color;
@@ -106,23 +115,28 @@ public class NoteCreate : MonoBehaviour
             sr[i].color = c;
         }
         Sequence seq = DOTween.Sequence();
-        seq.Append(transform.DOScale(1f, duration)
+        seq.Append(footHoldTransform.DOScale(1f, duration)
             .SetEase(Ease.OutBack, 1f));
-        for (int i = 0; i < sr.Length-1; i++)
+        for (int i = 0; i < sr.Length; i++)
         {
             SpriteRenderer rend = sr[i];
             seq.Join(rend
                 .DOFade(1f, duration)
                 .SetEase(Ease.Linear));
         }
-        seq.Join(sr[2].DOFade(1f, duration));
+        shirkingCircle.transform.DOScale(0.01f, duration * 3).OnComplete(() =>
+        {
+            Color c = shirkingCircle.color;
+            c.a = 0f;
+            shirkingCircle.color = c;
+        });
+        shirkingCircle.DOFade(1f, duration * 2).SetEase(Ease.OutQuad);
         yield return seq.WaitForCompletion();
         noteState = NoteState.Available;
         guideCircleSpeed = noteData.guideCircleSpeed == 0 ? 1 : noteData.guideCircleSpeed;
         float guideCircleDuration = duration / guideCircleSpeed;
         yield return new WaitForSeconds((duration - guideCircleDuration) / 2);
         Tween move = BeatEvent.instance.MoveGuideCircle(noteData.direction, noteData.type, guideCircleDuration);
-        sr[2].transform.DOScale(0.1f, guideCircleDuration);
         if (move != null)
             yield return move.WaitForCompletion();
         if (isActiveAndEnabled)
@@ -145,7 +159,7 @@ public class NoteCreate : MonoBehaviour
         while (elapsed < tempTime)
         {
             elapsed += Time.deltaTime;
-            for (int i = 0; i < sr.Length - 1; i++)
+            for (int i = 0; i < sr.Length; i++)
             {
                 Color c = sr[i].color;
                 c.a = Mathf.Clamp01(1f - elapsed / tempTime);
@@ -167,7 +181,7 @@ public class NoteCreate : MonoBehaviour
         while (elapsed < destroyTime)
         {
             elapsed += Time.deltaTime;
-            for (int i = 0; i < sr.Length-1; i++)
+            for (int i = 0; i < sr.Length; i++)
             {
                 Color c = sr[i].color;
                 c.a = Mathf.Clamp01(1f - elapsed / destroyTime);
