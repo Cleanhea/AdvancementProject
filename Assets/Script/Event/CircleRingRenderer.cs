@@ -12,14 +12,11 @@ public class CircleRingRenderer : MonoBehaviour
 
     void Awake()
     {
-        // 초기화는 여기서도 하지만, 타이밍 문제 방지를 위해
-        // 아래 EnsureInit()을 모든 진입점에서 한 번 더 호출합니다.
         EnsureInit();
         ApplyGeometry();
         ApplyColor();
     }
 
-    // 🔴 추가: 게으른 초기화
     void EnsureInit()
     {
         if (lr != null) return;
@@ -42,7 +39,7 @@ public class CircleRingRenderer : MonoBehaviour
         set
         {
             radius = Mathf.Max(0, value);
-            ApplyGeometry(); // 내부에서 EnsureInit 호출
+            ApplyGeometry();
         }
     }
 

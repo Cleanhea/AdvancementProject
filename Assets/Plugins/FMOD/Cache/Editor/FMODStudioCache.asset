@@ -144,7 +144,7 @@ MonoBehaviour:
   - {fileID: -2862972496294479044}
   StringsBanks:
   - {fileID: 6528054813473459205}
-  cacheTime: 638894231915535486
+  cacheTime: 638894244666483478
   cacheVersion: 131623
 --- !u!114 &4511435844718851650
 MonoBehaviour:
@@ -188,7 +188,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/HaiPhut.bank
   Name: HaiPhut
   StudioPath: bank:/HaiPhut
-  lastModified: 638894231915535486
+  lastModified: 638894244666483478
   FileSizes:
   - Name: Desktop
     Value: 2899040

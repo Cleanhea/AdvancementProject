@@ -13,12 +13,9 @@ public enum NoteState
 public class NoteCreate : MonoBehaviour
 {
     SpriteRenderer[] sr;
-    [SerializeField]
-    SpriteRenderer footHoldImage;
-    [SerializeField]
-    SpriteRenderer footHoldCircle;
-    [SerializeField]
-    SpriteRenderer shirkingCircle;
+    [SerializeField] SpriteRenderer footHoldImage;
+    [SerializeField] SpriteRenderer footHoldCircle;
+    [SerializeField] CircleRingRenderer shrinkingCircle;
     [SerializeField]
     Transform footHoldTransform;
 
@@ -28,21 +25,16 @@ public class NoteCreate : MonoBehaviour
     Sprite[] circleSprite;
 
     public bool isLeft;
-    [SerializeField]
-    float delayTime;
-    [SerializeField]
-    float duration;
-    [SerializeField]
-    float destroyDuration = 1f;
-    [SerializeField]
-    float destroyTime = 0.5f;
+    [SerializeField] float delayTime;
+    [SerializeField] float duration;
+    [SerializeField] float destroyDuration = 1f;
+    [SerializeField] float destroyTime = 0.5f;
     float bpm;
     public NoteState noteState = NoteState.Ready;
     public Notes noteData;
     public float guideCircleSpeed;
     Color defaultColor;
-    [SerializeField]
-    float defaultCircleSize = 0.5f;
+    [SerializeField] float defaultCircleSize = 0.5f;
 
     void Awake()
     {
@@ -71,10 +63,9 @@ public class NoteCreate : MonoBehaviour
             c.a = 0f;
             sr[i].color = c;
         }
-        shirkingCircle.transform.localScale = Vector3.one * defaultCircleSize;
-        Color sc = shirkingCircle.color;
-        sc.a = 0f;
-        shirkingCircle.color = sc;
+        shrinkingCircle.Color = BeatEvent.instance.inversion ? Color.white : Color.black;
+        shrinkingCircle.Alpha  = 0f;
+        shrinkingCircle.Radius = defaultCircleSize;
         noteState = NoteState.Normal;
         bpm = BeatManager.instance.notes.bpm;
         delayTime = 60f / bpm * 2;
@@ -89,13 +80,8 @@ public class NoteCreate : MonoBehaviour
         if (BeatEvent.instance.inversion)
         {
             spriteIndex += 3;
-            shirkingCircle.sprite = circleSprite[1];
         }
-        else
-        {
-            shirkingCircle.sprite = circleSprite[0];
-        }
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSeconds(delayTime/2);
         if (noteData.image == "Double")
         {
             spriteIndex += 1;
@@ -114,6 +100,19 @@ public class NoteCreate : MonoBehaviour
             c.a = 0f;
             sr[i].color = c;
         }
+        DOTween.To(
+            () => shrinkingCircle.Radius,
+            r  => shrinkingCircle.Radius = r,
+            0.9f,
+            duration * 3f
+        ).OnComplete(() => shrinkingCircle.Alpha = 0f);
+
+        DOTween.To(
+            () => shrinkingCircle.Alpha,
+            a  => shrinkingCircle.Alpha = a,
+            1f,
+            duration * 2f
+        ).SetEase(Ease.OutQuad);
         Sequence seq = DOTween.Sequence();
         seq.Append(footHoldTransform.DOScale(1f, duration)
             .SetEase(Ease.OutBack, 1f));
@@ -124,14 +123,8 @@ public class NoteCreate : MonoBehaviour
                 .DOFade(1f, duration)
                 .SetEase(Ease.Linear));
         }
-        shirkingCircle.transform.DOScale(0.01f, duration * 3).OnComplete(() =>
-        {
-            Color c = shirkingCircle.color;
-            c.a = 0f;
-            shirkingCircle.color = c;
-        });
-        shirkingCircle.DOFade(1f, duration * 2).SetEase(Ease.OutQuad);
         yield return seq.WaitForCompletion();
+        yield return new WaitForSeconds(delayTime/2);
         noteState = NoteState.Available;
         guideCircleSpeed = noteData.guideCircleSpeed == 0 ? 1 : noteData.guideCircleSpeed;
         float guideCircleDuration = duration / guideCircleSpeed;
@@ -139,6 +132,7 @@ public class NoteCreate : MonoBehaviour
         Tween move = BeatEvent.instance.MoveGuideCircle(noteData.direction, noteData.type, guideCircleDuration);
         if (move != null)
             yield return move.WaitForCompletion();
+        shrinkingCircle.Alpha  = 0f;
         if (isActiveAndEnabled)
             StartCoroutine(SetCircle());
         if (noteData.sevent == "quick")
