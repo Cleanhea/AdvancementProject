@@ -3,6 +3,124 @@
   "bpm": 128,
   "notes":[
     { "bar": 5, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1},
-    { "bar": 5, "beat": 3,"direction" : 0,"sevent" : "default", "type" : 0}
+    { "bar": 6, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
+    { "bar": 7, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1},
+    { "bar": 8, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+
+    { "bar": 9, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 1},
+    { "bar": 10, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 0},
+    { "bar": 11, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1},
+    { "bar": 12, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
+
+    { "bar": 13, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 1},
+    { "bar": 13, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 0},
+
+    { "bar": 14, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1},
+    { "bar": 14, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0,"cameraPosition" : {"x" : 6, "y" : 0}},
+
+    { "bar": 15, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1},
+    { "bar": 15, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0,"cameraPosition" : {"x" : -6, "y" : 0}},
+
+    { "bar": 16, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1},
+    { "bar": 16, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0,"cameraPosition" : {"x" : 6, "y" : 0}},
+
+    { "bar": 17, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1},
+    { "bar": 17, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+
+    { "bar": 18, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1},
+    { "bar": 18, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0,"cameraPosition" : {"x" : -6, "y" : 0}},
+
+    { "bar": 19, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1},
+    { "bar": 19, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0,"cameraPosition" : {"x" : 6, "y" : 0}},
+
+    { "bar": 20, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1},
+    { "bar": 20, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0,"cameraPosition" : {"x" : -6, "y" : 0}},
+
+    { "bar": 21, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 1},
+    { "bar": 21, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : 0, "y" : 6}},
+
+    { "bar": 21, "beat": 3,"direction" : 1,"sevent" : "quick", "type" : 1},
+    { "bar": 21, "beat": 3,"direction" : 1,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : 6, "y" : 0}},
+
+    { "bar": 22, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 1},
+    { "bar": 22, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : 0, "y" : 6}},
+
+    { "bar": 22, "beat": 3,"direction" : 0,"sevent" : "quick", "type" : 1},
+    { "bar": 22, "beat": 3,"direction" : 0,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : -6, "y" : 0}},
+
+    { "bar": 23, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 1},
+    { "bar": 23, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : 0, "y" : 6}},
+
+    { "bar": 23, "beat": 3,"direction" : 1,"sevent" : "quick", "type" : 1},
+    { "bar": 23, "beat": 3,"direction" : 1,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : 6, "y" : 0}},
+
+    { "bar": 24, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 1},
+    { "bar": 24, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : 0, "y" : 6}},
+
+    { "bar": 24, "beat": 3,"direction" : 0,"sevent" : "quick","image" : "Double", "type" : 1},
+    { "bar": 24, "beat": 3,"direction" : 0,"sevent" : "quick","image" : "Double", "type" : 0,"cameraPosition" : {"x" : -6, "y" : 0}},
+
+    { "bar": 25, "beat": 1,"direction" : 1,"sevent" : "quick", "type" : 1},
+    { "bar": 25, "beat": 1,"direction" : 1,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : 6, "y" : 0}},
+
+    { "bar": 25, "beat": 3,"direction" : 3,"sevent" : "quick", "type" : 1},
+    { "bar": 25, "beat": 3,"direction" : 3,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : 0, "y" : -6}},
+
+    { "bar": 26, "beat": 1,"direction" : 0,"sevent" : "quick", "type" : 1},
+    { "bar": 26, "beat": 1,"direction" : 0,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : -6, "y" : 0}},
+
+    { "bar": 26, "beat": 3,"direction" : 3,"sevent" : "quick", "type" : 1},
+    { "bar": 26, "beat": 3,"direction" : 3,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : 0, "y" : -6}},
+
+    { "bar": 27, "beat": 1,"direction" : 1,"sevent" : "quick", "type" : 1},
+    { "bar": 27, "beat": 1,"direction" : 1,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : 6, "y" : 0}},
+
+    { "bar": 27, "beat": 3,"direction" : 3,"sevent" : "quick", "type" : 1},
+    { "bar": 27, "beat": 3,"direction" : 3,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : 0, "y" : -6}},
+
+    { "bar": 28, "beat": 1,"direction" : 0,"sevent" : "quick", "type" : 1},
+    { "bar": 28, "beat": 1,"direction" : 0,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : -6, "y" : 0}},
+
+    { "bar": 28, "beat": 3,"direction" : 3,"sevent" : "quick", "type" : 1},
+    { "bar": 28, "beat": 3,"direction" : 3,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : 0, "y" : -6}},
+
+
+    { "bar": 29, "beat": 1,"direction" : 1,"sevent" : "quick","image" : "Double", "type" : 1},
+    { "bar": 29, "beat": 1,"direction" : 1,"sevent" : "quick","image" : "Double", "type" : 0,"cameraPosition" : {"x" : 6, "y" : 0}},
+
+    { "bar": 29, "beat": 3,"direction" : 0,"sevent" : "quick", "type" : 1},
+    { "bar": 29, "beat": 3,"direction" : 0,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : -6, "y" : 0}},
+
+    { "bar": 30, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 1},
+    { "bar": 30, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : 0, "y" : 6}},
+
+
+    { "bar": 33, "beat": 1,"direction" : 0,"sevent" : "quick","image" : "Double", "type" : 1},
+    { "bar": 33, "beat": 1,"direction" : 0,"sevent" : "quick","image" : "Double", "type" : 0,"cameraPosition" : {"x" : -6, "y" : 0}},
+
+    { "bar": 33, "beat": 3,"direction" : 1,"sevent" : "quick", "type" : 1},
+    { "bar": 33, "beat": 3,"direction" : 1,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : 6, "y" : 0}},
+
+    { "bar": 34, "beat": 1,"direction" : 3,"sevent" : "quick", "type" : 1},
+    { "bar": 34, "beat": 1,"direction" : 3,"sevent" : "quick", "type" : 0,"input":"saveOK","cameraPosition" : {"x" : 0, "y" : -6}},
+    { "bar": 34, "beat": 1,"sevent" : "save", "type" : 2},
+
+    { "bar": 37, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 1},
+    { "bar": 37, "beat": 3,"direction" : 2,"sevent" : "quick", "type" : 0,"cameraPosition" : {"x" : 0, "y" : 6}},
+    { "bar": 38, "beat": 1,"direction" : 0,"sevent" : "quick","image" : "Double", "type" : 0},
+    { "bar": 38, "beat": 3,"direction" : 1,"sevent" : "quick","image" : "Double", "type" : 1,"cameraZoom" : 1.5},
+    { "bar": 39, "beat": 1,"direction" : 1,"sevent" : "quick", "type" : 0},
+    { "bar": 39, "beat": 3,"direction" : 0,"sevent" : "quick", "type" : 1},
+    { "bar": 40, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 0},
+    { "bar": 40, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+
+    { "bar": 41, "beat": 1,"direction" : 0,"sevent" : "quick", "type" : 0},
+    { "bar": 41, "beat": 3,"direction" : 1,"sevent" : "quick", "type" : 1,"cameraZoom" : 1.5},
+    { "bar": 42, "beat": 1,"direction" : 2,"sevent" : "quick","image" : "Double", "type" : 0},
+    { "bar": 42, "beat": 3,"direction" : 2,"sevent" : "quick","image" : "Double", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+    { "bar": 43, "beat": 1,"direction" : 3,"sevent" : "quick", "type" : 0},
+    { "bar": 43, "beat": 3,"direction" : 3,"sevent" : "quick", "type" : 1,"cameraPosition" : {"x" : 0, "y" : -6}},
+    { "bar": 44, "beat": 1,"direction" : 1,"sevent" : "quick", "type" : 0},
+    { "bar": 44, "beat": 1,"direction" : 0,"sevent" : "quick", "type" : 1}
   ]
 }

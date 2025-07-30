@@ -402,7 +402,7 @@ MonoBehaviour:
     image: 
     input: 
   guideCircleSpeed: 0
-  defaultCircleSize: 9
+  defaultCircleSize: 6
 --- !u!1 &8963186800177824212
 GameObject:
   m_ObjectHideFlags: 0
