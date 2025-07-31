@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2168623295950766674}
   - component: {fileID: 7217206756829920661}
-  - component: {fileID: 7918832386818747935}
   - component: {fileID: 3198413921606411526}
   m_Layer: 0
   m_Name: BigCircle_0
@@ -46,61 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a16bf3aff07e084e92a3183d41569cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segments: 128
+  segments: 64
   radius: 5
   thickness: 0.1
---- !u!212 &7918832386818747935
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3072077839313135605}
-  m_Enabled: 0
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 134561924, guid: f4657d56c5f523548b241e9d7d4ce035, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 10, y: 10}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!120 &3198413921606411526
 LineRenderer:
   serializedVersion: 2
@@ -142,7 +89,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
@@ -310,8 +257,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 26a684082afcd2841bdbe194ff69f73c, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 363518192afa44941a926615346b265d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -374,18 +321,10 @@ MonoBehaviour:
   footHoldTransform: {fileID: 3642066458053084260}
   sprite:
   - {fileID: 21300000, guid: 26a684082afcd2841bdbe194ff69f73c, type: 3}
-  - {fileID: 21300000, guid: c15e9f8b0ff37374c9a69852787f328b, type: 3}
-  - {fileID: 21300000, guid: dff3be15746bfbc47b5b98e64c4560a9, type: 3}
-  - {fileID: 21300000, guid: ad847ac9657c6894aabf2e5d7b5d7410, type: 3}
-  - {fileID: 21300000, guid: d342e8e9fb50b594386cbbbe70f9a62c, type: 3}
-  - {fileID: 21300000, guid: 7f986f13ba992f547a46f7e9698ee131, type: 3}
-  circleSprite:
-  - {fileID: 134561924, guid: f4657d56c5f523548b241e9d7d4ce035, type: 3}
-  - {fileID: -1550991542, guid: f24c801f0a6e3d6459c54589b837e719, type: 3}
-  isLeft: 0
+  - {fileID: 21300000, guid: 363518192afa44941a926615346b265d, type: 3}
+  isLeft: 1
   delayTime: 0
   duration: 1.905
-  destroyDuration: 0.2
   destroyTime: 0.5
   noteState: 1
   noteData:

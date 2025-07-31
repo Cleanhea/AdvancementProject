@@ -12,5 +12,7 @@ public class SaveState
     public float CameraZoom;
     public Vector3 leftCirclePosition;
     public Vector3 rightCirclePosition;
+    public bool isInversion = false;
+    public Color globalLightColor;
     public List<Notes> remainingNotes = new List<Notes>();
 }

@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour
         }
         gameState = GameState.lobi;
     }
-
     public void SaveGame()
     {
         if (saveCoroutine != null)
@@ -51,10 +50,15 @@ public class GameManager : MonoBehaviour
         int ms;
         AudioManager.instance.bgmInstance.getTimelinePosition(out ms);
         temp.musicTime = ms - 100;
+        int copied = 0;
         foreach (var note in BeatManager.instance.noteQueue)
         {
             temp.remainingNotes.Add(note);
+            if ((++copied & 127) == 0)
+                yield return null;
         }
+        temp.isInversion = BeatEvent.instance.inversion;
+        temp.globalLightColor = BeatEvent.instance.globalLight2D.color;
         yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
         Debug.Log("SavePoint");
         //오차 보정
@@ -98,6 +102,8 @@ public class GameManager : MonoBehaviour
         BeatEvent.instance.leftCirclePositionQueue.Clear();
         BeatEvent.instance.rightCirclePositionQueue.Clear();
         BeatEvent.instance.mainCamera.orthographicSize = saveState.CameraZoom;
+        BeatEvent.instance.inversion = saveState.isInversion;
+        BeatEvent.instance.globalLight2D.color = saveState.globalLightColor;
         yield return null;
         BeatManager.instance.BeatStartFromSave(playname, saveState);
         yield return null;

@@ -113,7 +113,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 214342
+  Length: 214332
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
   - {fileID: -2862972496294479044}
   StringsBanks:
   - {fileID: 6528054813473459205}
-  cacheTime: 638895126440835978
+  cacheTime: 638895966107000116
   cacheVersion: 131623
 --- !u!114 &4511435844718851650
 MonoBehaviour:
@@ -188,7 +188,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/HaiPhut.bank
   Name: HaiPhut
   StudioPath: bank:/HaiPhut
-  lastModified: 638895126440835978
+  lastModified: 638895966107000116
   FileSizes:
   - Name: Desktop
     Value: 2899040

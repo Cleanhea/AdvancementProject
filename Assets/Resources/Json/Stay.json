@@ -12,8 +12,8 @@
 
   { "bar": 44, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
   { "bar": 46, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 1},
-  { "bar": 48, "beat": 1,"direction" : 0,"image" : "Double","sevent" : "quick", "type" : 0},
-  { "bar": 50, "beat": 1,"direction" : 1,"image" : "Double","sevent" : "quick", "type" : 1},
+  { "bar": 48, "beat": 1,"direction" : 0,"sevent" : "quick", "type" : 0},
+  { "bar": 50, "beat": 1,"direction" : 1,"sevent" : "quick", "type" : 1},
   { "bar": 52, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
   { "bar": 52, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1},
 
@@ -24,13 +24,13 @@
   { "bar": 68, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
   { "bar": 68, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1},
 
-  { "bar": 73, "beat": 1,"direction" : 2,"image" : "Double","sevent" : "quick", "type" : 0},
-  { "bar": 74, "beat": 1,"direction" : 2,"image" : "Double","sevent" : "quick", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+  { "bar": 73, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 0},
+  { "bar": 74, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
   { "bar": 75, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 0},
   { "bar": 77, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : -6}},
 
-  { "bar": 81, "beat": 1,"direction" : 3,"image" : "Double","sevent" : "default", "type" : 0},
-  { "bar": 82, "beat": 1,"direction" : 3,"image" : "Double","sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : -6}},
+  { "bar": 81, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 0},
+  { "bar": 82, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : -6}},
   { "bar": 83, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
   { "bar": 85, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}}
   ]

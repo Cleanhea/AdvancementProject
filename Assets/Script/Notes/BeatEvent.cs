@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 
 [DefaultExecutionOrder(1)]
@@ -12,6 +14,7 @@ public class BeatEvent : MonoBehaviour
     public GameObject leftCirclePrefab;
     public GameObject rightCirclePrefab;
     public GameObject guideCirclePrefab;
+    public GameObject haiPhutLightPrefab;
 
     //---------게임 오브젝트-----------
     public GameObject leftGuideCircle;
@@ -64,12 +67,17 @@ public class BeatEvent : MonoBehaviour
 
     //---------모드 bool값-----------
     public bool inversion = false;
+    public bool afterInversion = false;
 
     //---------연출 관련 값-----------
+    public static Action<bool> OnInversion;
     [SerializeField] float ClearCircleTime = 0.05f;
     [SerializeField] float ClearCircleSize = 1.15f;
-
+    public Light2D globalLight2D;
+    Light2D leftLight;
+    Light2D rightLight;
     Vector3 originCircleSize;
+    public GameObject stageLight;
 
 
     void Awake()
@@ -294,13 +302,17 @@ public class BeatEvent : MonoBehaviour
     {
         inversion = true;
         yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
-        mainCamera.backgroundColor = inversionColor;
+        globalLight2D.color = inversionColor;
+        OnInversion?.Invoke(inversion);
+        afterInversion = true;
     }
     IEnumerator DefaultMode()
     {
         inversion = false;
         yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
-        mainCamera.backgroundColor = defaultColor;
+        globalLight2D.color = defaultColor;
+        OnInversion?.Invoke(inversion);
+        afterInversion = false;
     }
     public void ClearNote(int type)
     {
@@ -312,5 +324,44 @@ public class BeatEvent : MonoBehaviour
         circle.DOKill();
         circle.localScale = originCircleSize;
         circle.DOScale(originCircleSize * ClearCircleSize, ClearCircleTime).SetEase(Ease.OutQuad).SetLoops(2, LoopType.Yoyo);
+    }
+    public void LightOn(string dir)
+    {
+        var target = leftLight;
+        float original = leftLight.intensity;
+        if (dir == "right")
+        {
+            original = rightLight.intensity;
+            target = rightLight;
+        }
+        float peak = 1f;
+        float total = 0.25f;
+        float half = total * 0.5f;
+
+        DOTween.Kill(target);
+
+        Sequence seq = DOTween.Sequence().SetTarget(target);
+        seq.Append(
+            DOTween.To(() => target.intensity, v => target.intensity = v, peak, half)
+                .SetEase(Ease.OutQuad)
+        );
+        seq.Append(
+            DOTween.To(() => target.intensity, v => target.intensity = v, original, half)
+                .SetEase(Ease.InQuad)
+        );
+    }
+
+    public void SetLightParent(SongName songName)
+    {
+        switch (songName)
+        {
+            case SongName.HaiPhut:
+            {
+                    stageLight = Instantiate(haiPhutLightPrefab, mainCamera.transform);
+                    leftLight = stageLight.transform.GetChild(0).GetComponent<Light2D>();
+                    rightLight = stageLight.transform.GetChild(1).GetComponent<Light2D>();
+                break;
+            }
+        }
     }
 }

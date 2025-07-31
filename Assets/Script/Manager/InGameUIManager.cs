@@ -26,6 +26,11 @@ public class InGameUIManager : MonoBehaviour
         }
         instance = this;
     }
+    void Start()
+    {
+        saveCircle.SetActive(false);
+        saveText.SetActive(false);
+    }
     void OnEnable()
     {
         GameManager.OnPauseRequest += TogglePause;
@@ -66,7 +71,7 @@ public class InGameUIManager : MonoBehaviour
         pausePanel.SetActive(false);
         TextMeshProUGUI text = timeCount.GetComponent<TextMeshProUGUI>();
         Color c;
-        Color bg = BeatEvent.instance.mainCamera.backgroundColor;
+        Color bg = BeatEvent.instance.globalLight2D.color;
         c = new Color(1f - bg.r, 1f - bg.g, 1f - bg.b);
         text.color = c;
         text.text = "3";
@@ -114,7 +119,7 @@ public class InGameUIManager : MonoBehaviour
         {
             t += Time.deltaTime;
             float alpha = Mathf.Clamp01(t / 0.4f);
-            Color bg = BeatEvent.instance.mainCamera.backgroundColor;
+            Color bg = BeatEvent.instance.globalLight2D.color;
             c = new Color(1f - bg.r, 1f - bg.g, 1f - bg.b, alpha);
             text.color = c;
             yield return null;
@@ -124,7 +129,7 @@ public class InGameUIManager : MonoBehaviour
         while (t < 0.3f)
         {
             t += Time.deltaTime;
-            Color bg = BeatEvent.instance.mainCamera.backgroundColor;
+            Color bg = BeatEvent.instance.globalLight2D.color;
             c = new Color(1f - bg.r, 1f - bg.g, 1f - bg.b, 1f);
             text.color = c;
             yield return null;

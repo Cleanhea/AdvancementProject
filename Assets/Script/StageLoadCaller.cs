@@ -39,6 +39,7 @@ public class StageLoadCaller : MonoBehaviour
                 yield return null;
             }
         }
+        BeatEvent.instance.SetLightParent(song);
         BeatEvent.instance.BeatStart();
         yield return new WaitForSeconds(1.5f);
         AudioManager.instance.SetMusicVolume(AudioManager.instance.MusicVolume);

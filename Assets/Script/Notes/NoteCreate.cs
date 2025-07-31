@@ -21,13 +21,10 @@ public class NoteCreate : MonoBehaviour
 
     [SerializeField]
     Sprite[] sprite;
-    [SerializeField]
-    Sprite[] circleSprite;
 
     public bool isLeft;
     [SerializeField] float delayTime;
     [SerializeField] float duration;
-    [SerializeField] float destroyDuration = 1f;
     [SerializeField] float destroyTime = 0.5f;
     float bpm;
     public NoteState noteState = NoteState.Ready;
@@ -47,8 +44,28 @@ public class NoteCreate : MonoBehaviour
         }
         defaultColor = footHoldCircle.color;
     }
+
+    void UpdateInversion(bool inversion)
+    {
+        int spriteIndex = 0;
+        Color c = footHoldCircle.color;
+        if (inversion)
+        {
+            c = Color.white;
+            spriteIndex += 1;
+        }
+        else
+        {
+            c = defaultColor;
+        }
+        c.a = footHoldCircle.color.a;
+        footHoldCircle.color = c;
+        footHoldImage.sprite = sprite[spriteIndex];
+    }
+
     void OnEnable()
     {
+        BeatEvent.OnInversion += UpdateInversion;
         if (BeatEvent.instance.inversion)
         {
             footHoldCircle.color = Color.white;
@@ -64,7 +81,7 @@ public class NoteCreate : MonoBehaviour
             sr[i].color = c;
         }
         shrinkingCircle.Color = BeatEvent.instance.inversion ? Color.white : Color.black;
-        shrinkingCircle.Alpha  = 0f;
+        shrinkingCircle.Alpha = 0f;
         shrinkingCircle.Radius = defaultCircleSize;
         noteState = NoteState.Normal;
         bpm = BeatManager.instance.notes.bpm;
@@ -73,24 +90,30 @@ public class NoteCreate : MonoBehaviour
         StartCoroutine(CreateNote());
     }
 
+    void OnDisable()
+    {
+        BeatEvent.OnInversion -= UpdateInversion;
+        DOTween.Kill(this);
+        StopAllCoroutines();
+    }
+
     IEnumerator CreateNote()
     {
-        //---스프라이트 설정 결정---
         int spriteIndex = 0;
-        if (BeatEvent.instance.inversion)
+        Color cc = footHoldCircle.color;
+        if (BeatEvent.instance.afterInversion)
         {
-            spriteIndex += 3;
-        }
-        yield return new WaitForSeconds(delayTime/2);
-        if (noteData.image == "Double")
-        {
+            cc = Color.white;
             spriteIndex += 1;
         }
-        else if (noteData.image == "Triple")
+        else
         {
-            spriteIndex += 2;
+            cc = defaultColor;
         }
+        cc.a = footHoldCircle.color.a;
+        footHoldCircle.color = cc;
         footHoldImage.sprite = sprite[spriteIndex];
+        yield return new WaitForSeconds(delayTime / 2);
         noteState = NoteState.Ready;
         footHoldTransform.localScale = Vector3.one * 0.4f;
         //초기화
@@ -102,17 +125,22 @@ public class NoteCreate : MonoBehaviour
         }
         DOTween.To(
             () => shrinkingCircle.Radius,
-            r  => shrinkingCircle.Radius = r,
+            r => shrinkingCircle.Radius = r,
             0.9f,
             duration * 3f
         ).OnComplete(() => shrinkingCircle.Alpha = 0f);
-
         DOTween.To(
             () => shrinkingCircle.Alpha,
-            a  => shrinkingCircle.Alpha = a,
+            a => shrinkingCircle.Alpha = a,
             1f,
             duration * 2f
-        ).SetEase(Ease.OutQuad);
+        ).SetEase(Ease.OutQuad).OnUpdate(() =>
+        {
+            Color c;
+            Color bg = BeatEvent.instance.globalLight2D.color;
+            c = new Color(1f - bg.r, 1f - bg.g, 1f - bg.b);
+            shrinkingCircle.Color = c;
+        });
         Sequence seq = DOTween.Sequence();
         seq.Append(footHoldTransform.DOScale(1f, duration)
             .SetEase(Ease.OutBack, 1f));
@@ -124,7 +152,7 @@ public class NoteCreate : MonoBehaviour
                 .SetEase(Ease.Linear));
         }
         yield return seq.WaitForCompletion();
-        yield return new WaitForSeconds(delayTime/2);
+        yield return new WaitForSeconds(delayTime / 2);
         noteState = NoteState.Available;
         guideCircleSpeed = noteData.guideCircleSpeed == 0 ? 1 : noteData.guideCircleSpeed;
         float guideCircleDuration = duration / guideCircleSpeed;
@@ -132,19 +160,11 @@ public class NoteCreate : MonoBehaviour
         Tween move = BeatEvent.instance.MoveGuideCircle(noteData.direction, noteData.type, guideCircleDuration);
         if (move != null)
             yield return move.WaitForCompletion();
-        shrinkingCircle.Alpha  = 0f;
+        shrinkingCircle.Alpha = 0f;
         if (isActiveAndEnabled)
             StartCoroutine(SetCircle());
-        if (noteData.sevent == "quick")
-        {
-            StartCoroutine(FastDestroyNote());
-        }
+        StartCoroutine(FastDestroyNote());
         yield return new WaitForSeconds((duration - guideCircleDuration) / 2);
-        if(noteData.sevent!="quick")
-        {
-            yield return new WaitForSeconds(destroyDuration);
-            StartCoroutine(DestroyNote());
-        }
     }
     IEnumerator FastDestroyNote()
     {
