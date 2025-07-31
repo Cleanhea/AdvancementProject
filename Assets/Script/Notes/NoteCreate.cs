@@ -30,6 +30,7 @@ public class NoteCreate : MonoBehaviour
     public NoteState noteState = NoteState.Ready;
     public Notes noteData;
     public float guideCircleSpeed;
+    float clearTime = 0.1f;
     Color defaultColor;
     [SerializeField] float defaultCircleSize = 0.5f;
 
@@ -214,7 +215,7 @@ public class NoteCreate : MonoBehaviour
 
     IEnumerator SetCircle()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(clearTime);
         //게임오버
         if (noteState == NoteState.Available)
         {

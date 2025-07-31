@@ -13,6 +13,7 @@ public class SaveState
     public Vector3 leftCirclePosition;
     public Vector3 rightCirclePosition;
     public bool isInversion = false;
+    public bool afterInversion = false;
     public Color globalLightColor;
     public List<Notes> remainingNotes = new List<Notes>();
 }

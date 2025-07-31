@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 31104148}
   - component: {fileID: 31104151}
   m_Layer: 5
-  m_Name: Stage2Btn
+  m_Name: Stage3Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,7 +255,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 31104148}
         m_TargetAssemblyTypeName: BtnLogic, Assembly-CSharp
-        m_MethodName: GoStage2
+        m_MethodName: GoStage3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -290,7 +290,7 @@ MonoBehaviour:
   clear: 0
   death: 0
   Bpm: 102
-  level: 3
+  level: 4
 --- !u!1 &107772141
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,6 +801,7 @@ GameObject:
   - component: {fileID: 141545631}
   - component: {fileID: 141545630}
   - component: {fileID: 141545632}
+  - component: {fileID: 141545633}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -888,6 +889,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nonRigidbodyVelocity: 0
   attenuationObject: {fileID: 0}
+--- !u!114 &141545633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141545628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &216433825
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,8 +1008,12 @@ MonoBehaviour:
     CameraZoom: 0
     leftCirclePosition: {x: -3.5, y: 0, z: 0}
     rightCirclePosition: {x: 3.5, y: 0, z: 0}
+    isInversion: 0
+    afterInversion: 0
+    globalLightColor: {r: 0, g: 0, b: 0, a: 0}
     remainingNotes: []
   gameState: 0
+  saveOK: 0
 --- !u!4 &259579397
 Transform:
   m_ObjectHideFlags: 0
@@ -1037,7 +1086,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stage2
+  m_text: Stage3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1496,7 +1545,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stage3
+  m_text: Stage1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2037,7 +2086,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stage1
+  m_text: Stage2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2720,7 +2769,7 @@ GameObject:
   - component: {fileID: 877833150}
   - component: {fileID: 877833153}
   m_Layer: 5
-  m_Name: Stage1Btn
+  m_Name: Stage2Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2804,7 +2853,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 877833150}
         m_TargetAssemblyTypeName: BtnLogic, Assembly-CSharp
-        m_MethodName: GoStage1
+        m_MethodName: GoStage2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2839,7 +2888,7 @@ MonoBehaviour:
   clear: 0
   death: 0
   Bpm: 126
-  level: 1
+  level: 3
 --- !u!1 &895960018
 GameObject:
   m_ObjectHideFlags: 0
@@ -4154,8 +4203,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5400,9 +5449,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2013846412}
   - {fileID: 877833149}
   - {fileID: 31104147}
-  - {fileID: 2013846412}
   - {fileID: 895960019}
   - {fileID: 1580032528}
   - {fileID: 2096151420}
@@ -5848,9 +5897,9 @@ MonoBehaviour:
   - {fileID: 1579392010}
   - {fileID: 1538058097}
   musicSelectUIButton:
+  - {fileID: 2013846411}
   - {fileID: 877833148}
   - {fileID: 31104146}
-  - {fileID: 2013846411}
   - {fileID: 895960018}
   - {fileID: 1580032527}
   - {fileID: 2096151419}
@@ -6334,7 +6383,7 @@ GameObject:
   - component: {fileID: 2013846413}
   - component: {fileID: 2013846416}
   m_Layer: 5
-  m_Name: Stage3Btn
+  m_Name: Stage1Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6418,7 +6467,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2013846413}
         m_TargetAssemblyTypeName: BtnLogic, Assembly-CSharp
-        m_MethodName: GoMusicSelect
+        m_MethodName: GoStage1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6448,12 +6497,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 643b242eaf957c1428f564ec4957bd9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songName: 
-  composer: 
+  songName: Hai Phut Hon(KAIZ Remix)
+  composer: PHAO & CM1X
   clear: 0
   death: 0
-  Bpm: 0
-  level: 0
+  Bpm: 128
+  level: 1
 --- !u!1 &2096151419
 GameObject:
   m_ObjectHideFlags: 0

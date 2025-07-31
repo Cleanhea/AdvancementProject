@@ -29,10 +29,16 @@ public class BtnLogic : MonoBehaviour
     public void GoStage1()
     {
         DOTween.KillAll();
-        StageLoadContext.Set(SongName.SoHappy);
+        StageLoadContext.Set(SongName.HaiPhutHon);
         LobiUI.instance.StartCoroutine(LobiUI.instance.GoStageReady());
     }
     public void GoStage2()
+    {
+        DOTween.KillAll();
+        StageLoadContext.Set(SongName.SoHappy);
+        LobiUI.instance.StartCoroutine(LobiUI.instance.GoStageReady());
+    }
+    public void GoStage3()
     {
         DOTween.KillAll();
         StageLoadContext.Set(SongName.Stay);

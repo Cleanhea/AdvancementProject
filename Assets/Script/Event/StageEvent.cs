@@ -23,6 +23,11 @@ public static class StageEvent
                     BeatEvent.instance.LightOn("right");
                     break;
             }
+            case ("allLightOn"):
+                {
+                    BeatEvent.instance.LightOn("all");
+                    break;
+            }
             default:
                 {
                     Debug.LogWarning("오류나씀");

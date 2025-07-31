@@ -27,6 +27,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 161402
+--- !u!114 &-5944334327365795315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/HaiPhutHon.bank
+  m_EditorClassIdentifier: 
+  Path: FMODProject/Build/Desktop/HaiPhutHon.bank
+  Name: HaiPhutHon
+  StudioPath: bank:/HaiPhutHon
+  lastModified: 638896054499456837
+  FileSizes:
+  - Name: Desktop
+    Value: 2899040
+  Exists: 1
 --- !u!114 &-3242976124175020057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +82,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638894231865098496
+  lastModified: 638896054356970535
   FileSizes:
   - Name: Desktop
     Value: 1324
@@ -87,33 +107,6 @@ MonoBehaviour:
   - Name: Desktop
     Value: 2292992
   Exists: 1
---- !u!114 &-1571187611227647833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/HaiPhut
-  m_EditorClassIdentifier: 
-  Path: event:/HaiPhut
-  Guid:
-    Data1: -1892141829
-    Data2: 1083297271
-    Data3: 1680883591
-    Data4: -415649343
-  Banks:
-  - {fileID: 5295535653880650280}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 214332
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,19 +126,46 @@ MonoBehaviour:
   - {fileID: -1907117335244470613}
   - {fileID: -3242976124175020057}
   - {fileID: 8956037587107370485}
-  - {fileID: 5295535653880650280}
+  - {fileID: -5944334327365795315}
   EditorEvents:
   - {fileID: -6036873956604757182}
   - {fileID: 5312220912306853145}
   - {fileID: 4511435844718851650}
-  - {fileID: -1571187611227647833}
+  - {fileID: 3956210271889294814}
   EditorParameters: []
   MasterBanks:
   - {fileID: -2862972496294479044}
   StringsBanks:
   - {fileID: 6528054813473459205}
-  cacheTime: 638895966107000116
+  cacheTime: 638896054499456837
   cacheVersion: 131623
+--- !u!114 &3956210271889294814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/HaiPhutHon
+  m_EditorClassIdentifier: 
+  Path: event:/HaiPhutHon
+  Guid:
+    Data1: -1892141829
+    Data2: 1083297271
+    Data3: 1680883591
+    Data4: -415649343
+  Banks:
+  - {fileID: -5944334327365795315}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 214332
 --- !u!114 &4511435844718851650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,26 +193,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 371382
---- !u!114 &5295535653880650280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/HaiPhut.bank
-  m_EditorClassIdentifier: 
-  Path: FMODProject/Build/Desktop/HaiPhut.bank
-  Name: HaiPhut
-  StudioPath: bank:/HaiPhut
-  lastModified: 638895966107000116
-  FileSizes:
-  - Name: Desktop
-    Value: 2899040
-  Exists: 1
 --- !u!114 &5312220912306853145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,10 +235,10 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638894231865138388
+  lastModified: 638896054357020397
   FileSizes:
   - Name: Desktop
-    Value: 1164
+    Value: 1170
   Exists: 1
 --- !u!114 &8919382533530419305
 MonoBehaviour:

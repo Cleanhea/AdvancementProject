@@ -11,31 +11,36 @@ public class BeatEvent : MonoBehaviour
 {
     public static BeatEvent instance;
     //---------프리펩-----------
+    [Header("---------게임 오브젝트 프리펩-----------")]
     public GameObject leftCirclePrefab;
     public GameObject rightCirclePrefab;
     public GameObject guideCirclePrefab;
-    public GameObject haiPhutLightPrefab;
+    [Header("---------스테이지 연출 프리펩-----------")]
+    public GameObject haiPhutHonLightPrefab;
 
     //---------게임 오브젝트-----------
-    public GameObject leftGuideCircle;
-    public GameObject rightGuideCircle;
+    [HideInInspector] public GameObject leftGuideCircle;
+    [HideInInspector] public GameObject rightGuideCircle;
+    [HideInInspector] public GameObject stageLight;
     GameObject leftCircle;//유저가 조정하는것
     GameObject rightCircle;// 유저가 조정하는것
 
     //---------좌표-----------
-    public Vector3 leftPoint;
-    public Vector3 rightPoint;
+    [HideInInspector] public Vector3 leftPoint;
+    [HideInInspector] public Vector3 rightPoint;
 
     //---------카메라 관련-----------
+    [Header("---------카메라 관련-----------")]
     public Camera mainCamera;
     public float cameraSpeedOffset = 0.2f;
     public Vector3 cameraPoint = new Vector3(0, 0, -10);
 
     //---------시작 위치-----------
-    public Vector3 startLeftCirclePosition = new Vector3(-3.5f, -3.0f, 0);
-    public Vector3 startRightCirclePosition = new Vector3(3.5f, -3.0f, 0);
+    [HideInInspector] public Vector3 startLeftCirclePosition = new Vector3(-3.5f, -3.0f, 0);
+    [HideInInspector] public Vector3 startRightCirclePosition = new Vector3(3.5f, -3.0f, 0);
 
     //---------포인트 관련-----------
+    [Header("---------포인트 관련-----------")]
     [SerializeField]
     Color defaultColor;
     [SerializeField]
@@ -66,6 +71,7 @@ public class BeatEvent : MonoBehaviour
     public Queue<Vector3> rightCirclePositionQueue = new Queue<Vector3>();
 
     //---------모드 bool값-----------
+    [Header("---------연출 관련 값-----------")]
     public bool inversion = false;
     public bool afterInversion = false;
 
@@ -74,10 +80,10 @@ public class BeatEvent : MonoBehaviour
     [SerializeField] float ClearCircleTime = 0.05f;
     [SerializeField] float ClearCircleSize = 1.15f;
     public Light2D globalLight2D;
+    public GameObject lightTransform;
     Light2D leftLight;
     Light2D rightLight;
     Vector3 originCircleSize;
-    public GameObject stageLight;
 
 
     void Awake()
@@ -328,7 +334,9 @@ public class BeatEvent : MonoBehaviour
     public void LightOn(string dir)
     {
         var target = leftLight;
+        var sub = rightLight;
         float original = leftLight.intensity;
+        float subOriginal = rightLight.intensity;
         if (dir == "right")
         {
             original = rightLight.intensity;
@@ -337,7 +345,6 @@ public class BeatEvent : MonoBehaviour
         float peak = 1f;
         float total = 0.25f;
         float half = total * 0.5f;
-
         DOTween.Kill(target);
 
         Sequence seq = DOTween.Sequence().SetTarget(target);
@@ -349,15 +356,27 @@ public class BeatEvent : MonoBehaviour
             DOTween.To(() => target.intensity, v => target.intensity = v, original, half)
                 .SetEase(Ease.InQuad)
         );
+        if (dir == "all")
+        {
+            Sequence seqSub = DOTween.Sequence().SetTarget(sub);
+        seqSub.Append(
+            DOTween.To(() => sub.intensity, v => sub.intensity = v, peak, half)
+                .SetEase(Ease.OutQuad)
+        );
+        seqSub.Append(
+            DOTween.To(() => sub.intensity, v => sub.intensity = v, subOriginal, half)
+                .SetEase(Ease.InQuad)
+        );
+        }
     }
 
     public void SetLightParent(SongName songName)
     {
         switch (songName)
         {
-            case SongName.HaiPhut:
+            case SongName.HaiPhutHon:
             {
-                    stageLight = Instantiate(haiPhutLightPrefab, mainCamera.transform);
+                    stageLight = Instantiate(haiPhutHonLightPrefab, lightTransform.transform);
                     leftLight = stageLight.transform.GetChild(0).GetComponent<Light2D>();
                     rightLight = stageLight.transform.GetChild(1).GetComponent<Light2D>();
                 break;

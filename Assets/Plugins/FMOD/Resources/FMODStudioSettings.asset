@@ -342,7 +342,7 @@ MonoBehaviour:
   MasterBanks:
   - Master
   Banks:
-  - HaiPhut
+  - HaiPhutHon
   - Lobi
   - SFX
   - SoHappy

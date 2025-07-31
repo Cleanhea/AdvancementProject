@@ -6,7 +6,7 @@ public enum SongName
 {
     SoHappy,
     Stay,
-    HaiPhut
+    HaiPhutHon
 }
 
 public class NotesLoader : MonoBehaviour

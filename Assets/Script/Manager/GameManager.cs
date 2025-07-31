@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
                 yield return null;
         }
         temp.isInversion = BeatEvent.instance.inversion;
+        temp.afterInversion = BeatEvent.instance.afterInversion;
         temp.globalLightColor = BeatEvent.instance.globalLight2D.color;
         yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
         Debug.Log("SavePoint");
@@ -103,6 +104,7 @@ public class GameManager : MonoBehaviour
         BeatEvent.instance.rightCirclePositionQueue.Clear();
         BeatEvent.instance.mainCamera.orthographicSize = saveState.CameraZoom;
         BeatEvent.instance.inversion = saveState.isInversion;
+        BeatEvent.instance.afterInversion = saveState.afterInversion;
         BeatEvent.instance.globalLight2D.color = saveState.globalLightColor;
         yield return null;
         BeatManager.instance.BeatStartFromSave(playname, saveState);
