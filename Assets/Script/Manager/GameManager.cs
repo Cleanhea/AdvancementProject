@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public SaveState saveState = new SaveState();
     public GameState gameState;
     public bool saveOK = false;
+    public bool startGame = false;
+    public int deathCount = 0;
     Coroutine saveCoroutine;
 
     private void Awake()
@@ -90,6 +92,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator ResetGame()
     {
+        deathCount++;
         BeatManager.instance.LinkDisable();
         SongName playname = BeatManager.instance.Playname;
         BeatEvent.instance.SetCameraPos(new Vector3(saveState.cameraPosition.x, saveState.cameraPosition.y, -10));
@@ -115,5 +118,20 @@ public class GameManager : MonoBehaviour
     public void MarkSaveOK()
     {
         saveOK = true;
+    }
+    public void DefaultSaveData()
+    {
+        saveState.musicTime = 0;
+        saveState.currentBar = 0;
+        saveState.currentBeat = 0;
+        saveState.cameraPosition.x = 0;
+        saveState.cameraPosition.y = 0;
+        saveState.CameraZoom = 12;
+        saveState.leftCirclePosition = new Vector3(-5, 0, 0);
+        saveState.rightCirclePosition = new Vector3(5, 0, 0);
+        saveState.isInversion = false;
+        saveState.afterInversion = false;
+        saveState.globalLightColor = Color.white;
+        saveState.remainingNotes.Clear();
     }
 }

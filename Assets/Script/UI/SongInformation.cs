@@ -5,6 +5,7 @@ using UnityEngine;
 public class SongInformation : MonoBehaviour
 {
     public string songName;
+    public string songIDName;
     public string composer;
     public bool clear;
     public int death;

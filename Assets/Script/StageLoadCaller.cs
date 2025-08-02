@@ -30,14 +30,8 @@ public class StageLoadCaller : MonoBehaviour
         if (!testMode)
         {
             InGameUIManager.instance.SetMusicInformation(song);
-            float t = 0f;
-            while (t < 2f)
-            {
-                t += Time.unscaledDeltaTime;
-                float volume = Mathf.Lerp(AudioManager.instance.MusicVolume, 0f, t / 2f);
-                AudioManager.instance.SetMusicVolumeInGame(volume);
-                yield return null;
-            }
+            AudioManager.instance.StartCoroutine(AudioManager.instance.VolumeFadeOut());
+            yield return new WaitForSeconds(1.5f);
         }
         BeatEvent.instance.SetLightParent(song);
         BeatEvent.instance.BeatStart();

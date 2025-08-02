@@ -235,6 +235,8 @@ MonoBehaviour:
     remainingNotes: []
   gameState: 0
   saveOK: 0
+  startGame: 0
+  deathCount: 0
 --- !u!4 &89459837
 Transform:
   m_ObjectHideFlags: 0
@@ -3500,7 +3502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c29a8d1a29c164297298aae108b381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testMode: 1
+  testMode: 0
 --- !u!4 &1917880538
 Transform:
   m_ObjectHideFlags: 0

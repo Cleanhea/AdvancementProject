@@ -110,4 +110,16 @@ public class AudioManager : MonoBehaviour
     {
         musicVCA.setVolume(musicVol);
     }
+
+    public IEnumerator VolumeFadeOut()
+    {
+        float t = 0f;
+        while (t < 2f)
+        {
+            t += Time.unscaledDeltaTime;
+            float volume = Mathf.Lerp(MusicVolume, 0f, t / 2f);
+            SetMusicVolumeInGame(volume);
+            yield return null;
+        }
+    }
 }

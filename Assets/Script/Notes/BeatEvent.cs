@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 
 [DefaultExecutionOrder(1)]
@@ -146,7 +147,34 @@ public class BeatEvent : MonoBehaviour
             r.color = rc;
             lg.color = lgc;
             rg.color = rgc;
-
+            yield return null;
+        }
+        leftPoint = leftCircle.transform.position;
+        rightPoint = rightCircle.transform.position;
+    }
+    IEnumerator ClearSetCircle()
+    {
+        SpriteRenderer l = leftCircle.GetComponent<SpriteRenderer>();
+        SpriteRenderer r = rightCircle.GetComponent<SpriteRenderer>();
+        SpriteRenderer lg = leftGuideCircle.GetComponent<SpriteRenderer>();
+        SpriteRenderer rg = rightGuideCircle.GetComponent<SpriteRenderer>();
+        Color lc = l.color;
+        Color rc = r.color;
+        Color lgc = lg.color;
+        Color rgc = rg.color;
+        float t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime;
+            float alpha = Mathf.Clamp01(1f-t / 1f);
+            lc.a = alpha;
+            rc.a = alpha;
+            lgc.a = alpha;
+            rgc.a = alpha;
+            l.color = lc;
+            r.color = rc;
+            lg.color = lgc;
+            rg.color = rgc;
             yield return null;
         }
         leftPoint = leftCircle.transform.position;
@@ -181,6 +209,10 @@ public class BeatEvent : MonoBehaviour
             else if (notes.sevent == "disInversion")
             {
                 StartCoroutine(DefaultMode());
+            }
+            else if (notes.sevent == "clear")
+            {
+                StartCoroutine(Clear());
             }
             return;
         }
@@ -304,6 +336,21 @@ public class BeatEvent : MonoBehaviour
     }
 
     //---------------------------------------- 연출 관련 로직 -----------------------------------------------------
+    IEnumerator Clear()
+    {
+        yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
+        DOTween.KillAll();
+        PlayerPrefs.SetInt(BeatManager.instance.Playname + "Death", GameManager.instance.deathCount);
+        PlayerPrefs.SetInt(BeatManager.instance.Playname + "Clear", 1);
+        AudioManager.instance.StartCoroutine(AudioManager.instance.VolumeFadeOut());
+        StartCoroutine(ClearSetCircle());
+        yield return new WaitForSeconds(2f);
+        AudioManager.instance.SetMusicVolume(AudioManager.instance.MusicVolume);
+        AudioManager.instance.PlayMusic("event:/Lobi", 0);
+        GameManager.instance.DefaultSaveData();
+        GameManager.instance.deathCount = 0;
+        SceneManager.LoadScene("Lobby");
+    }
     IEnumerator InversionMode()
     {
         inversion = true;
@@ -359,14 +406,14 @@ public class BeatEvent : MonoBehaviour
         if (dir == "all")
         {
             Sequence seqSub = DOTween.Sequence().SetTarget(sub);
-        seqSub.Append(
-            DOTween.To(() => sub.intensity, v => sub.intensity = v, peak, half)
-                .SetEase(Ease.OutQuad)
-        );
-        seqSub.Append(
-            DOTween.To(() => sub.intensity, v => sub.intensity = v, subOriginal, half)
-                .SetEase(Ease.InQuad)
-        );
+            seqSub.Append(
+                DOTween.To(() => sub.intensity, v => sub.intensity = v, peak, half)
+                    .SetEase(Ease.OutQuad)
+            );
+            seqSub.Append(
+                DOTween.To(() => sub.intensity, v => sub.intensity = v, subOriginal, half)
+                    .SetEase(Ease.InQuad)
+            );
         }
     }
 
@@ -375,12 +422,12 @@ public class BeatEvent : MonoBehaviour
         switch (songName)
         {
             case SongName.HaiPhutHon:
-            {
+                {
                     stageLight = Instantiate(haiPhutHonLightPrefab, lightTransform.transform);
                     leftLight = stageLight.transform.GetChild(0).GetComponent<Light2D>();
                     rightLight = stageLight.transform.GetChild(1).GetComponent<Light2D>();
-                break;
-            }
+                    break;
+                }
         }
     }
 }

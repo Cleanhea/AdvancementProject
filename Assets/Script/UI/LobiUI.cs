@@ -21,17 +21,16 @@ public class LobiUI : MonoBehaviour
     public GameObject optionPanel;
     Slider volumeSlider;
     [SerializeField]
-    Vector3 circleMoveOffset;
-    [SerializeField]
     float circleMoveTime = 1.5f;
-    [SerializeField]
-    Vector3 slotUIMoveOffset;
     [SerializeField]
     float slotUIMoveTime = 1.5f;
     [SerializeField]
-    Vector3 optionUIInOffset;
-    [SerializeField]
     float optionUIMoveTime = 1.5f;
+    [SerializeField] Transform informationPosition;
+    [SerializeField] Transform outPosition;
+    [SerializeField] Transform outButtonPosition;
+    [SerializeField] Transform circlePosition;
+    [SerializeField] Transform buttonPosition;
     public bool isLogo = false;
 
     void Awake()
@@ -73,8 +72,8 @@ public class LobiUI : MonoBehaviour
         Transform circleTransform = circleUI.transform;
         Transform slotTransform = slotUI.transform;
         Sequence seq = DOTween.Sequence();
-        seq.Join(circleTransform.DOMove(circleTransform.position + circleMoveOffset, circleMoveTime).SetEase(Ease.InOutSine));
-        seq.Join(slotTransform.DOMove(slotTransform.position + slotUIMoveOffset, slotUIMoveTime).SetEase(Ease.InOutSine));
+        seq.Join(circleTransform.DOMove(outPosition.position, circleMoveTime).SetEase(Ease.InOutSine));
+        seq.Join(slotTransform.DOMove(outButtonPosition.position, slotUIMoveTime).SetEase(Ease.InOutSine));
 
         return seq;
     }
@@ -84,8 +83,8 @@ public class LobiUI : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         Transform slotTransform = slotUI.transform;
         Transform optionTransform = optionPanel.transform;
-        seq.Append(slotTransform.DOMove(slotTransform.position + slotUIMoveOffset, slotUIMoveTime).SetEase(Ease.InOutSine));
-        seq.Append(optionTransform.DOMove(optionTransform.position - optionUIInOffset, optionUIMoveTime).SetEase(Ease.InOutSine));
+        seq.Append(slotTransform.DOMove(outButtonPosition.position, slotUIMoveTime).SetEase(Ease.InOutSine));
+        seq.Append(optionTransform.DOMove(buttonPosition.position, optionUIMoveTime).SetEase(Ease.InOutSine));
         return seq;
     }
     public Sequence OutOptionAnimation()
@@ -94,8 +93,8 @@ public class LobiUI : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         Transform slotTransform = slotUI.transform;
         Transform optionTransform = optionPanel.transform;
-        seq.Append(optionTransform.DOMove(optionTransform.position + optionUIInOffset, optionUIMoveTime).SetEase(Ease.InOutSine));
-        seq.Append(slotTransform.DOMove(slotTransform.position - slotUIMoveOffset, slotUIMoveTime).SetEase(Ease.InOutSine));
+        seq.Append(optionTransform.DOMove(outButtonPosition.position, optionUIMoveTime).SetEase(Ease.InOutSine));
+        seq.Append(slotTransform.DOMove(buttonPosition.position, slotUIMoveTime).SetEase(Ease.InOutSine));
         return seq;
     }
 
@@ -105,33 +104,40 @@ public class LobiUI : MonoBehaviour
         Transform slotTransform = slotUI.transform;
         Transform logoTransform = circleUI.transform.GetChild(0).GetComponent<Transform>();
         Transform musicInformationTransform = circleUI.transform.GetChild(1).GetComponent<Transform>();
-        seq.Join(slotTransform.DOMove(slotTransform.position + slotUIMoveOffset, slotUIMoveTime).SetEase(Ease.InOutSine));
+        seq.Join(slotTransform.DOMove(outButtonPosition.position, slotUIMoveTime).SetEase(Ease.InOutSine));
         if (isLogo)
         {
-            seq.Join(logoTransform.DOMove(logoTransform.position + circleMoveOffset, circleMoveTime).SetEase(Ease.InOutSine));
+            seq.Join(logoTransform.DOMove(outPosition.position, circleMoveTime).SetEase(Ease.InOutSine));
         }
         else
         {
-            seq.Join(musicInformationTransform.DOMove(logoTransform.position + circleMoveOffset, circleMoveTime).SetEase(Ease.InOutSine));
+            seq.Join(musicInformationTransform.DOMove(outPosition.position, circleMoveTime).SetEase(Ease.InOutSine));
         }
         return seq;
     }
-
+    public Sequence InCircle()
+    {
+        Sequence seq = DOTween.Sequence();
+        Transform circleTransform = circleUI.transform.GetChild(2).transform;
+        seq.Join(circleTransform.DOMove(circlePosition.position, circleMoveTime).SetEase(Ease.InOutSine));
+        return seq;
+    }
     public Sequence InButtonSelect()
     {
         Sequence seq = DOTween.Sequence();
         Transform slotTransform = slotUI.transform;
         Transform logoTransform = circleUI.transform.GetChild(0).GetComponent<Transform>();
         Transform musicInformationTransform = circleUI.transform.GetChild(1).GetComponent<Transform>();
-        seq.Join(slotTransform.DOMove(slotTransform.position - slotUIMoveOffset, slotUIMoveTime).SetEase(Ease.InOutSine));
+        seq.Join(slotTransform.DOMove(buttonPosition.position, slotUIMoveTime).SetEase(Ease.InOutSine));
         if (!isLogo)
         {
-            seq.Join(logoTransform.DOMove(logoTransform.position - circleMoveOffset, circleMoveTime).SetEase(Ease.InOutSine));
+            seq.Join(logoTransform.DOMove(informationPosition.position, circleMoveTime).SetEase(Ease.InOutSine));
         }
         else
         {
-            seq.Join(musicInformationTransform.DOMove(logoTransform.position - circleMoveOffset, circleMoveTime).SetEase(Ease.InOutSine));
+            seq.Join(musicInformationTransform.DOMove(informationPosition.position, circleMoveTime).SetEase(Ease.InOutSine));
         }
         return seq;
     }
+    
 }

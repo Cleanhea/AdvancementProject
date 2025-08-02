@@ -50,8 +50,20 @@ public class LobiInput : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        lobiState = LobiState.FirstUI;
-        RefreshSlots();
+        
+    }
+    void Start()
+    {
+        LobiUI.instance.InCircle();
+        if (!GameManager.instance.startGame)
+        {
+            StartCoroutine(FirstUISetting());
+            GameManager.instance.startGame = true;
+        }
+        else
+        {
+            StartCoroutine(MusicSelectSetting());
+        }
     }
 
     void Update()
@@ -240,6 +252,11 @@ public class LobiInput : MonoBehaviour
     public void RefreshSongInformation()
     {
         SongInformation songInformation = buttonSlots[2].UIButton.GetComponent<SongInformation>();
+        if (PlayerPrefs.GetInt(songInformation.songIDName+"Clear") == 1)
+        {
+            songInformation.clear = true;
+            songInformation.death = PlayerPrefs.GetInt(songInformation.songIDName + "Death");
+        }
         songName.text = songInformation.songName;
         bpm.text = songInformation.Bpm.ToString();
         level.text = songInformation.level.ToString();
