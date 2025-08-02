@@ -1042,68 +1042,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &259579395
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 259579397}
-  - component: {fileID: 259579396}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &259579396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259579395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1ededb9ffc62f84390ba1c7ecaabf7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveState:
-    musicTime: 0
-    currentBar: 0
-    currentBeat: 0
-    cameraPosition:
-      x: 0
-      y: 0
-    CameraZoom: 0
-    leftCirclePosition: {x: -3.5, y: 0, z: 0}
-    rightCirclePosition: {x: 3.5, y: 0, z: 0}
-    isInversion: 0
-    afterInversion: 0
-    globalLightColor: {r: 0, g: 0, b: 0, a: 0}
-    remainingNotes: []
-  gameState: 0
-  saveOK: 0
-  startGame: 0
-  deathCount: 0
---- !u!4 &259579397
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259579395}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 429.75952, y: 345.07858, z: -0.055296946}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &267759939
 GameObject:
   m_ObjectHideFlags: 0
@@ -5258,6 +5196,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1627290246}
   m_CullTransparentMesh: 1
+--- !u!1 &1694703929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1694703931}
+  - component: {fileID: 1694703930}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1694703930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694703929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ededb9ffc62f84390ba1c7ecaabf7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveState:
+    musicTime: 0
+    currentBar: 0
+    currentBeat: 0
+    cameraPosition:
+      x: 0
+      y: 0
+    CameraZoom: 12
+    leftCirclePosition: {x: -4.5, y: 0, z: 0}
+    rightCirclePosition: {x: 4.5, y: 0, z: 0}
+    isInversion: 0
+    afterInversion: 0
+    globalLightColor: {r: 1, g: 1, b: 1, a: 0}
+    remainingNotes: []
+  gameState: 0
+  saveOK: 0
+  startGame: 0
+  deathCount: 0
+--- !u!4 &1694703931
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694703929}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 429.75952, y: 345.07858, z: -0.055296946}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1751069915
 GameObject:
   m_ObjectHideFlags: 0
@@ -6983,5 +6983,5 @@ SceneRoots:
   - {fileID: 348785207}
   - {fileID: 1876488421}
   - {fileID: 107772143}
-  - {fileID: 259579397}
   - {fileID: 343200618}
+  - {fileID: 1694703931}

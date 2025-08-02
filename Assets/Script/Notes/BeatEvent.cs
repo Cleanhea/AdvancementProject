@@ -37,8 +37,9 @@ public class BeatEvent : MonoBehaviour
     public Vector3 cameraPoint = new Vector3(0, 0, -10);
 
     //---------시작 위치-----------
-    [HideInInspector] public Vector3 startLeftCirclePosition = new Vector3(-3.5f, -3.0f, 0);
-    [HideInInspector] public Vector3 startRightCirclePosition = new Vector3(3.5f, -3.0f, 0);
+    [Header("----------시작 좌표----------")]
+    public Vector3 startLeftCirclePosition = new Vector3(-3.5f, -3.0f, 0);
+    public Vector3 startRightCirclePosition = new Vector3(3.5f, -3.0f, 0);
 
     //---------포인트 관련-----------
     [Header("---------포인트 관련-----------")]
@@ -339,8 +340,15 @@ public class BeatEvent : MonoBehaviour
     IEnumerator Clear()
     {
         yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
-        PlayerPrefs.SetInt(BeatManager.instance.Playname + "Death", GameManager.instance.deathCount);
-        PlayerPrefs.SetInt(BeatManager.instance.Playname + "Clear", 1);
+        if (PlayerPrefs.GetInt(BeatManager.instance.Playname + "Clear") == 0)
+        {
+            PlayerPrefs.SetInt(BeatManager.instance.Playname + "Death", GameManager.instance.deathCount);
+            PlayerPrefs.SetInt(BeatManager.instance.Playname + "Clear", 1);
+        }
+        else if (PlayerPrefs.GetInt(BeatManager.instance.Playname + "Death") > GameManager.instance.deathCount)
+        {
+            PlayerPrefs.SetInt(BeatManager.instance.Playname + "Death", GameManager.instance.deathCount);
+        }
         PlayerPrefs.Save();
         yield return AudioManager.instance.VolumeFadeOut();
         yield return ClearSetCircle();
