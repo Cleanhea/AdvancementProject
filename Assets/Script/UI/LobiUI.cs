@@ -43,6 +43,11 @@ public class LobiUI : MonoBehaviour
         instance = this;
         volumeSlider = optionPanel.transform.GetChild(0).GetComponent<Slider>();
     }
+    void Start()
+    {
+        AudioManager.instance.SetMusicVolume(AudioManager.instance.MusicVolume);
+        AudioManager.instance.PlayMusic("event:/Lobi", 0);
+    }
     public IEnumerator GoStageReady()
     {
         Sequence anim = GoStageAnimation();

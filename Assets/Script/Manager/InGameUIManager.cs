@@ -39,7 +39,7 @@ public class InGameUIManager : MonoBehaviour
     void OnDisable()
     {
         GameManager.OnPauseRequest -= TogglePause;
-        GameManager.OnSaveAlarm += SaveAlarmSet;
+        GameManager.OnSaveAlarm -= SaveAlarmSet;
     }
 
     void TogglePause()

@@ -37,10 +37,6 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void Start()
-    {
-        PlayMusic("event:/Lobi", 0);
-    }
     // 재생
     public void PlayMusic(string eventPath, int startTime)
     {

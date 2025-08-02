@@ -42,7 +42,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/HaiPhutHon.bank
   Name: HaiPhutHon
   StudioPath: bank:/HaiPhutHon
-  lastModified: 638896054499456837
+  lastModified: 638897914968728478
   FileSizes:
   - Name: Desktop
     Value: 2899040
@@ -137,7 +137,7 @@ MonoBehaviour:
   - {fileID: -2862972496294479044}
   StringsBanks:
   - {fileID: 6528054813473459205}
-  cacheTime: 638896054499456837
+  cacheTime: 638897914968728478
   cacheVersion: 131623
 --- !u!114 &3956210271889294814
 MonoBehaviour:
@@ -165,7 +165,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 214332
+  Length: 214321
 --- !u!114 &4511435844718851650
 MonoBehaviour:
   m_ObjectHideFlags: 0

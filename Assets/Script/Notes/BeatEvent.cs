@@ -339,18 +339,16 @@ public class BeatEvent : MonoBehaviour
     IEnumerator Clear()
     {
         yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
-        DOTween.KillAll();
         PlayerPrefs.SetInt(BeatManager.instance.Playname + "Death", GameManager.instance.deathCount);
         PlayerPrefs.SetInt(BeatManager.instance.Playname + "Clear", 1);
-        AudioManager.instance.StartCoroutine(AudioManager.instance.VolumeFadeOut());
-        StartCoroutine(ClearSetCircle());
-        yield return new WaitForSeconds(2f);
-        AudioManager.instance.SetMusicVolume(AudioManager.instance.MusicVolume);
-        AudioManager.instance.PlayMusic("event:/Lobi", 0);
+        PlayerPrefs.Save();
+        yield return AudioManager.instance.VolumeFadeOut();
+        yield return ClearSetCircle();
         GameManager.instance.DefaultSaveData();
         GameManager.instance.deathCount = 0;
         SceneManager.LoadScene("Lobby");
     }
+
     IEnumerator InversionMode()
     {
         inversion = true;
