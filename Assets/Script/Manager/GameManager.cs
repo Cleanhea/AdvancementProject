@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public bool saveOK = false;
     public bool startGame = false;
     public int deathCount = 0;
+    public bool isFirstGame = true;
     Coroutine saveCoroutine;
 
     private void Awake()
@@ -109,6 +110,7 @@ public class GameManager : MonoBehaviour
         BeatEvent.instance.inversion = saveState.isInversion;
         BeatEvent.instance.afterInversion = saveState.afterInversion;
         BeatEvent.instance.globalLight2D.color = saveState.globalLightColor;
+        BeatEvent.instance.StopAllCoroutines();
         yield return null;
         BeatManager.instance.BeatStartFromSave(playname, saveState);
         yield return null;
@@ -126,7 +128,7 @@ public class GameManager : MonoBehaviour
         saveState.currentBeat = 0;
         saveState.cameraPosition.x = 0;
         saveState.cameraPosition.y = 0;
-        saveState.CameraZoom = 12;
+        saveState.CameraZoom = 15;
         saveState.leftCirclePosition = new Vector3(-5, 0, 0);
         saveState.rightCirclePosition = new Vector3(5, 0, 0);
         saveState.isInversion = false;

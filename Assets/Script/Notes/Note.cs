@@ -21,9 +21,12 @@ public class Notes
     public int type;// 0 : left, 1 : right
     public CameraPos cameraPosition;
     public float cameraZoom;
+    public float zoomSpeed;
     public float guideCircleSpeed;
     public string image;
     public string input;
+    public Vector3 moveCirclePosition;
+    public int type2;
 }
 
 [System.Serializable]

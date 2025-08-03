@@ -26,22 +26,28 @@ public class BtnLogic : MonoBehaviour
         Application.Quit();
     }
 
-    public void GoStage1()
+    public void GoHaiPhutHon()
     {
         DOTween.KillAll();
         StageLoadContext.Set(SongName.HaiPhutHon);
         LobiUI.instance.StartCoroutine(LobiUI.instance.GoStageReady());
     }
-    public void GoStage2()
+    public void GoSoHappy()
     {
         DOTween.KillAll();
         StageLoadContext.Set(SongName.SoHappy);
         LobiUI.instance.StartCoroutine(LobiUI.instance.GoStageReady());
     }
-    public void GoStage3()
+    public void GoStay()
     {
         DOTween.KillAll();
         StageLoadContext.Set(SongName.Stay);
+        LobiUI.instance.StartCoroutine(LobiUI.instance.GoStageReady());
+    }
+    public void GoMatches()
+    {
+        DOTween.KillAll();
+        StageLoadContext.Set(SongName.Matches);
         LobiUI.instance.StartCoroutine(LobiUI.instance.GoStageReady());
     }
 }

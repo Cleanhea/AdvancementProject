@@ -7,6 +7,7 @@ using UnityEngine;
 public class StageLoadCaller : MonoBehaviour
 {
     [SerializeField] bool testMode = false;
+    [SerializeField] int startTime = 0;
     void Start()
     {
         if (testMode)
@@ -21,12 +22,13 @@ public class StageLoadCaller : MonoBehaviour
         {
             BeatManager.instance.noteQueue.Clear();
         }
-        AudioManager.instance.PlayMusic("event:/" + songName.ToString(), 0);
+        AudioManager.instance.PlayMusic("event:/" + songName.ToString(), startTime);
         BeatManager.instance.BeatStart(songName);
     }
     IEnumerator RunSceneLoad()
     {
         var song = StageLoadContext.songName;
+        BeatEvent.instance.BeatStart();
         if (!testMode)
         {
             InGameUIManager.instance.SetMusicInformation(song);
@@ -34,7 +36,6 @@ public class StageLoadCaller : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
         }
         BeatEvent.instance.SetLightParent(song);
-        BeatEvent.instance.BeatStart();
         yield return new WaitForSeconds(1.5f);
         AudioManager.instance.SetMusicVolume(AudioManager.instance.MusicVolume);
         MusicStart(song);

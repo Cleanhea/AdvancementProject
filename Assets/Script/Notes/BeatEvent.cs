@@ -18,6 +18,9 @@ public class BeatEvent : MonoBehaviour
     public GameObject guideCirclePrefab;
     [Header("---------스테이지 연출 프리펩-----------")]
     public GameObject haiPhutHonLightPrefab;
+    public GameObject stayLightPrefab;
+    public GameObject matchesLightPrefab;
+    public GameObject soHappyLightPrefab;
 
     //---------게임 오브젝트-----------
     [HideInInspector] public GameObject leftGuideCircle;
@@ -83,8 +86,7 @@ public class BeatEvent : MonoBehaviour
     [SerializeField] float ClearCircleSize = 1.15f;
     public Light2D globalLight2D;
     public GameObject lightTransform;
-    Light2D leftLight;
-    Light2D rightLight;
+    Light2D[] lightList = new Light2D[4];
     Vector3 originCircleSize;
 
 
@@ -197,7 +199,7 @@ public class BeatEvent : MonoBehaviour
             }
             else if (notes.sevent == "setCameraZoom")
             {
-                StartCoroutine(AbsSetCameraZoom(notes.cameraZoom));
+                StartCoroutine(AbsSetCameraZoom(notes.cameraZoom,notes.zoomSpeed));
             }
             else if (notes.sevent == "setCamera")
             {
@@ -214,6 +216,10 @@ public class BeatEvent : MonoBehaviour
             else if (notes.sevent == "clear")
             {
                 StartCoroutine(Clear());
+            }
+            else if (notes.sevent == "moveCircle")
+            {
+                StartCoroutine(AbsMoveCircle(new Vector3(notes.moveCirclePosition.x, notes.moveCirclePosition.y, 0), notes.type2,0.2f));
             }
             return;
         }
@@ -260,9 +266,28 @@ public class BeatEvent : MonoBehaviour
         Vector3 position = tr.position;
         MoveCircleStart(tr, position + dirUnit[dir] * pointOffset);
     }
-    void MoveCircleStart(Transform tr, Vector3 vec)
+    IEnumerator AbsMoveCircle(Vector3 vec, int type,float duration)
     {
-        tr.DOMove(vec, 0.08f);
+        if (type == 0)
+        {
+            leftPoint = vec;
+        }
+        else
+        {
+            rightPoint = vec;
+        }
+        yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
+        GameObject circle = leftCircle;
+        if (type == 1)
+        {
+            circle = rightCircle;
+        }
+        Transform tr = circle.transform;
+        MoveCircleStart(tr, vec,duration);
+    }
+    void MoveCircleStart(Transform tr, Vector3 vec,float duration = 0.08f)
+    {
+        tr.DOMove(vec, duration);
     }
     public void SetPoint(Vector3 left, Vector3 right)
     {
@@ -307,10 +332,12 @@ public class BeatEvent : MonoBehaviour
         mainCamera.transform.position = new Vector3(vec.x, vec.y, -10);
         cameraPoint = new Vector3(vec.x, vec.y, -10);
     }
-    public IEnumerator AbsSetCameraZoom(float cameraZoom)
+    public IEnumerator AbsSetCameraZoom(float cameraZoom,float cameraSpeed = 0.2f)
     {
+        if(cameraSpeed == 0)
+            cameraSpeed = 0.2f;
         yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
-        mainCamera.DOOrthoSize(cameraZoom, cameraSpeedOffset).SetEase(Ease.InOutSine);
+        mainCamera.DOOrthoSize(cameraZoom, cameraSpeed).SetEase(Ease.InOutSine);
     }
 
     public IEnumerator AbsSetCameraPos(Vector3 vec)
@@ -331,9 +358,11 @@ public class BeatEvent : MonoBehaviour
     {
         return mainCamera.orthographicSize;
     }
-    public void SetCameraZoom(float set)
+    public void SetCameraZoom(float set,float cameraSpeed = 0.2f)
     {
-        mainCamera.DOOrthoSize(mainCamera.orthographicSize + set, cameraSpeedOffset).SetEase(Ease.InOutSine);
+        if(cameraSpeed == 0)
+            cameraSpeed = 0.2f;
+        mainCamera.DOOrthoSize(mainCamera.orthographicSize + set, cameraSpeed).SetEase(Ease.InOutSine);
     }
 
     //---------------------------------------- 연출 관련 로직 -----------------------------------------------------
@@ -384,43 +413,40 @@ public class BeatEvent : MonoBehaviour
         circle.localScale = originCircleSize;
         circle.DOScale(originCircleSize * ClearCircleSize, ClearCircleTime).SetEase(Ease.OutQuad).SetLoops(2, LoopType.Yoyo);
     }
+
+    void Pulse(Light2D l, float peak, float total)
+    {
+        if (l == null) return;
+        float original = 0.1f;
+        float half = total * 0.5f;
+
+        DOTween.Kill(l);
+        Sequence seq = DOTween.Sequence().SetTarget(l);
+        seq.Append(DOTween.To(() => l.intensity, v => l.intensity = v, peak, half).SetEase(Ease.OutQuad));
+        seq.Append(DOTween.To(() => l.intensity, v => l.intensity = v, original, half).SetEase(Ease.InQuad));
+    }
+
     public void LightOn(string dir)
     {
-        var target = leftLight;
-        var sub = rightLight;
-        float original = leftLight.intensity;
-        float subOriginal = rightLight.intensity;
-        if (dir == "right")
-        {
-            original = rightLight.intensity;
-            target = rightLight;
-        }
         float peak = 1f;
         float total = 0.25f;
-        float half = total * 0.5f;
-        DOTween.Kill(target);
 
-        Sequence seq = DOTween.Sequence().SetTarget(target);
-        seq.Append(
-            DOTween.To(() => target.intensity, v => target.intensity = v, peak, half)
-                .SetEase(Ease.OutQuad)
-        );
-        seq.Append(
-            DOTween.To(() => target.intensity, v => target.intensity = v, original, half)
-                .SetEase(Ease.InQuad)
-        );
         if (dir == "all")
         {
-            Sequence seqSub = DOTween.Sequence().SetTarget(sub);
-            seqSub.Append(
-                DOTween.To(() => sub.intensity, v => sub.intensity = v, peak, half)
-                    .SetEase(Ease.OutQuad)
-            );
-            seqSub.Append(
-                DOTween.To(() => sub.intensity, v => sub.intensity = v, subOriginal, half)
-                    .SetEase(Ease.InQuad)
-            );
+            foreach (var l in lightList)
+                Pulse(l, peak, total);
+            return;
         }
+        int idx = dir switch
+        {
+            "right" => 1,
+            "up" => 2,
+            "down" => 3,
+            "left" => 0,
+            _       => 0 
+        };
+
+        Pulse(lightList[idx], peak, total);
     }
 
     public void SetLightParent(SongName songName)
@@ -430,8 +456,33 @@ public class BeatEvent : MonoBehaviour
             case SongName.HaiPhutHon:
                 {
                     stageLight = Instantiate(haiPhutHonLightPrefab, lightTransform.transform);
-                    leftLight = stageLight.transform.GetChild(0).GetComponent<Light2D>();
-                    rightLight = stageLight.transform.GetChild(1).GetComponent<Light2D>();
+                    lightList[0] = stageLight.transform.GetChild(0).GetComponent<Light2D>();
+                    lightList[1] = stageLight.transform.GetChild(1).GetComponent<Light2D>();
+                    break;
+                }
+            case SongName.Stay:
+                {
+                    stageLight = Instantiate(stayLightPrefab, lightTransform.transform);
+                    lightList[0] = stageLight.transform.GetChild(0).GetComponent<Light2D>();
+                    lightList[1] = stageLight.transform.GetChild(1).GetComponent<Light2D>();
+                    lightList[2] = stageLight.transform.GetChild(2).GetComponent<Light2D>();
+                    lightList[3] = stageLight.transform.GetChild(3).GetComponent<Light2D>();
+                    break;
+                }
+            case SongName.Matches:
+                {
+                    stageLight = Instantiate(matchesLightPrefab, lightTransform.transform);
+                    lightList[0] = stageLight.transform.GetChild(0).GetComponent<Light2D>();
+                    lightList[1] = stageLight.transform.GetChild(1).GetComponent<Light2D>();
+                    break;
+                }
+            case SongName.SoHappy:
+                {
+                    stageLight = Instantiate(soHappyLightPrefab, lightTransform.transform);
+                    lightList[0] = stageLight.transform.GetChild(0).GetComponent<Light2D>();
+                    lightList[1] = stageLight.transform.GetChild(1).GetComponent<Light2D>();
+                    lightList[2] = stageLight.transform.GetChild(2).GetComponent<Light2D>();
+                    lightList[3] = stageLight.transform.GetChild(3).GetComponent<Light2D>();
                     break;
                 }
         }

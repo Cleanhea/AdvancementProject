@@ -31,7 +31,8 @@ public class NoteCreate : MonoBehaviour
     public Notes noteData;
     public float guideCircleSpeed;
     float clearTime = 0.1f;
-    Color defaultColor;
+    [SerializeField] Color defaultColor;
+    [SerializeField] Color defaultColor2;
     [SerializeField] float defaultCircleSize = 0.5f;
 
     void Awake()
@@ -129,19 +130,29 @@ public class NoteCreate : MonoBehaviour
             r => shrinkingCircle.Radius = r,
             0.9f,
             duration * 3f
-        ).OnComplete(() => shrinkingCircle.Alpha = 0f);
+        ).OnUpdate(()=>
+        {
+            if (noteState == NoteState.Available)
+            {
+                Color c;
+                c = defaultColor2;
+                c.a = 1f;
+                shrinkingCircle.Color = c;
+            }
+            else
+            {
+                Color c;
+                Color bg = BeatEvent.instance.globalLight2D.color;
+                c = new Color(1f - bg.r, 1f - bg.g, 1f - bg.b);
+                shrinkingCircle.Color = c;
+            }
+        }).OnComplete(() => shrinkingCircle.Alpha = 0f);
         DOTween.To(
             () => shrinkingCircle.Alpha,
             a => shrinkingCircle.Alpha = a,
             1f,
             duration * 2f
-        ).SetEase(Ease.OutQuad).OnUpdate(() =>
-        {
-            Color c;
-            Color bg = BeatEvent.instance.globalLight2D.color;
-            c = new Color(1f - bg.r, 1f - bg.g, 1f - bg.b);
-            shrinkingCircle.Color = c;
-        });
+        ).SetEase(Ease.OutQuad);
         Sequence seq = DOTween.Sequence();
         seq.Append(footHoldTransform.DOScale(1f, duration)
             .SetEase(Ease.OutBack, 1f));
@@ -153,8 +164,9 @@ public class NoteCreate : MonoBehaviour
                 .SetEase(Ease.Linear));
         }
         yield return seq.WaitForCompletion();
-        yield return new WaitForSeconds(delayTime / 2);
+        yield return new WaitForSeconds(duration / 4f * 3f);
         noteState = NoteState.Available;
+        yield return new WaitForSeconds(duration / 4f);
         guideCircleSpeed = noteData.guideCircleSpeed == 0 ? 1 : noteData.guideCircleSpeed;
         float guideCircleDuration = duration / guideCircleSpeed;
         yield return new WaitForSeconds((duration - guideCircleDuration) / 2);
@@ -164,10 +176,8 @@ public class NoteCreate : MonoBehaviour
         shrinkingCircle.Alpha = 0f;
         if (isActiveAndEnabled)
             StartCoroutine(SetCircle());
-        StartCoroutine(FastDestroyNote());
-        yield return new WaitForSeconds((duration - guideCircleDuration) / 2);
     }
-    IEnumerator FastDestroyNote()
+    public IEnumerator DestroyNote()
     {
         float elapsed = 0f;
         float tempTime = destroyTime / 3;
@@ -178,28 +188,6 @@ public class NoteCreate : MonoBehaviour
             {
                 Color c = sr[i].color;
                 c.a = Mathf.Clamp01(1f - elapsed / tempTime);
-                sr[i].color = c;
-            }
-            yield return null;
-        }
-        for (int i = 0; i < sr.Length; i++)
-        {
-            Color c = sr[i].color;
-            c.a = 0f;
-            sr[i].color = c;
-        }
-        FootHoldObjectFool.instance.ReturnFootHold(this.gameObject);
-    }
-    IEnumerator DestroyNote()
-    {
-        float elapsed = 0f;
-        while (elapsed < destroyTime)
-        {
-            elapsed += Time.deltaTime;
-            for (int i = 0; i < sr.Length; i++)
-            {
-                Color c = sr[i].color;
-                c.a = Mathf.Clamp01(1f - elapsed / destroyTime);
                 sr[i].color = c;
             }
             yield return null;

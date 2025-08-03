@@ -127,26 +127,26 @@
   { "bar": 183, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 7.25}},
 
   { "bar": 185, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0,"guideCircleSpeed" : 2.0},
-  { "bar": 185, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1,"guideCircleSpeed": 2.0},
+  { "bar": 185, "beat": 3,"direction" : 0,"sevent" : "default", "type" : 1,"guideCircleSpeed": 2.0},
   { "bar": 186, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0,"guideCircleSpeed": 2.0},
-  { "bar": 186, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
+  { "bar": 186, "beat": 3,"direction" : 0,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
   { "bar": 187, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0,"guideCircleSpeed" : 2.0},
-  { "bar": 187, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
+  { "bar": 187, "beat": 3,"direction" : 0,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
   { "bar": 188, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0,"guideCircleSpeed" : 2.0},
-  { "bar": 188, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
+  { "bar": 188, "beat": 3,"direction" : 0,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
 
   { "bar": 189, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0,"guideCircleSpeed" : 2.0},
-  { "bar": 189, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"guideCircleSpeed": 2.0},
+  { "bar": 189, "beat": 3,"direction" : 2,"sevent" : "default", "type" : 1,"guideCircleSpeed": 2.0},
   { "bar": 190, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0,"guideCircleSpeed": 2.0},
-  { "bar": 190, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
+  { "bar": 190, "beat": 3,"direction" : 2,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
   { "bar": 191, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0,"guideCircleSpeed" : 2.0},
-  { "bar": 191, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
+  { "bar": 191, "beat": 3,"direction" : 2,"sevent" : "default", "type" : 1,"guideCircleSpeed" : 2.0},
   { "bar": 192, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0,"guideCircleSpeed" : 2.0},
-  { "bar": 192, "beat": 1,"direction" : 2,"sevent" : "default","input":"saveOK", "type" : 1,"guideCircleSpeed" : 2.0},
-  { "bar": 192, "beat": 1,"sevent" : "save", "type" : 2},
-  { "bar": 196, "beat": 1,"sevent" : "setCamera", "type" : 2,"cameraPosition" : {"x":0, "y":120}},
-  { "bar": 196, "beat": 1,"sevent" : "setCameraZoom", "type" : 2,"cameraZoom" : 10},
-  { "bar": 196, "beat": 1,"sevent" : "inversion", "type" : 2},
+  { "bar": 192, "beat": 3,"direction" : 2,"sevent" : "default","input":"saveOK", "type" : 1,"guideCircleSpeed" : 2.0},
+  { "bar": 192, "beat": 3,"sevent" : "save", "type" : 2},
+  { "bar": 196, "beat": 3,"sevent" : "setCamera", "type" : 2,"cameraPosition" : {"x":0, "y":120}},
+  { "bar": 196, "beat": 3,"sevent" : "setCameraZoom", "type" : 2,"cameraZoom" : 10},
+  { "bar": 196, "beat": 3,"sevent" : "inversion", "type" : 2},
 
   { "bar": 200, "beat": 1,"direction" : 1,"sevent" : "quick", "type" : 0},
   { "bar": 200, "beat": 1,"direction" : 1,"sevent" : "quick", "type" : 1,"cameraPosition" : {"x":6, "y":0}},
@@ -523,6 +523,9 @@
   { "bar": 638, "beat": 1,"direction" : 3,"sevent" : "quick", "type" : 1},
 
   { "bar": 644, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 0},
-  { "bar": 644, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 1}
+  { "bar": 644, "beat": 1,"direction" : 2,"sevent" : "quick", "type" : 1},
+
+  { "bar": 646, "beat": 1,"sevent" : "disInversion", "type" : 2},
+  { "bar": 648, "beat": 1,"sevent" : "clear", "type" : 2}
   ]
 }

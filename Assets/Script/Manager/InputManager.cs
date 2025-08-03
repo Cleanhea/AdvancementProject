@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(ESC))
+        if (Input.GetKeyDown(ESC) && GameManager.instance.gameState == GameState.inGame)
         {
             GameManager.OnPauseRequest?.Invoke();
             return;
@@ -33,6 +33,18 @@ public class InputManager : MonoBehaviour
             return;
         int dir = queue.Peek().noteData.direction;
         Notes noteData = queue.Peek().noteData;
+        for (int i = 0; i < keys.Length; i++)
+        {
+            if (queue.Peek().noteState == NoteState.Ready)
+            {
+                if (Input.GetKeyDown(keys[i]) && i != dir)
+                {
+                    Debug.Log("wrong key");
+                    GameManager.instance.RestartGame();
+                    return;
+                }
+            }
+        }
         if (Input.GetKeyDown(keys[dir]))
         {
             //성공시
@@ -46,7 +58,7 @@ public class InputManager : MonoBehaviour
                 StartCoroutine(queue.Peek().SetPointCircle());
                 if (noteData.cameraZoom != 0)
                 {
-                    BeatEvent.instance.SetCameraZoom(noteData.cameraZoom);
+                    BeatEvent.instance.SetCameraZoom(noteData.cameraZoom,noteData.zoomSpeed);
                 }
                 BeatEvent.instance.MoveCircle(dir, type);
                 if (noteData.input != null)
@@ -54,9 +66,10 @@ public class InputManager : MonoBehaviour
                     StageEvent.Sevent(noteData.input);
                 }
                 queue.Peek().noteState = NoteState.Clear;
+                queue.Peek().StartCoroutine(queue.Peek().DestroyNote());
                 queue.Dequeue();
             }
-            else if (queue.Peek().noteState == NoteState.Ready)
+            else
             {
                 Debug.Log("over");
                 GameManager.instance.RestartGame();

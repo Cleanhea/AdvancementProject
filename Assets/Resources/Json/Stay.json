@@ -2,7 +2,6 @@
   "name": "Stay",
   "bpm": 102,
   "notes":[
-  { "bar": 27, "beat": 3,"sevent" : "save", "type" : 2},
   { "bar": 28, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1},
   { "bar": 30, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
   { "bar": 32, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1},
@@ -32,6 +31,127 @@
   { "bar": 81, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 0},
   { "bar": 82, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : -6}},
   { "bar": 83, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
-  { "bar": 85, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}}
+  { "bar": 85, "beat": 1,"direction" : 2,"sevent" : "default","input":"saveOK", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+  { "bar": 85, "beat": 3,"sevent" : "save", "type" : 2},
+
+  { "bar": 92, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 94, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1,"cameraZoom" : 1.5},
+  { "bar": 96, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+  { "bar": 97, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+  { "bar": 98, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
+  { "bar": 98, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1},
+
+  { "bar": 100, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 0},
+  { "bar": 100, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : -6}},
+  { "bar": 102, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 103, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1},
+  { "bar": 104, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+  { "bar": 104, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+
+  { "bar": 108, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 110, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1,"cameraZoom" : 1.5},
+  { "bar": 112, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+  { "bar": 113, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+  { "bar": 114, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
+  { "bar": 114, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1},
+
+  { "bar": 116, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 0},
+  { "bar": 116, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : -6}},
+  { "bar": 118, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 119, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1},
+  { "bar": 120, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+  { "bar": 120, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+  { "bar": 122, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 122, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1},
+
+  { "bar": 124, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
+  { "bar": 126, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1},
+  { "bar": 128, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 0},
+  { "bar": 129, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : -6}},
+  { "bar": 130, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 130, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1},
+
+  { "bar": 137, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
+  { "bar": 138, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+  { "bar": 139, "beat": 2,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 141, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 0},
+
+  { "bar": 145, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 1},
+  { "bar": 146, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1},
+  { "bar": 147, "beat": 2,"direction" : 1,"sevent" : "default", "type" : 1},
+  { "bar": 149, "beat": 1,"direction" : 0,"sevent" : "default","input":"saveOK", "type" : 1},
+  { "bar": 150, "beat": 1,"sevent" : "save", "type" : 2},
+  { "bar": 150, "beat": 2,"sevent" : "inversion", "type" : 2},
+  { "bar": 150, "beat": 2,"sevent" : "moveCircle", "type" : 2,"type2" : 0, "moveCirclePosition": {"x" : -3, "y" : 12}},
+  { "bar": 150, "beat": 2,"sevent" : "moveCircle", "type" : 2,"type2" : 1, "moveCirclePosition": {"x" : 3, "y" : 18}},
+  { "bar": 150, "beat": 2,"sevent" : "setCameraZoom", "type" : 2,"cameraZoom" : 10},
+  { "bar": 150, "beat": 2,"sevent" : "setCamera", "type" : 2,"cameraPosition" : {"x":0, "y":15}},
+  { "bar": 156, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
+  { "bar": 156, "beat": 1,"direction" : 0,"sevent" : "default","input":"allLightOn", "type" : 1},
+
+  { "bar": 160, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+  { "bar": 160, "beat": 1,"direction" : 3,"sevent" : "default","input":"allLightOn", "type" : 1},
+
+  { "bar": 164, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 164, "beat": 1,"direction" : 1,"sevent" : "default","input":"allLightOn", "type" : 1},
+
+  { "bar": 168, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 0},
+  { "bar": 168, "beat": 1,"direction" : 2,"sevent" : "default","input":"allLightOn", "type" : 1},
+
+  { "bar": 172, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
+  { "bar": 172, "beat": 1,"direction" : 0,"sevent" : "default","input":"allLightOn", "type" : 1},
+
+  { "bar": 176, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 176, "beat": 1,"direction" : 1,"sevent" : "default","input":"allLightOn", "type" : 1},
+
+  { "bar": 180, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
+  { "bar": 180, "beat": 1,"direction" : 0,"sevent" : "default","input":"allLightOn", "type" : 1},
+
+  { "bar": 188, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
+  { "bar": 188, "beat": 1,"direction" : 1,"sevent" : "default","input":"allLightOn", "type" : 1},
+
+  { "bar": 191, "beat": 1,"direction" : 1,"sevent" : "default","input":"allLightOn", "type" : 0},
+  { "bar": 192, "beat": 1,"direction" : 0,"sevent" : "default","input":"allLightOn", "type" : 1},
+
+  { "bar": 195, "beat": 1,"direction" : 2,"sevent" : "default","input":"allLightOn", "type" : 0},
+  { "bar": 196, "beat": 1,"direction" : 3,"sevent" : "default","input":"allLightOn", "type" : 1},
+
+  { "bar": 199, "beat": 1,"direction" : 0,"sevent" : "default","input":"allLightOn", "type" : 0},
+  { "bar": 200, "beat": 1,"direction" : 1,"sevent" : "default","input":"allLightOn", "type" : 1},
+
+  { "bar": 203, "beat": 1,"direction" : 3,"sevent" : "default","input":"allLightOn", "type" : 0},
+  { "bar": 204, "beat": 1,"direction" : 2,"sevent" : "default","input":"allLightOn", "type" : 1},
+
+  { "bar": 207, "beat": 1,"direction" : 1,"sevent" : "default","input":"allLightOn", "type" : 0},
+  { "bar": 208, "beat": 1,"direction" : 0,"sevent" : "default","input":"allLightOn", "type" : 1},
+
+  { "bar": 211, "beat": 1,"direction" : 0,"sevent" : "default","input":"allLightOn", "type" : 0},
+  { "bar": 212, "beat": 1,"direction" : 1,"sevent" : "default","input":"saveOK", "type" : 1},
+  { "bar": 212, "beat": 1,"sevent" : "save", "type" : 2},
+
+  { "bar": 213, "beat": 2,"sevent" : "moveCircle", "type" : 2,"type2" : 0, "moveCirclePosition": {"x" : -4.5, "y" : 12}},
+  { "bar": 213, "beat": 2,"sevent" : "moveCircle", "type" : 2,"type2" : 1, "moveCirclePosition": {"x" : 4.5, "y" : 18}},
+  { "bar": 218, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0,"cameraPosition" : {"x" : 0, "y" : 3},"cameraZoom":30,"zoomSpeed":0.3},
+  { "bar": 218, "beat": 2,"sevent" : "disInversion", "type" : 2},
+  { "bar": 220, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0,"cameraZoom":-28,"zoomSpeed":0.2},
+  { "bar": 220, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+
+  { "bar": 222, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
+  { "bar": 223, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 6, "y" : 0}},
+
+  { "bar": 224, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+  { "bar": 224, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}},
+
+  { "bar": 226, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
+  { "bar": 227, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 6, "y" : 0}},
+
+  { "bar": 228, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 0},
+  { "bar": 228, "beat": 1,"direction" : 3,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : -6}},
+
+  { "bar": 230, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 0},
+  { "bar": 231, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 6, "y" : 0}},
+
+  { "bar": 232, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 0},
+  { "bar": 232, "beat": 1,"direction" : 2,"sevent" : "default", "type" : 1,"cameraPosition" : {"x" : 0, "y" : 6}}
   ]
 }

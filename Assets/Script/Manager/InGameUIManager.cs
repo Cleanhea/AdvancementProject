@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Text.RegularExpressions;
+using UnityEngine.UI;
 
 public class InGameUIManager : MonoBehaviour
 {
@@ -14,8 +15,9 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] GameObject saveText;
     [SerializeField] GameObject saveCircle;
     [SerializeField] GameObject musicNameInform;
+    [SerializeField] GameObject GuideButton;
     [SerializeField] float saveCircleTime = 3f;
-    [SerializeField] float saveCircleSize = 25f;
+    [SerializeField] float saveCircleSize = 25f; 
     bool isPaused = false;
     void Awake()
     {
@@ -170,9 +172,50 @@ public class InGameUIManager : MonoBehaviour
         string name = SplitCamelCase(songName.ToString());
         TextMeshProUGUI text = musicNameInform.GetComponent<TextMeshProUGUI>();
         text.text = name;
+        if(GameManager.instance.isFirstGame)
+        {
+            GameManager.instance.isFirstGame = false;
+            StartCoroutine(FadeInOutGuideButton());
+        }
         StartCoroutine(FadeInMusicInformation());
     }
-
+    IEnumerator FadeInOutGuideButton()
+    {
+        float t = 0f;
+        Image[] images = GuideButton.GetComponentsInChildren<Image>(true);
+        foreach (Image img in images)
+        {
+            Color c = img.color;
+            c.a = 0f;
+            img.color = c;
+        }
+        GuideButton.SetActive(true);
+        while (t < 0.5f)
+        {
+            t += Time.deltaTime;
+            foreach (Image img in images)
+            {
+                Color c = img.color;
+                c.a = Mathf.Clamp01(t / 0.5f);
+                img.color = c;
+            }
+            yield return null;
+        }
+        t = 0f;
+        yield return new WaitForSecondsRealtime(2f);
+        while (t < 0.5f)
+        {
+            t += Time.deltaTime;
+            foreach (Image img in images)
+            {
+                Color c = img.color;
+                c.a = Mathf.Clamp01(1f - t / 0.5f);
+                img.color = c;
+            }
+            yield return null;
+        }
+        GuideButton.SetActive(false);
+    }
     IEnumerator FadeInMusicInformation()
     {
         TextMeshProUGUI text = musicNameInform.GetComponent<TextMeshProUGUI>();
