@@ -23,6 +23,16 @@ public static class StageEvent
                     BeatEvent.instance.LightOn("right");
                     break;
             }
+            case ("upLightOn"):
+                {
+                    BeatEvent.instance.LightOn("up");
+                    break;
+            }
+            case ("downLightOn"):
+                {
+                    BeatEvent.instance.LightOn("down");
+                    break;
+            }
             case ("allLightOn"):
                 {
                     BeatEvent.instance.LightOn("all");

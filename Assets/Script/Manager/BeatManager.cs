@@ -33,7 +33,7 @@ public class BeatManager : MonoBehaviour
         Playname = songName;
         noteQueue = new Queue<Notes>(notes.notes);
         GameManager.instance.saveState.remainingNotes = new List<Notes>(noteQueue);
-        GameManager.instance.saveState.CameraZoom = 12f;
+        GameManager.instance.saveState.CameraZoom = 15f;
         LinkEnable();
     }
     public void BeatStartFromSave(SongName songName, SaveState s)

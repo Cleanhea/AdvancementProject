@@ -919,7 +919,7 @@ MonoBehaviour:
   haiPhutHonLightPrefab: {fileID: 48931478923048136, guid: 5fcb0f0419a5f6c449826e8fc70583f9, type: 3}
   stayLightPrefab: {fileID: 6357154819161235392, guid: 8718658d8eb89614e983ca65ee912713, type: 3}
   matchesLightPrefab: {fileID: 6983399423091653278, guid: c75386eb88afbe04286ae3c956a8b904, type: 3}
-  soHappyLightPrefab: {fileID: 6357154819161235392, guid: 09710e6000d5111489c7ca9b8c468579, type: 3}
+  soHappyLightPrefab: {fileID: 1481115364981425849, guid: faf68332c9b35af4f94651fafebef517, type: 3}
   leftGuideCircle: {fileID: 0}
   rightGuideCircle: {fileID: 0}
   stageLight: {fileID: 0}

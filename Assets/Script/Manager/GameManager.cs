@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
         saveState.currentBeat = 0;
         saveState.cameraPosition.x = 0;
         saveState.cameraPosition.y = 0;
-        saveState.CameraZoom = 15;
+        saveState.CameraZoom = 15f;
         saveState.leftCirclePosition = new Vector3(-5, 0, 0);
         saveState.rightCirclePosition = new Vector3(5, 0, 0);
         saveState.isInversion = false;
