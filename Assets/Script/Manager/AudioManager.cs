@@ -53,6 +53,7 @@ public class AudioManager : MonoBehaviour
         bgmInstance.start();
         currentBGMPath = eventPath;
     }
+    
     FMOD.RESULT OnTimelineBeat(EVENT_CALLBACK_TYPE type, IntPtr eventInstPtr, IntPtr paramPtr)
     {
         if (type == EVENT_CALLBACK_TYPE.TIMELINE_BEAT)

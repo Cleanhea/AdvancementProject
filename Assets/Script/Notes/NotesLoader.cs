@@ -32,7 +32,7 @@ public class NotesLoader : MonoBehaviour
         TextAsset jsonFile = Resources.Load<TextAsset>(path);
         if (jsonFile == null)
         {
-            Debug.LogError($"파일을 찾을 수 없습니다: Resources/{path}.json");
+            Debug.LogError("파일이 읎어요 이사람아." + path);
             return null;
         }
         temp = JsonUtility.FromJson<NotesData>(jsonFile.text);
