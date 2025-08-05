@@ -323,14 +323,14 @@ public class BeatEvent : MonoBehaviour
     #region ------------------------------------카메라 관련 로직--------------------------------------
     public void MoveCamera(Vector3 vec)
     {
-        cameraPoint += new Vector3(vec.x, vec.y);
+        cameraPoint += vec;
         mainCamera.transform.DOMove(mainCamera.transform.position + new Vector3(vec.x, vec.y, -10), cameraSpeedOffset).SetEase(Ease.InOutSine);
     }
 
     public void SetCameraPos(Vector3 vec)
     {
-        mainCamera.transform.position = new Vector3(vec.x, vec.y, -10);
         cameraPoint = new Vector3(vec.x, vec.y, -10);
+        mainCamera.transform.position = new Vector3(vec.x, vec.y, -10);
     }
     public IEnumerator AbsSetCameraZoom(float cameraZoom, float cameraSpeed = 0.2f)
     {
