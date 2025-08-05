@@ -52,7 +52,8 @@ public class InputManager : MonoBehaviour
             {
                 if (noteData.cameraPosition.y != 0 || noteData.cameraPosition.x != 0)
                 {
-                    BeatEvent.instance.MoveCamera(new Vector3(noteData.cameraPosition.x, noteData.cameraPosition.y, -10));
+                    Debug.Log("move camera");
+                    BeatEvent.instance.MoveCamera(new Vector3(noteData.cameraPosition.x, noteData.cameraPosition.y, 0));
                 }
                 BeatEvent.instance.ClearNote(noteData.type);
                 StartCoroutine(queue.Peek().SetPointCircle());

@@ -66,11 +66,12 @@ public class GameManager : MonoBehaviour
         temp.isInversion = BeatEvent.instance.inversion;
         temp.afterInversion = BeatEvent.instance.afterInversion;
         temp.globalLightColor = BeatEvent.instance.globalLight2D.color;
-        Debug.Log("SavePoint");
         //오차 보정
+        saveOK = false;
+        yield return null;
         yield return new WaitUntil(() => saveOK);
-        Vector3 pl = BeatEvent.instance.leftPoint;
-        Vector3 pr = BeatEvent.instance.rightPoint;
+        Vector3 pl = BeatEvent.instance.currentLeftCirclePosition;
+        Vector3 pr = BeatEvent.instance.currentRightCirclePosition;
         temp.leftCirclePosition = pl;
         temp.rightCirclePosition = pr;
         temp.cameraPosition = new CameraPos();
@@ -79,6 +80,7 @@ public class GameManager : MonoBehaviour
         temp.CameraZoom = BeatEvent.instance.cameraZoomPoint;
         OnSaveAlarm?.Invoke();
         saveState = temp;
+        Debug.Log("SavePoint");
         saveOK = false;
     }
 
@@ -124,14 +126,15 @@ public class GameManager : MonoBehaviour
     }
     public void DefaultSaveData()
     {
+        deathCount = 0;
         saveState.musicTime = 0;
         saveState.currentBar = 0;
         saveState.currentBeat = 0;
         saveState.cameraPosition.x = 0;
         saveState.cameraPosition.y = 0;
         saveState.CameraZoom = 15f;
-        saveState.leftCirclePosition = new Vector3(-5, 0, 0);
-        saveState.rightCirclePosition = new Vector3(5, 0, 0);
+        saveState.leftCirclePosition = new Vector3(-4.5f, 0, 0);
+        saveState.rightCirclePosition = new Vector3(4.5f, 0, 0);
         saveState.isInversion = false;
         saveState.afterInversion = false;
         saveState.globalLightColor = Color.white;

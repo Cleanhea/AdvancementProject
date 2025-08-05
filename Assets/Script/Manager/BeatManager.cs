@@ -53,10 +53,14 @@ public class BeatManager : MonoBehaviour
         if (noteQueue.Count == 0) return;
         if(isCheck == true)
             RestartHandleBeat(bar, beatIndex);
+        StartCoroutine(HandleOnBeatGo(bar, beatIndex));
+    }
+    IEnumerator HandleOnBeatGo(int bar, int beatIndex) {
+        yield return new WaitForSeconds(GameManager.instance.delayTempoOffset);
         while (noteQueue.Count > 0 && noteQueue.Peek().bar == bar && noteQueue.Peek().beat == beatIndex)
         {
-            if(isCheck)
-                Debug.Log("bar = " + bar + " beat =" +beatIndex);
+            if (isCheck)
+                Debug.Log("bar = " + bar + " beat =" + beatIndex);
             Notes note = noteQueue.Dequeue();
             OnNoteSpawn?.Invoke(note);
         }

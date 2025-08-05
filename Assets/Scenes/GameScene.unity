@@ -238,6 +238,7 @@ MonoBehaviour:
   startGame: 0
   deathCount: 0
   isFirstGame: 1
+  delayTempoOffset: 0
 --- !u!4 &89459837
 Transform:
   m_ObjectHideFlags: 0
@@ -928,12 +929,15 @@ MonoBehaviour:
   mainCamera: {fileID: 519420031}
   cameraSpeedOffset: 0.2
   cameraPoint: {x: 0, y: 0, z: -10}
+  cameraZoomPoint: 15
   startLeftCirclePosition: {x: -4.5, y: 0, z: 0}
   startRightCirclePosition: {x: 4.5, y: 0, z: 0}
   defaultColor: {r: 0.94117653, g: 0.9725491, b: 1, a: 0}
   inversionColor: {r: 0, g: 0, b: 0, a: 0}
   pointOffset: 6
   footHoldOffset: 3
+  currentLeftCirclePosition: {x: -4.5, y: 0, z: 0}
+  currentRightCirclePosition: {x: 4.5, y: 0, z: 0}
   inversion: 0
   afterInversion: 0
   ClearCircleTime: 0.1
@@ -4286,7 +4290,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -716, y: 439}
+  m_AnchoredPosition: {x: -678, y: 441}
   m_SizeDelta: {x: 284.5453, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1838264129
@@ -4971,7 +4975,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 16.00003}
+  m_AnchoredPosition: {x: 0, y: 16}
   m_SizeDelta: {x: 0, y: 65}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2124820124

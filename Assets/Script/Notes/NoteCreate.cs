@@ -101,7 +101,6 @@ public class NoteCreate : MonoBehaviour
 
     IEnumerator CreateNote()
     {
-        yield return new WaitForSeconds(GameManager.instance.delayTempoOffset);
         int spriteIndex = 0;
         Color cc = footHoldCircle.color;
         if (BeatEvent.instance.afterInversion)

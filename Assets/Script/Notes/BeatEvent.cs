@@ -69,6 +69,8 @@ public class BeatEvent : MonoBehaviour
         new Vector3(0, 0, 0),
         new Vector3(0, 0, 180f)
     };
+    public Vector3 currentLeftCirclePosition;
+    public Vector3 currentRightCirclePosition;
 
     //---------포인트 큐-----------
     public Queue<NoteCreate> leftFootHoldQueue = new Queue<NoteCreate>();
@@ -258,12 +260,15 @@ public class BeatEvent : MonoBehaviour
     public void MoveCircle(int dir, int type)
     {
         GameObject circle = leftCircle;
+        ref Vector3 point = ref currentLeftCirclePosition;
         if (type == 1)
         {
             circle = rightCircle;
+            point = ref currentRightCirclePosition;
         }
         Transform tr = circle.transform;
         Vector3 position = tr.position;
+        point += dirUnit[dir] * pointOffset;
         MoveCircleStart(tr, position + dirUnit[dir] * pointOffset);
     }
     IEnumerator AbsMoveCircle(Vector3 vec, int type, float duration)
@@ -297,6 +302,8 @@ public class BeatEvent : MonoBehaviour
         rightCircle.transform.position = rightPoint;
         leftGuideCircle.transform.position = leftPoint;
         rightGuideCircle.transform.position = rightPoint;
+        currentLeftCirclePosition = leftPoint;
+        currentRightCirclePosition = rightPoint;
     }
     public void SetCircle()
     {
@@ -330,7 +337,7 @@ public class BeatEvent : MonoBehaviour
     public void SetCameraPos(Vector3 vec)
     {
         cameraPoint = new Vector3(vec.x, vec.y, -10);
-        mainCamera.transform.position = new Vector3(vec.x, vec.y, -10);
+        mainCamera.transform.position = cameraPoint;
     }
     public IEnumerator AbsSetCameraZoom(float cameraZoom, float cameraSpeed = 0.2f)
     {
