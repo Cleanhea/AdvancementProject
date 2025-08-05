@@ -8,6 +8,7 @@ public class StageLoadCaller : MonoBehaviour
 {
     [SerializeField] bool testMode = false;
     [SerializeField] int startTime = 0;
+    [SerializeField] GameObject tutorialManager;
     void Start()
     {
         if (testMode)
@@ -27,10 +28,21 @@ public class StageLoadCaller : MonoBehaviour
     }
     IEnumerator RunSceneLoad()
     {
+        GameManager.instance.isInputEnabled = true;
         var song = StageLoadContext.songName;
+        
         BeatEvent.instance.BeatStart();
+        if (song == SongName.Tutorial)
+        {
+            tutorialManager.SetActive(true);
+        }
+        else
+        {
+            tutorialManager.SetActive(false);
+        }
         if (!testMode)
         {
+            yield return new WaitForSeconds(0.6f);
             InGameUIManager.instance.SetMusicInformation(song);
             AudioManager.instance.StartCoroutine(AudioManager.instance.VolumeFadeOut());
             yield return new WaitForSeconds(1.5f);

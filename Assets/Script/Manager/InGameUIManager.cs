@@ -17,6 +17,8 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] GameObject musicNameInform;
     [SerializeField] GameObject GuideButton;
     [SerializeField] TextMeshProUGUI deathText;
+    [SerializeField] Image sliderFill;
+    [SerializeField] Image sliderBackGround;
     [SerializeField] Slider songDistanceSlider;
     [SerializeField] float saveCircleTime = 3f;
     [SerializeField] float saveCircleSize = 25f;
@@ -34,6 +36,14 @@ public class InGameUIManager : MonoBehaviour
     {
         saveCircle.SetActive(false);
         saveText.SetActive(false);
+    }
+    void Update()
+    {
+        if (BeatEvent.instance == null) return;
+        Color bg = BeatEvent.instance.globalLight2D.color;
+        deathText.color = new Color(1f - bg.r, 1f - bg.g, 1f - bg.b);
+        sliderFill.color = new Color(1f - bg.r, 1f - bg.g, 1f - bg.b);
+        sliderBackGround.color = new Color(bg.r, bg.g, bg.b);
     }
     void OnEnable()
     {
@@ -102,6 +112,7 @@ public class InGameUIManager : MonoBehaviour
         GameManager.instance.DefaultSaveData();
         GameManager.instance.StopAllCoroutines();
         Time.timeScale = 1f;
+        GameManager.instance.gameState = GameState.lobi;
         AudioManager.instance.PlayMusic("event:/Lobi", 0);
         SceneManager.LoadScene("Lobby");
     }
@@ -178,6 +189,7 @@ public class InGameUIManager : MonoBehaviour
     public void SetMusicInformation(SongName songName)
     {
         string name = SplitCamelCase(songName.ToString());
+
         TextMeshProUGUI text = musicNameInform.GetComponent<TextMeshProUGUI>();
         text.text = name;
         if(GameManager.instance.isFirstGame)
@@ -235,7 +247,7 @@ public class InGameUIManager : MonoBehaviour
         while (t < 1f)
         {
             t += Time.deltaTime;
-            c.a = Mathf.Clamp01(t / 0.5f);
+            c.a = Mathf.Clamp01(t / 1f);
             text.color = c;
             yield return null;
         }

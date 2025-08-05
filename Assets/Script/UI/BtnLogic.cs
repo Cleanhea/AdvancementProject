@@ -50,4 +50,10 @@ public class BtnLogic : MonoBehaviour
         StageLoadContext.Set(SongName.Matches);
         LobiUI.instance.StartCoroutine(LobiUI.instance.GoStageReady());
     }
+    public void GoTutorial()
+    {
+        DOTween.KillAll();
+        StageLoadContext.Set(SongName.Tutorial);
+        LobiUI.instance.StartCoroutine(LobiUI.instance.GoStageReady());
+    }
 }

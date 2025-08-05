@@ -92,6 +92,8 @@ public class BeatEvent : MonoBehaviour
     Light2D[] lightList = new Light2D[4];
     Vector3 originCircleSize;
 
+    //---------튜토리얼 관련------------
+    public static Action<Notes> OnTutorial;
 
     void Awake()
     {
@@ -118,16 +120,21 @@ public class BeatEvent : MonoBehaviour
         }
     }
 
+    #region ----------------------------------------초기화 관련 로직-----------------------------------------------------
+    // 비트 시작시 초기화
     public void BeatStart()
     {
-        StartCoroutine(MusicStartSetCircle());
+        StartCoroutine(MusicSetCircle());
     }
-    IEnumerator MusicStartSetCircle()
+    IEnumerator MusicSetCircle(bool gameStart = true, float duration = 1f)
     {
-        leftCircle = Instantiate(leftCirclePrefab, startLeftCirclePosition, Quaternion.identity);
-        rightCircle = Instantiate(rightCirclePrefab, startRightCirclePosition, Quaternion.identity);
-        leftGuideCircle = Instantiate(guideCirclePrefab, startLeftCirclePosition, Quaternion.identity);
-        rightGuideCircle = Instantiate(guideCirclePrefab, startRightCirclePosition, Quaternion.identity);
+        if (gameStart)
+        {
+            leftCircle = Instantiate(leftCirclePrefab, startLeftCirclePosition, Quaternion.identity);
+            rightCircle = Instantiate(rightCirclePrefab, startRightCirclePosition, Quaternion.identity);
+            leftGuideCircle = Instantiate(guideCirclePrefab, startLeftCirclePosition, Quaternion.identity);
+            rightGuideCircle = Instantiate(guideCirclePrefab, startRightCirclePosition, Quaternion.identity);
+        }
         SpriteRenderer l = leftCircle.GetComponent<SpriteRenderer>();
         SpriteRenderer r = rightCircle.GetComponent<SpriteRenderer>();
         SpriteRenderer lg = leftGuideCircle.GetComponent<SpriteRenderer>();
@@ -136,43 +143,19 @@ public class BeatEvent : MonoBehaviour
         Color rc = r.color;
         Color lgc = lg.color;
         Color rgc = rg.color;
+        if (gameStart) {
         lc.a = 0f;
         rc.a = 0f;
         lgc.a = 0f;
         rgc.a = 0f;
-        float t = 0f;
-        while (t < 1f)
-        {
-            t += Time.deltaTime;
-            float alpha = Mathf.Clamp01(t / 1f);
-            lc.a = alpha;
-            rc.a = alpha;
-            lgc.a = alpha;
-            rgc.a = alpha;
-            l.color = lc;
-            r.color = rc;
-            lg.color = lgc;
-            rg.color = rgc;
-            yield return null;
         }
-        leftPoint = leftCircle.transform.position;
-        rightPoint = rightCircle.transform.position;
-    }
-    IEnumerator ClearSetCircle()
-    {
-        SpriteRenderer l = leftCircle.GetComponent<SpriteRenderer>();
-        SpriteRenderer r = rightCircle.GetComponent<SpriteRenderer>();
-        SpriteRenderer lg = leftGuideCircle.GetComponent<SpriteRenderer>();
-        SpriteRenderer rg = rightGuideCircle.GetComponent<SpriteRenderer>();
-        Color lc = l.color;
-        Color rc = r.color;
-        Color lgc = lg.color;
-        Color rgc = rg.color;
+        float from = gameStart ? 0f : 1f;
+        float to = gameStart ? 1f : 0f;
         float t = 0f;
-        while (t < 1f)
+        while (t < duration)
         {
             t += Time.deltaTime;
-            float alpha = Mathf.Clamp01(1f - t / 1f);
+            float alpha = Mathf.Lerp(from, to, Mathf.Clamp01(t / duration));
             lc.a = alpha;
             rc.a = alpha;
             lgc.a = alpha;
@@ -187,6 +170,7 @@ public class BeatEvent : MonoBehaviour
         rightPoint = rightCircle.transform.position;
     }
 
+    #endregion
     // 비트 발생시 처리 기능
     public void BeatHandling(Notes notes)
     {
@@ -225,6 +209,10 @@ public class BeatEvent : MonoBehaviour
                 StartCoroutine(AbsMoveCircle(new Vector3(notes.moveCirclePosition.x, notes.moveCirclePosition.y, 0), notes.type2, 0.2f));
             }
             return;
+        }
+        else if (notes.type == -1)
+        {
+             OnTutorial?.Invoke(notes);
         }
     }
     #region--------------------------------------------노트 생성--------------------------------------------------
@@ -281,7 +269,6 @@ public class BeatEvent : MonoBehaviour
         {
             rightPoint = vec;
         }
-        yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
         GameObject circle = leftCircle;
         if (type == 1)
         {
@@ -289,6 +276,7 @@ public class BeatEvent : MonoBehaviour
         }
         Transform tr = circle.transform;
         MoveCircleStart(tr, vec, duration);
+        yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
     }
     void MoveCircleStart(Transform tr, Vector3 vec, float duration = 0.08f)
     {
@@ -389,9 +377,11 @@ public class BeatEvent : MonoBehaviour
         }
         PlayerPrefs.Save();
         yield return AudioManager.instance.VolumeFadeOut();
-        yield return ClearSetCircle();
+        yield return StartCoroutine(MusicSetCircle(false));
         GameManager.instance.DefaultSaveData();
         GameManager.instance.deathCount = 0;
+        GameManager.instance.gameState = GameState.lobi;
+        AudioManager.instance.PlayMusic("event:/Lobi", 0);
         SceneManager.LoadScene("Lobby");
     }
 

@@ -19,6 +19,10 @@ public class InputManager : MonoBehaviour
             GameManager.OnPauseRequest?.Invoke();
             return;
         }
+        if (GameManager.instance.isInputEnabled == false)
+        {
+            return;
+        }
         if (GameManager.instance.gameState == GameState.inGame)
         {
             HandleInput(BeatEvent.instance.leftFootHoldQueue, leftKeys, 0);
@@ -72,8 +76,11 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("over");
-                GameManager.instance.RestartGame();
+                if (BeatManager.instance.Playname != SongName.Tutorial)
+                {
+                    Debug.Log("over");
+                    GameManager.instance.RestartGame();
+                }
             }
         }
     }

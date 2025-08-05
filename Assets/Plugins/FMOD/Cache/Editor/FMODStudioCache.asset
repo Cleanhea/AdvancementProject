@@ -47,6 +47,34 @@ MonoBehaviour:
   - Name: Desktop
     Value: 2899040
   Exists: 1
+--- !u!114 &-3301142600742492554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tutorial
+  m_EditorClassIdentifier: 
+  Path: event:/Tutorial
+  Guid:
+    Data1: -1025113176
+    Data2: 1228090359
+    Data3: -867357823
+    Data4: -1020269066
+  Banks:
+  - {fileID: 2642363159820251897}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 5075641034399703808}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 84000
 --- !u!114 &-3242976124175020057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +110,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638898807736322423
+  lastModified: 638900383770865334
   FileSizes:
   - Name: Desktop
     Value: 1324
@@ -155,19 +183,41 @@ MonoBehaviour:
   - {fileID: 8956037587107370485}
   - {fileID: -5944334327365795315}
   - {fileID: 4367239188101606018}
+  - {fileID: 2642363159820251897}
   EditorEvents:
   - {fileID: -6036873956604757182}
   - {fileID: 5312220912306853145}
   - {fileID: 4511435844718851650}
   - {fileID: 3956210271889294814}
   - {fileID: -1192724164374835875}
+  - {fileID: -3301142600742492554}
   EditorParameters: []
   MasterBanks:
   - {fileID: -2862972496294479044}
   StringsBanks:
   - {fileID: 6528054813473459205}
-  cacheTime: 638898816296320592
+  cacheTime: 638900479407035035
   cacheVersion: 131623
+--- !u!114 &2642363159820251897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Tutorial.bank
+  m_EditorClassIdentifier: 
+  Path: FMODProject/Build/Desktop/Tutorial.bank
+  Name: Tutorial
+  StudioPath: bank:/Tutorial
+  lastModified: 638900479407035035
+  FileSizes:
+  - Name: Desktop
+    Value: 66496
+  Exists: 1
 --- !u!114 &3956210271889294814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +292,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 371382
+--- !u!114 &5075641034399703808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Tutorial/LoopOn
+  m_EditorClassIdentifier: 
+  Name: LoopOn
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 150941005
+    data2: 2820312599
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &5312220912306853145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,10 +358,10 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638898807736362290
+  lastModified: 638900383770905224
   FileSizes:
   - Name: Desktop
-    Value: 1256
+    Value: 1382
   Exists: 1
 --- !u!114 &8919382533530419305
 MonoBehaviour:

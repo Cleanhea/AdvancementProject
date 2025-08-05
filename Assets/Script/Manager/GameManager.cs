@@ -9,7 +9,7 @@ public enum GameState
     lobi,
     inGame,
     pause,
-    option
+    option,
 }
 
 public class GameManager : MonoBehaviour
@@ -20,11 +20,12 @@ public class GameManager : MonoBehaviour
     public static Action<int> OnRestartRequest;
     public SaveState saveState = new SaveState();
     public GameState gameState;
-    public bool saveOK = false;
+    public int saveOK = 0;
     public bool startGame = false;
     public int deathCount = 0;
     public bool isFirstGame = true;
     public float delayTempoOffset = 0f;
+    public bool isInputEnabled = true;
     Coroutine saveCoroutine;
 
     private void Awake()
@@ -67,9 +68,8 @@ public class GameManager : MonoBehaviour
         temp.afterInversion = BeatEvent.instance.afterInversion;
         temp.globalLightColor = BeatEvent.instance.globalLight2D.color;
         //오차 보정
-        saveOK = false;
         yield return null;
-        yield return new WaitUntil(() => saveOK);
+        yield return new WaitUntil(() => saveOK == 2);
         Vector3 pl = BeatEvent.instance.currentLeftCirclePosition;
         Vector3 pr = BeatEvent.instance.currentRightCirclePosition;
         temp.leftCirclePosition = pl;
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
         OnSaveAlarm?.Invoke();
         saveState = temp;
         Debug.Log("SavePoint");
-        saveOK = false;
+        saveOK = 0;
     }
 
     public void RestartGame()
@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator ResetGame()
     {
+        saveOK = 0;
         deathCount++;
         OnRestartRequest?.Invoke(deathCount);
         BeatManager.instance.LinkDisable();
@@ -122,7 +123,7 @@ public class GameManager : MonoBehaviour
 
     public void MarkSaveOK()
     {
-        saveOK = true;
+        saveOK++;
     }
     public void DefaultSaveData()
     {
