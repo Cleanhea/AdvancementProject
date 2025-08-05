@@ -5422,6 +5422,7 @@ MonoBehaviour:
   startGame: 0
   deathCount: 0
   isFirstGame: 1
+  delayTempoOffset: 0
 --- !u!4 &1694703931
 Transform:
   m_ObjectHideFlags: 0

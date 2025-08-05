@@ -17,12 +17,14 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public static Action OnPauseRequest;
     public static Action OnSaveAlarm;
+    public static Action<int> OnRestartRequest;
     public SaveState saveState = new SaveState();
     public GameState gameState;
     public bool saveOK = false;
     public bool startGame = false;
     public int deathCount = 0;
     public bool isFirstGame = true;
+    public float delayTempoOffset = 0f;
     Coroutine saveCoroutine;
 
     private void Awake()
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
             StopCoroutine(saveCoroutine);
         saveCoroutine = StartCoroutine(SavePoint());
     }
+
     IEnumerator SavePoint()
     {
         SaveState temp = new SaveState();
@@ -63,20 +66,17 @@ public class GameManager : MonoBehaviour
         temp.isInversion = BeatEvent.instance.inversion;
         temp.afterInversion = BeatEvent.instance.afterInversion;
         temp.globalLightColor = BeatEvent.instance.globalLight2D.color;
-        yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
         Debug.Log("SavePoint");
         //오차 보정
-        Vector3 pl = BeatEvent.instance.leftGuideCircle.transform.position;
-        Vector3 pr = BeatEvent.instance.rightGuideCircle.transform.position;
-        pl.x = (float)Math.Round(pl.x, 1);
-        pr.x = (float)Math.Round(pr.x, 1);
-        pl.y = (float)Math.Round(pl.y, 1);
-        pr.y = (float)Math.Round(pr.y, 1);
+        yield return new WaitUntil(() => saveOK);
+        Vector3 pl = BeatEvent.instance.leftPoint;
+        Vector3 pr = BeatEvent.instance.rightPoint;
         temp.leftCirclePosition = pl;
         temp.rightCirclePosition = pr;
-        temp.cameraPosition = BeatEvent.instance.GetCameraPos();
-        temp.CameraZoom = BeatEvent.instance.GetCameraZoom();
-        yield return new WaitUntil(() => saveOK);
+        temp.cameraPosition = new CameraPos();
+        temp.cameraPosition.x = BeatEvent.instance.cameraPoint.x;
+        temp.cameraPosition.y = BeatEvent.instance.cameraPoint.y;
+        temp.CameraZoom = BeatEvent.instance.cameraZoomPoint;
         OnSaveAlarm?.Invoke();
         saveState = temp;
         saveOK = false;
@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
     IEnumerator ResetGame()
     {
         deathCount++;
+        OnRestartRequest?.Invoke(deathCount);
         BeatManager.instance.LinkDisable();
         SongName playname = BeatManager.instance.Playname;
         BeatEvent.instance.SetCameraPos(new Vector3(saveState.cameraPosition.x, saveState.cameraPosition.y, -10));

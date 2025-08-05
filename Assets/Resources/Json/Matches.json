@@ -1,6 +1,7 @@
 {
   "name": "Matches",
   "bpm": 75,
+  "clearBeat": 115,
   "notes":[
     { "bar": 1, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1},
     { "bar": 3, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},

@@ -15,5 +15,5 @@ public class SaveState
     public bool isInversion = false;
     public bool afterInversion = false;
     public Color globalLightColor;
-    public List<Notes> remainingNotes = new List<Notes>();
+    [HideInInspector] public List<Notes> remainingNotes = new List<Notes>();
 }

@@ -38,6 +38,7 @@ public class BeatEvent : MonoBehaviour
     public Camera mainCamera;
     public float cameraSpeedOffset = 0.2f;
     public Vector3 cameraPoint = new Vector3(0, 0, -10);
+    public float cameraZoomPoint = 15f;
 
     //---------시작 위치-----------
     [Header("----------시작 좌표----------")]
@@ -169,7 +170,7 @@ public class BeatEvent : MonoBehaviour
         while (t < 1f)
         {
             t += Time.deltaTime;
-            float alpha = Mathf.Clamp01(1f-t / 1f);
+            float alpha = Mathf.Clamp01(1f - t / 1f);
             lc.a = alpha;
             rc.a = alpha;
             lgc.a = alpha;
@@ -199,7 +200,7 @@ public class BeatEvent : MonoBehaviour
             }
             else if (notes.sevent == "setCameraZoom")
             {
-                StartCoroutine(AbsSetCameraZoom(notes.cameraZoom,notes.zoomSpeed));
+                StartCoroutine(AbsSetCameraZoom(notes.cameraZoom, notes.zoomSpeed));
             }
             else if (notes.sevent == "setCamera")
             {
@@ -219,13 +220,12 @@ public class BeatEvent : MonoBehaviour
             }
             else if (notes.sevent == "moveCircle")
             {
-                StartCoroutine(AbsMoveCircle(new Vector3(notes.moveCirclePosition.x, notes.moveCirclePosition.y, 0), notes.type2,0.2f));
+                StartCoroutine(AbsMoveCircle(new Vector3(notes.moveCirclePosition.x, notes.moveCirclePosition.y, 0), notes.type2, 0.2f));
             }
             return;
         }
     }
-
-    //--------------------------------------------노트 생성--------------------------------------------------
+    #region--------------------------------------------노트 생성--------------------------------------------------
     public void CreateNote(Notes notes)
     {
         ref Vector3 point = ref leftPoint;
@@ -253,8 +253,8 @@ public class BeatEvent : MonoBehaviour
         point += dirUnit[notes.direction] * pointOffset;
         queue.Enqueue(point);
     }
-
-    //---------------------------------------원 이동 관련 로직--------------------------------------------
+    #endregion
+    #region ---------------------------------------원 이동 관련 로직--------------------------------------------
     public void MoveCircle(int dir, int type)
     {
         GameObject circle = leftCircle;
@@ -266,7 +266,7 @@ public class BeatEvent : MonoBehaviour
         Vector3 position = tr.position;
         MoveCircleStart(tr, position + dirUnit[dir] * pointOffset);
     }
-    IEnumerator AbsMoveCircle(Vector3 vec, int type,float duration)
+    IEnumerator AbsMoveCircle(Vector3 vec, int type, float duration)
     {
         if (type == 0)
         {
@@ -283,9 +283,9 @@ public class BeatEvent : MonoBehaviour
             circle = rightCircle;
         }
         Transform tr = circle.transform;
-        MoveCircleStart(tr, vec,duration);
+        MoveCircleStart(tr, vec, duration);
     }
-    void MoveCircleStart(Transform tr, Vector3 vec,float duration = 0.08f)
+    void MoveCircleStart(Transform tr, Vector3 vec, float duration = 0.08f)
     {
         tr.DOMove(vec, duration);
     }
@@ -319,8 +319,8 @@ public class BeatEvent : MonoBehaviour
         positionQueue.Dequeue();
         return guideCircle.transform.DOMove(position, duration).SetEase(Ease.InOutSine);
     }
-
-    //------------------------------------카메라 관련 로직--------------------------------------
+    #endregion
+    #region ------------------------------------카메라 관련 로직--------------------------------------
     public void MoveCamera(Vector3 vec)
     {
         cameraPoint += new Vector3(vec.x, vec.y);
@@ -332,18 +332,19 @@ public class BeatEvent : MonoBehaviour
         mainCamera.transform.position = new Vector3(vec.x, vec.y, -10);
         cameraPoint = new Vector3(vec.x, vec.y, -10);
     }
-    public IEnumerator AbsSetCameraZoom(float cameraZoom,float cameraSpeed = 0.2f)
+    public IEnumerator AbsSetCameraZoom(float cameraZoom, float cameraSpeed = 0.2f)
     {
-        if(cameraSpeed == 0)
+        if (cameraSpeed == 0)
             cameraSpeed = 0.2f;
+        cameraZoomPoint = cameraZoom;
         yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
         mainCamera.DOOrthoSize(cameraZoom, cameraSpeed).SetEase(Ease.InOutSine);
     }
 
     public IEnumerator AbsSetCameraPos(Vector3 vec)
     {
-        yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
         cameraPoint = new Vector3(vec.x, vec.y, -10);
+        yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
         mainCamera.transform.DOMove(new Vector3(vec.x, vec.y, -10), cameraSpeedOffset).SetEase(Ease.InOutSine);
     }
 
@@ -358,14 +359,15 @@ public class BeatEvent : MonoBehaviour
     {
         return mainCamera.orthographicSize;
     }
-    public void SetCameraZoom(float set,float cameraSpeed = 0.2f)
+    public void SetCameraZoom(float set, float cameraSpeed = 0.2f)
     {
-        if(cameraSpeed == 0)
+        if (cameraSpeed == 0)
             cameraSpeed = 0.2f;
+        cameraZoomPoint = mainCamera.orthographicSize + set;
         mainCamera.DOOrthoSize(mainCamera.orthographicSize + set, cameraSpeed).SetEase(Ease.InOutSine);
     }
-
-    //---------------------------------------- 연출 관련 로직 -----------------------------------------------------
+    #endregion
+    #region ---------------------------------------- 연출 관련 로직 -----------------------------------------------------
     IEnumerator Clear()
     {
         yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
@@ -443,7 +445,7 @@ public class BeatEvent : MonoBehaviour
             "up" => 2,
             "down" => 3,
             "left" => 0,
-            _       => 0 
+            _ => 0
         };
 
         Pulse(lightList[idx], peak, total);
@@ -487,4 +489,6 @@ public class BeatEvent : MonoBehaviour
                 }
         }
     }
+# endregion
 }
+

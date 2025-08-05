@@ -34,5 +34,6 @@ public class NotesData
 {
     public string name;
     public float bpm;
+    public int clearBeat;
     public List<Notes> notes;
 }

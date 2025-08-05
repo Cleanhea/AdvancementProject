@@ -16,8 +16,10 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] GameObject saveCircle;
     [SerializeField] GameObject musicNameInform;
     [SerializeField] GameObject GuideButton;
+    [SerializeField] TextMeshProUGUI deathText;
+    [SerializeField] Slider songDistanceSlider;
     [SerializeField] float saveCircleTime = 3f;
-    [SerializeField] float saveCircleSize = 25f; 
+    [SerializeField] float saveCircleSize = 25f;
     bool isPaused = false;
     void Awake()
     {
@@ -37,11 +39,15 @@ public class InGameUIManager : MonoBehaviour
     {
         GameManager.OnPauseRequest += TogglePause;
         GameManager.OnSaveAlarm += SaveAlarmSet;
+        GameManager.OnRestartRequest += DeathTextSet;
+        AudioManager.OnBeat += SliderUpdate;
     }
     void OnDisable()
     {
         GameManager.OnPauseRequest -= TogglePause;
         GameManager.OnSaveAlarm -= SaveAlarmSet;
+        GameManager.OnRestartRequest -= DeathTextSet;
+        AudioManager.OnBeat -= SliderUpdate;
     }
 
     void TogglePause()
@@ -93,6 +99,8 @@ public class InGameUIManager : MonoBehaviour
 
     public void GoMainManu()
     {
+        GameManager.instance.DefaultSaveData();
+        GameManager.instance.StopAllCoroutines();
         Time.timeScale = 1f;
         AudioManager.instance.PlayMusic("event:/Lobi", 0);
         SceneManager.LoadScene("Lobby");
@@ -241,7 +249,18 @@ public class InGameUIManager : MonoBehaviour
             yield return null;
         }
     }
+    //데스카운터 업데이트
+    public void DeathTextSet(int deathCount)
+    {
+        deathText.text = "Death : " + deathCount.ToString();
+    }
 
+    public void SliderUpdate(int bar, int beat)
+    {
+        float clearBeat = BeatManager.instance.notes.clearBeat;
+        float cal = (float)bar / clearBeat;
+        songDistanceSlider.value = cal;
+    }
 
 
 

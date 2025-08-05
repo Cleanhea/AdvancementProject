@@ -40,7 +40,7 @@ public static class StageEvent
             }
             default:
                 {
-                    Debug.LogWarning("오류나씀");
+                    Debug.Log("인풋이벤트 엄서요");
                     break;
             }
         }
