@@ -275,8 +275,16 @@ public class BeatEvent : MonoBehaviour
             circle = rightCircle;
         }
         Transform tr = circle.transform;
-        MoveCircleStart(tr, vec, duration);
         yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
+        if (type == 0)
+        {
+            currentLeftCirclePosition = vec;
+        }
+        else
+        {
+            currentRightCirclePosition = vec;
+        }
+        MoveCircleStart(tr, vec, duration);
     }
     void MoveCircleStart(Transform tr, Vector3 vec, float duration = 0.08f)
     {

@@ -102,6 +102,7 @@ public class NoteCreate : MonoBehaviour
     IEnumerator CreateNote()
     {
         int spriteIndex = 0;
+        int type = noteData.type;
         Color cc = footHoldCircle.color;
         if (BeatEvent.instance.afterInversion)
         {
@@ -130,12 +131,11 @@ public class NoteCreate : MonoBehaviour
             r => shrinkingCircle.Radius = r,
             0.9f,
             duration * 3f
-        ).OnUpdate(()=>
+        ).OnUpdate(() =>
         {
-            if (noteState == NoteState.Available)
+            if (noteState == NoteState.Available && IsPeekOfMyQueue())
             {
-                Color c;
-                c = defaultColor2;
+                Color c = defaultColor2;
                 c.a = 1f;
                 shrinkingCircle.Color = c;
             }
@@ -227,5 +227,14 @@ public class NoteCreate : MonoBehaviour
         Color c2 = sr[1].color;
         c2.a = 0f;
         sr[1].color = c2;
+    }
+    
+    bool IsPeekOfMyQueue()
+    {
+        var q = (noteData.type == 0)
+            ? BeatEvent.instance.leftFootHoldQueue
+            : BeatEvent.instance.rightFootHoldQueue;
+
+        return q != null && q.Count > 0 && ReferenceEquals(q.Peek(), this);
     }
 }

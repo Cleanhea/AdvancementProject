@@ -67,8 +67,9 @@ public class BeatManager : MonoBehaviour
     }
     void RestartHandleBeat(int bar, int beatIndex)
     {
-        while (noteQueue.Count > 0 && noteQueue.Peek().bar < bar || 
-            (noteQueue.Peek().bar == bar && noteQueue.Peek().beat < beatIndex))
+        while (noteQueue.Count > 0 &&
+        (noteQueue.Peek().bar < bar ||
+            (noteQueue.Peek().bar == bar && noteQueue.Peek().beat < beatIndex)))
         {
             noteQueue.Dequeue();
         }

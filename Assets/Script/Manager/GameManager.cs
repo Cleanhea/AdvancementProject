@@ -69,7 +69,8 @@ public class GameManager : MonoBehaviour
         temp.globalLightColor = BeatEvent.instance.globalLight2D.color;
         //오차 보정
         yield return null;
-        yield return new WaitUntil(() => saveOK == 2);
+        yield return new WaitUntil(() => saveOK >= 2);
+        Debug.Log("SavePoint");
         Vector3 pl = BeatEvent.instance.currentLeftCirclePosition;
         Vector3 pr = BeatEvent.instance.currentRightCirclePosition;
         temp.leftCirclePosition = pl;
@@ -80,7 +81,6 @@ public class GameManager : MonoBehaviour
         temp.CameraZoom = BeatEvent.instance.cameraZoomPoint;
         OnSaveAlarm?.Invoke();
         saveState = temp;
-        Debug.Log("SavePoint");
         saveOK = 0;
     }
 
