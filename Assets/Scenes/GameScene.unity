@@ -220,15 +220,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveState:
-    musicTime: 140000
+    musicTime: 177558
     currentBar: 0
     currentBeat: 0
     cameraPosition:
       x: 0
-      y: 126
-    CameraZoom: 10
-    leftCirclePosition: {x: 3, y: 123, z: 0}
-    rightCirclePosition: {x: -3, y: 129, z: 0}
+      y: 237
+    CameraZoom: 12
+    leftCirclePosition: {x: -4.5, y: 237, z: 0}
+    rightCirclePosition: {x: 4.5, y: 237, z: 0}
     isInversion: 0
     afterInversion: 0
     globalLightColor: {r: 1, g: 1, b: 1, a: 0}
@@ -1015,7 +1015,7 @@ MonoBehaviour:
     notes: []
   Playname: 1
   bpm: 0
-  isCheck: 1
+  isCheck: 0
 --- !u!1 &400612101
 GameObject:
   m_ObjectHideFlags: 0
@@ -4730,8 +4730,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c29a8d1a29c164297298aae108b381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testMode: 1
-  startTime: 6000
+  testMode: 0
+  startTime: 0
   tutorialManager: {fileID: 1512216940}
 --- !u!4 &1917880538
 Transform:

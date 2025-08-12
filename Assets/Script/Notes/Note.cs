@@ -35,5 +35,6 @@ public class NotesData
     public string name;
     public float bpm;
     public int clearBeat;
+    public float guideCircleSpeed;
     public List<Notes> notes;
 }

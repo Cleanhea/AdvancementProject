@@ -1,6 +1,7 @@
 {
   "name": "Tutorial",
   "bpm": 100,
+  "guideCircleSpeed": 1,
   "notes":[
     { "bar": 1, "beat": 3, "type" : -1},
     { "bar": 3, "beat": 3, "type" : -1},

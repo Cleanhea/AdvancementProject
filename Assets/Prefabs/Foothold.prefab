@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segments: 64
   radius: 6
-  thickness: 0.18
+  thickness: 0.24
 --- !u!120 &3198413921606411526
 LineRenderer:
   serializedVersion: 2
@@ -141,7 +141,7 @@ LineRenderer:
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 6
+    numCornerVertices: 9
     numCapVertices: 0
     alignment: 0
     textureMode: 0
@@ -337,12 +337,16 @@ MonoBehaviour:
       x: 0
       y: 0
     cameraZoom: 0
+    zoomSpeed: 0
     guideCircleSpeed: 0
     image: 
     input: 
+    moveCirclePosition: {x: 0, y: 0, z: 0}
+    type2: 0
   guideCircleSpeed: 0
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
-  defaultColor2: {r: 0.9960785, g: 0, b: 0.82745105, a: 0}
+  leftDefaultColor: {r: 1, g: 0.2688679, b: 0.35775068, a: 0}
+  rightDefaultColor: {r: 0.2688679, g: 0.2688679, b: 1, a: 0}
   defaultCircleSize: 6
 --- !u!1 &8963186800177824212
 GameObject:

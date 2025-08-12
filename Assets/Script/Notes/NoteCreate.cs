@@ -30,9 +30,11 @@ public class NoteCreate : MonoBehaviour
     public NoteState noteState = NoteState.Ready;
     public Notes noteData;
     public float guideCircleSpeed;
+    float guideCircleSpeed2;
     float clearTime = 0.1f;
     [SerializeField] Color defaultColor;
-    [SerializeField] Color defaultColor2;
+    [SerializeField] Color leftDefaultColor;
+    [SerializeField] Color rightDefaultColor;
     [SerializeField] float defaultCircleSize = 0.5f;
 
     void Awake()
@@ -87,6 +89,7 @@ public class NoteCreate : MonoBehaviour
         shrinkingCircle.Radius = defaultCircleSize;
         noteState = NoteState.Normal;
         bpm = BeatManager.instance.notes.bpm;
+        guideCircleSpeed2 = BeatManager.instance.notes.guideCircleSpeed;
         delayTime = 60f / bpm * 2;
         duration = 60f / bpm * 1;
         StartCoroutine(CreateNote());
@@ -135,7 +138,8 @@ public class NoteCreate : MonoBehaviour
         {
             if (noteState == NoteState.Available && IsPeekOfMyQueue())
             {
-                Color c = defaultColor2;
+                Color c;
+                c = isLeft ? leftDefaultColor : rightDefaultColor;
                 c.a = 1f;
                 shrinkingCircle.Color = c;
             }
@@ -168,7 +172,7 @@ public class NoteCreate : MonoBehaviour
         noteState = NoteState.Available;
         yield return new WaitForSeconds(duration / 4f);
         guideCircleSpeed = noteData.guideCircleSpeed == 0 ? 1 : noteData.guideCircleSpeed;
-        float guideCircleDuration = duration / guideCircleSpeed;
+        float guideCircleDuration = duration / guideCircleSpeed / guideCircleSpeed2;
         yield return new WaitForSeconds((duration - guideCircleDuration) / 2);
         Tween move = BeatEvent.instance.MoveGuideCircle(noteData.direction, noteData.type, guideCircleDuration);
         if (move != null)

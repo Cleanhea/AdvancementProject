@@ -2,6 +2,7 @@
   "name": "HaiPhutHon",
   "bpm": 128,
   "clearBeat" : 87,
+  "guideCircleSpeed": 2,
   "notes":[
     { "bar": 5, "beat": 1,"direction" : 1,"sevent" : "default", "type" : 1},
     { "bar": 6, "beat": 1,"direction" : 0,"sevent" : "default", "type" : 0},
