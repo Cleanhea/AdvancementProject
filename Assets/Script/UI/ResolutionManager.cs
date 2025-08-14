@@ -1,10 +1,10 @@
 	using UnityEngine;
-	using UnityEngine.UI;
 	using System.Collections.Generic;
-	 
-	public class ResolutionManager : MonoBehaviour
+    using TMPro;
+
+public class ResolutionManager : MonoBehaviour
 	{
-	    public Dropdown resolutionDropdown;
+	    public TMP_Dropdown resolutionDropdown;
 	 
 	    private List<Resolution> resolutions = new List<Resolution>();
 	    private int optimalResolutionIndex = 2;
