@@ -1,5 +1,25 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9133650198520934426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/TocaToca.bank
+  m_EditorClassIdentifier: 
+  Path: FMODProject/Build/Desktop/TocaToca.bank
+  Name: TocaToca
+  StudioPath: bank:/TocaToca
+  lastModified: 638907116035668840
+  FileSizes:
+  - Name: Desktop
+    Value: 2771808
+  Exists: 1
 --- !u!114 &-6036873956604757182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +130,7 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638900383770865334
+  lastModified: 638906694596098695
   FileSizes:
   - Name: Desktop
     Value: 1324
@@ -162,6 +182,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 190020
+--- !u!114 &-418642687774922973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TocaToca
+  m_EditorClassIdentifier: 
+  Path: event:/TocaToca
+  Guid:
+    Data1: -1468917726
+    Data2: 1154916486
+    Data3: 1228985278
+    Data4: 1527613862
+  Banks:
+  - {fileID: -9133650198520934426}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 195700
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +231,7 @@ MonoBehaviour:
   - {fileID: -5944334327365795315}
   - {fileID: 4367239188101606018}
   - {fileID: 2642363159820251897}
+  - {fileID: -9133650198520934426}
   EditorEvents:
   - {fileID: -6036873956604757182}
   - {fileID: 5312220912306853145}
@@ -191,12 +239,13 @@ MonoBehaviour:
   - {fileID: 3956210271889294814}
   - {fileID: -1192724164374835875}
   - {fileID: -3301142600742492554}
+  - {fileID: -418642687774922973}
   EditorParameters: []
   MasterBanks:
   - {fileID: -2862972496294479044}
   StringsBanks:
   - {fileID: 6528054813473459205}
-  cacheTime: 638900479407035035
+  cacheTime: 638907116035668840
   cacheVersion: 131623
 --- !u!114 &2642363159820251897
 MonoBehaviour:
@@ -358,10 +407,10 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638900383770905224
+  lastModified: 638906694596138806
   FileSizes:
   - Name: Desktop
-    Value: 1382
+    Value: 1482
   Exists: 1
 --- !u!114 &8919382533530419305
 MonoBehaviour:

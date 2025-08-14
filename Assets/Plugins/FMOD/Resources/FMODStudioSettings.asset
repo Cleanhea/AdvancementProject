@@ -348,6 +348,7 @@ MonoBehaviour:
   - SFX
   - SoHappy
   - Stay
+  - TocaToca
   - Tutorial
   BanksToLoad: []
   LiveUpdatePort: 9264

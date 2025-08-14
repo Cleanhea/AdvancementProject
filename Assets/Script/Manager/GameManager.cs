@@ -58,9 +58,10 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.bgmInstance.getTimelinePosition(out ms);
         temp.musicTime = ms - 100;
         int copied = 0;
-        foreach (var note in BeatManager.instance.noteQueue)
+        var snapshot = BeatManager.instance.noteQueue.ToArray();
+        for(int i = 0; i < snapshot.Length; i++)
         {
-            temp.remainingNotes.Add(note);
+            temp.remainingNotes.Add(snapshot[i]);
             if ((++copied & 127) == 0)
                 yield return null;
         }
@@ -110,6 +111,7 @@ public class GameManager : MonoBehaviour
         BeatEvent.instance.rightFootHoldQueue.Clear();
         BeatEvent.instance.leftCirclePositionQueue.Clear();
         BeatEvent.instance.rightCirclePositionQueue.Clear();
+        FootHoldObjectFool.instance.AllReturnFootHold();
         BeatEvent.instance.mainCamera.orthographicSize = saveState.CameraZoom;
         BeatEvent.instance.inversion = saveState.isInversion;
         BeatEvent.instance.afterInversion = saveState.afterInversion;

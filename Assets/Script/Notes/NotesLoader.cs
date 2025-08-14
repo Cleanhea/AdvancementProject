@@ -9,6 +9,7 @@ public enum SongName
     HaiPhutHon,
     Matches,
     Tutorial,
+    TocaToca,
 }
 
 public class NotesLoader : MonoBehaviour

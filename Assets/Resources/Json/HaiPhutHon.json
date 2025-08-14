@@ -144,10 +144,10 @@
     { "bar": 50, "beat": 3,"direction" : 3,"sevent" : "quick","input":"saveOK", "type" : 0},
     { "bar": 50, "beat": 3,"direction" : 3,"sevent" : "quick","input":"saveOK", "type" : 1},
     { "bar": 50, "beat": 3,"sevent" : "save", "type" : 2},
-    { "bar": 51, "beat": 3,"sevent" : "setCameraZoom", "type" : 2,"cameraZoom" : 13},
-    { "bar": 52, "beat": 3,"sevent" : "inversion", "type" : 2},
-    { "bar": 52, "beat": 3,"sevent" : "moveCircle", "type" : 2,"type2" : 0, "moveCirclePosition": {"x" : -4.5, "y" : 27}},
-    { "bar": 52, "beat": 3,"sevent" : "moveCircle", "type" : 2,"type2" : 1, "moveCirclePosition": {"x" : 4.5, "y" : 21}},
+    { "bar": 50, "beat": 4,"sevent" : "setCameraZoom", "type" : 2,"cameraZoom" : 13},
+    { "bar": 50, "beat": 4,"sevent" : "inversion", "type" : 2},
+    { "bar": 50, "beat": 4,"sevent" : "moveCircle", "type" : 2,"type2" : 0, "moveCirclePosition": {"x" : -4.5, "y" : 27}},
+    { "bar": 50, "beat": 4,"sevent" : "moveCircle", "type" : 2,"type2" : 1, "moveCirclePosition": {"x" : 4.5, "y" : 21}},
 
 
     { "bar": 53, "beat": 1,"direction" : 1,"sevent" : "quick", "type" : 0},

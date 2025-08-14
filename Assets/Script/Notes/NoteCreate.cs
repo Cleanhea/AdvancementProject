@@ -31,7 +31,7 @@ public class NoteCreate : MonoBehaviour
     public Notes noteData;
     public float guideCircleSpeed;
     float guideCircleSpeed2;
-    float clearTime = 0.1f;
+    float clearTime = 0.15f;
     [SerializeField] Color defaultColor;
     [SerializeField] Color leftDefaultColor;
     [SerializeField] Color rightDefaultColor;

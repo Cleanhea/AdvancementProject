@@ -220,15 +220,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveState:
-    musicTime: 177558
+    musicTime: 0
     currentBar: 0
     currentBeat: 0
     cameraPosition:
       x: 0
-      y: 237
-    CameraZoom: 12
-    leftCirclePosition: {x: -4.5, y: 237, z: 0}
-    rightCirclePosition: {x: 4.5, y: 237, z: 0}
+      y: 0
+    CameraZoom: 15
+    leftCirclePosition: {x: -4.5, y: 0, z: 0}
+    rightCirclePosition: {x: 4.5, y: 0, z: 0}
     isInversion: 0
     afterInversion: 0
     globalLightColor: {r: 1, g: 1, b: 1, a: 0}
@@ -1012,8 +1012,9 @@ MonoBehaviour:
     name: 
     bpm: 0
     clearBeat: 0
+    guideCircleSpeed: 0
     notes: []
-  Playname: 1
+  Playname: 5
   bpm: 0
   isCheck: 0
 --- !u!1 &400612101
