@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segments: 64
-  radius: 6
+  radius: 8
   thickness: 0.24
 --- !u!120 &3198413921606411526
 LineRenderer:
@@ -347,7 +347,7 @@ MonoBehaviour:
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
   leftDefaultColor: {r: 1, g: 0.2688679, b: 0.35775068, a: 0}
   rightDefaultColor: {r: 0.2688679, g: 0.2688679, b: 1, a: 0}
-  defaultCircleSize: 6
+  defaultCircleSize: 10
 --- !u!1 &8963186800177824212
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,7 +31,7 @@ public class NoteCreate : MonoBehaviour
     public Notes noteData;
     public float guideCircleSpeed;
     float guideCircleSpeed2;
-    float clearTime = 0.15f;
+    float clearTime = 0.3f;
     [SerializeField] Color defaultColor;
     [SerializeField] Color leftDefaultColor;
     [SerializeField] Color rightDefaultColor;
@@ -134,7 +134,7 @@ public class NoteCreate : MonoBehaviour
             r => shrinkingCircle.Radius = r,
             0.9f,
             duration * 3f
-        ).OnUpdate(() =>
+        ).SetEase(Ease.OutCubic).OnUpdate(() =>
         {
             if (noteState == NoteState.Available && IsPeekOfMyQueue())
             {
