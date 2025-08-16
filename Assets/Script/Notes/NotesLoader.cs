@@ -10,6 +10,7 @@ public enum SongName
     Matches,
     Tutorial,
     TocaToca,
+    Dubidubidu,
 }
 
 public class NotesLoader : MonoBehaviour

@@ -342,8 +342,12 @@ MonoBehaviour:
   MasterBanks:
   - Master
   Banks:
+  - Click
+  - Dubidubidu
+  - GoStage
   - HaiPhutHon
   - Lobi
+  - Logo
   - Matches
   - SFX
   - SoHappy

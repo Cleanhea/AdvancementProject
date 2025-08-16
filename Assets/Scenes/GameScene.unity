@@ -958,6 +958,8 @@ MonoBehaviour:
   stayLightPrefab: {fileID: 6357154819161235392, guid: 8718658d8eb89614e983ca65ee912713, type: 3}
   matchesLightPrefab: {fileID: 6983399423091653278, guid: c75386eb88afbe04286ae3c956a8b904, type: 3}
   soHappyLightPrefab: {fileID: 6357154819161235392, guid: 09710e6000d5111489c7ca9b8c468579, type: 3}
+  dubidubiduLightPrefab: {fileID: 8382922975751487880, guid: 917dc253f495317419ee99f839356887, type: 3}
+  tocatocaLightPrefab: {fileID: 2664211263411869479, guid: c3209ae8c20b23d40b1919bb1b7afe76, type: 3}
   leftGuideCircle: {fileID: 0}
   rightGuideCircle: {fileID: 0}
   stageLight: {fileID: 0}

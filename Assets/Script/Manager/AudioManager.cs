@@ -11,10 +11,22 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
+    // 음악 관련
     string MUSIC_VCA_PATH = "vca:/Music";
     VCA musicVCA;
     float musicVol = 1f;
     public float MusicVolume => musicVol;
+
+    // 효과음 관련
+    string SFX_VCA_PATH = "vca:/SFX";
+    VCA sfxVCA;
+    float sfxVol = 1f;
+    public float SFXVolume => sfxVol;
+    public EventReference uiSet;
+    public EventReference uiClick;
+    public EventReference uiCancel;
+    public EventReference goStage;
+    public EventReference logo;
     private FMOD.Studio.EVENT_CALLBACK beatCallback;
     public EventInstance bgmInstance;
     string currentBGMPath;
@@ -29,14 +41,20 @@ public class AudioManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
             musicVCA = RuntimeManager.GetVCA(MUSIC_VCA_PATH);
+            sfxVCA = RuntimeManager.GetVCA(SFX_VCA_PATH);
+
             musicVol = PlayerPrefs.GetFloat("MusicVol", 1f);
+            sfxVol = PlayerPrefs.GetFloat("SFXVol", 1f);
             ApplyMusicVolume();
+            ApplySFXVolume();
         }
         else
         {
             Destroy(gameObject);
         }
     }
+
+    #region ------------------Music-----------------
     // 재생
     public void PlayMusic(string eventPath, int startTime)
     {
@@ -53,7 +71,7 @@ public class AudioManager : MonoBehaviour
         bgmInstance.start();
         currentBGMPath = eventPath;
     }
-    
+
     FMOD.RESULT OnTimelineBeat(EVENT_CALLBACK_TYPE type, IntPtr eventInstPtr, IntPtr paramPtr)
     {
         if (type == EVENT_CALLBACK_TYPE.TIMELINE_BEAT)
@@ -119,4 +137,26 @@ public class AudioManager : MonoBehaviour
             yield return null;
         }
     }
+    #endregion
+
+    #region ------------------SFX-----------------
+    public void PlaySFX(EventReference sfx)
+    {
+        if (sfx.IsNull) return;
+        RuntimeManager.PlayOneShot(sfx);
+    }
+
+    public void SetSFXVolume(float v)
+    {
+        sfxVol = Mathf.Clamp01(v);
+        ApplySFXVolume();
+        PlayerPrefs.SetFloat("SFXVol", sfxVol);
+        PlayerPrefs.Save();
+    }
+
+    void ApplySFXVolume()
+    {
+        sfxVCA.setVolume(sfxVol);
+    }
+    #endregion
 }

@@ -92,6 +92,9 @@
 	</object>
 	<object class="MixerBusPanner" id="{639a284c-b69b-4556-8ed1-91f5ea50bf95}" />
 	<object class="SingleSound" id="{9c4692f3-b43d-4d23-8cbb-36f492115a0d}">
+		<property name="start">
+			<value>0.12246736409058911</value>
+		</property>
 		<property name="length">
 			<value>210.15510204081633</value>
 		</property>
@@ -115,7 +118,7 @@
 	</object>
 	<object class="TempoMarker" id="{225deb2f-6fa5-404c-885a-ac5d9de3d148}">
 		<property name="position">
-			<value>0</value>
+			<value>0.16121812271706704</value>
 		</property>
 		<property name="tempo">
 			<value>408</value>

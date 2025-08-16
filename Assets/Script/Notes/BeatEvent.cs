@@ -21,6 +21,8 @@ public class BeatEvent : MonoBehaviour
     public GameObject stayLightPrefab;
     public GameObject matchesLightPrefab;
     public GameObject soHappyLightPrefab;
+    public GameObject dubidubiduLightPrefab;
+    public GameObject tocatocaLightPrefab;
 
     //---------게임 오브젝트-----------
     [HideInInspector] public GameObject leftGuideCircle;
@@ -144,10 +146,10 @@ public class BeatEvent : MonoBehaviour
         Color lgc = lg.color;
         Color rgc = rg.color;
         if (gameStart) {
-        lc.a = 0f;
-        rc.a = 0f;
-        lgc.a = 0f;
-        rgc.a = 0f;
+            lc.a = 0f;
+            rc.a = 0f;
+            lgc.a = 0f;
+            rgc.a = 0f;
         }
         float from = gameStart ? 0f : 1f;
         float to = gameStart ? 1f : 0f;
@@ -212,7 +214,7 @@ public class BeatEvent : MonoBehaviour
         }
         else if (notes.type == -1)
         {
-             OnTutorial?.Invoke(notes);
+            OnTutorial?.Invoke(notes);
         }
     }
     #region--------------------------------------------노트 생성--------------------------------------------------
@@ -397,6 +399,7 @@ public class BeatEvent : MonoBehaviour
     {
         inversion = true;
         yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
+        SetStageLightActive(true);
         globalLight2D.color = inversionColor;
         OnInversion?.Invoke(inversion);
         afterInversion = true;
@@ -405,6 +408,7 @@ public class BeatEvent : MonoBehaviour
     {
         inversion = false;
         yield return new WaitForSeconds(60f / BeatManager.instance.notes.bpm * 4f);
+        SetStageLightActive(false);
         globalLight2D.color = defaultColor;
         OnInversion?.Invoke(inversion);
         afterInversion = false;
@@ -492,8 +496,30 @@ public class BeatEvent : MonoBehaviour
                     lightList[3] = stageLight.transform.GetChild(3).GetComponent<Light2D>();
                     break;
                 }
+            case SongName.Dubidubidu:
+                {
+                    stageLight = Instantiate(dubidubiduLightPrefab, lightTransform.transform);
+                    break;
+                }
+            case SongName.TocaToca:
+                {
+                    stageLight = Instantiate(tocatocaLightPrefab, lightTransform.transform);
+                    lightList[0] = stageLight.transform.GetChild(0).GetComponent<Light2D>();
+                    lightList[1] = stageLight.transform.GetChild(1).GetComponent<Light2D>();
+                    lightList[2] = stageLight.transform.GetChild(2).GetComponent<Light2D>();
+                    lightList[3] = stageLight.transform.GetChild(3).GetComponent<Light2D>();
+                    break;
+                }
+        }
+        SetStageLightActive(false);
+    }
+    public void SetStageLightActive(bool active)
+    {
+        if (stageLight != null)
+        {
+            stageLight.SetActive(active);
         }
     }
-# endregion
+#endregion
 }
 

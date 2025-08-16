@@ -13,12 +13,14 @@ public class Logo : MonoBehaviour
     [SerializeField] float logoTextDuration = 2f;
     void Start()
     {
-        Screen.SetResolution(1280, 800,false);
         StartCoroutine(StartLogo());
     }
     IEnumerator StartLogo()
     {
-        logo.DOFade(1f, 1f);
+        yield return new WaitForSeconds(1f);
+        logo.fillAmount = 0f;
+        logo.DOFillAmount(1f, logoDuration).SetEase(Ease.OutCubic);
+        AudioManager.instance.PlaySFX(AudioManager.instance.logo);
         yield return new WaitForSeconds(logoDuration);
         logoText.DOFade(1f, 1f);
         yield return new WaitForSeconds(logoTextDuration);

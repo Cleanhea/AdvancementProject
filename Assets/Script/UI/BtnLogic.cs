@@ -62,4 +62,10 @@ public class BtnLogic : MonoBehaviour
         StageLoadContext.Set(SongName.Tutorial);
         LobiUI.instance.StartCoroutine(LobiUI.instance.GoStageReady());
     }
+    public void GoDubidubidu()
+    {
+        DOTween.KillAll();
+        StageLoadContext.Set(SongName.Dubidubidu);
+        LobiUI.instance.StartCoroutine(LobiUI.instance.GoStageReady());
+    }
 }

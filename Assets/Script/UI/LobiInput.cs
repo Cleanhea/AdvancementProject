@@ -90,6 +90,7 @@ public class LobiInput : MonoBehaviour
         {
             if (lobiState == LobiState.Option)
             {
+                AudioManager.instance.PlaySFX(AudioManager.instance.uiCancel);
                 LobiUI.instance.StartCoroutine(LobiUI.instance.OutOptionReady());
                 lobiState = LobiState.FirstUI;
             }
@@ -101,6 +102,7 @@ public class LobiInput : MonoBehaviour
         {
             if (selectIndex > 0)
             {
+                AudioManager.instance.PlaySFX(AudioManager.instance.uiSet);
                 selectIndex--;
                 RefreshSlots();
             }
@@ -111,6 +113,7 @@ public class LobiInput : MonoBehaviour
             {
                 if (selectIndex < musicSelectUIButton.Length - 1)
                 {
+                    AudioManager.instance.PlaySFX(AudioManager.instance.uiSet);
                     selectIndex++;
                     RefreshSlots();
                 }
@@ -119,6 +122,7 @@ public class LobiInput : MonoBehaviour
             {
                 if (selectIndex < firstUIButton.Length - 1)
                 {
+                    AudioManager.instance.PlaySFX(AudioManager.instance.uiSet);
                     selectIndex++;
                     RefreshSlots();
                 }
@@ -126,6 +130,8 @@ public class LobiInput : MonoBehaviour
         }
         else if (Input.GetKeyDown(UIKey[4]))
         {
+            if(lobiState == LobiState.FirstUI)
+                AudioManager.instance.PlaySFX(AudioManager.instance.uiClick);
             GameObject selectedButton = buttonSlots[2].UIButton;
             selectedButton?.GetComponent<Button>()?.onClick.Invoke();
         }
@@ -133,6 +139,7 @@ public class LobiInput : MonoBehaviour
         {
             if (lobiState == LobiState.MusicSelect)
             {
+                AudioManager.instance.PlaySFX(AudioManager.instance.uiCancel);
                 StartCoroutine(FirstUISetting());
             }
         }

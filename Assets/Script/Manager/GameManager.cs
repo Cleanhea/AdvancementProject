@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
         BeatEvent.instance.mainCamera.orthographicSize = saveState.CameraZoom;
         BeatEvent.instance.inversion = saveState.isInversion;
         BeatEvent.instance.afterInversion = saveState.afterInversion;
+        BeatEvent.instance.SetStageLightActive(saveState.isInversion);
         BeatEvent.instance.globalLight2D.color = saveState.globalLightColor;
         BeatEvent.instance.StopAllCoroutines();
         yield return null;

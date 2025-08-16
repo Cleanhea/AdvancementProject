@@ -85,7 +85,7 @@ public class TutorialManager : MonoBehaviour
         );
         AudioManager.instance.bgmInstance.setPaused(true);
         Time.timeScale = 0f;
-        yield return StartCoroutine(FadeInUnscaledTime("바깥원이 보라색이 되었을때 빨간 원을 이동시킬 수 있습니다."));
+        yield return StartCoroutine(FadeInUnscaledTime("바깥원이 색이 바뀌었을때 원을 이동시킬 수 있습니다."));
         yield return new WaitForSecondsRealtime(1f);
         yield return StartCoroutine(FadeOutUnscaledTime());
         AudioManager.instance.bgmInstance.setPaused(false);

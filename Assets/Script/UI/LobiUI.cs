@@ -51,6 +51,7 @@ public class LobiUI : MonoBehaviour
     public IEnumerator GoStageReady()
     {
         Sequence anim = GoStageAnimation();
+        AudioManager.instance.PlaySFX(AudioManager.instance.goStage);
         yield return anim.WaitForCompletion();
         yield return new WaitForSecondsRealtime(0.5f);
         SceneManager.LoadScene("GameScene");
