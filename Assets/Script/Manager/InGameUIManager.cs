@@ -189,7 +189,6 @@ public class InGameUIManager : MonoBehaviour
     public void SetMusicInformation(SongName songName)
     {
         string name = SplitCamelCase(songName.ToString());
-
         TextMeshProUGUI text = musicNameInform.GetComponent<TextMeshProUGUI>();
         text.text = name;
         if(GameManager.instance.isFirstGame)
@@ -197,6 +196,10 @@ public class InGameUIManager : MonoBehaviour
             GameManager.instance.isFirstGame = false;
             StartCoroutine(FadeInOutGuideButton());
         }
+        Color c = deathText.color;
+        c.a = 0f;
+        deathText.color = c;
+        deathText.DOFade(1f, 2f);
         StartCoroutine(FadeInMusicInformation());
     }
     IEnumerator FadeInOutGuideButton()
@@ -264,7 +267,7 @@ public class InGameUIManager : MonoBehaviour
     //데스카운터 업데이트
     public void DeathTextSet(int deathCount)
     {
-        deathText.text = "Death : " + deathCount.ToString();
+        deathText.text = deathCount.ToString();
     }
 
     public void SliderUpdate(int bar, int beat)
@@ -273,7 +276,10 @@ public class InGameUIManager : MonoBehaviour
         float cal = (float)bar / clearBeat;
         songDistanceSlider.value = cal;
     }
-
+    public Tween FadeOutDeathText()
+    {
+        return deathText.DOFade(0f, 1f);
+    }
 
 
     //--------------부가기능-----------------

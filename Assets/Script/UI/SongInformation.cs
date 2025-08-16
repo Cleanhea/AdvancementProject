@@ -11,4 +11,5 @@ public class SongInformation : MonoBehaviour
     public int death;
     public int Bpm;
     public int level;
+    public Sprite coverImage;
 }

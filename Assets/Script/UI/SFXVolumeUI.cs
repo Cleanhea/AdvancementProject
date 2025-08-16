@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class SFXVolumeUI: MonoBehaviour
+public class SFXVolumeUI : MonoBehaviour, IEndDragHandler
 {
     Slider musicSlider;
 
@@ -13,5 +14,10 @@ public class SFXVolumeUI: MonoBehaviour
         musicSlider.SetValueWithoutNotify(AudioManager.instance.SFXVolume);
 
         musicSlider.onValueChanged.AddListener(AudioManager.instance.SetSFXVolume);
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        AudioManager.instance.PlayUISet();
     }
 }

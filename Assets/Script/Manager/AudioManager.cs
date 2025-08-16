@@ -158,5 +158,10 @@ public class AudioManager : MonoBehaviour
     {
         sfxVCA.setVolume(sfxVol);
     }
+
+    public void PlayUISet()
+    {
+        RuntimeManager.PlayOneShot(uiSet);
+    }
     #endregion
 }

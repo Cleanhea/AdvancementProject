@@ -39,6 +39,7 @@ public class LobiInput : MonoBehaviour
     public TextMeshProUGUI level;
     public GameObject clearPanel;
     public TextMeshProUGUI death;
+    public Image coverImage;
 
     void Awake()
     {
@@ -268,6 +269,7 @@ public class LobiInput : MonoBehaviour
         bpm.text = songInformation.Bpm.ToString();
         level.text = songInformation.level.ToString();
         composer.text = songInformation.composer;
+        coverImage.sprite = songInformation.coverImage;
         if (songInformation.clear)
         {
             clearPanel.SetActive(true);

@@ -329,7 +329,7 @@ public class BeatEvent : MonoBehaviour
     public void MoveCamera(Vector3 vec)
     {
         cameraPoint += vec;
-        mainCamera.transform.DOMove(mainCamera.transform.position + new Vector3(vec.x, vec.y, -10), cameraSpeedOffset).SetEase(Ease.InOutSine);
+        mainCamera.transform.DOMove(mainCamera.transform.position + new Vector3(vec.x, vec.y, 0), cameraSpeedOffset).SetEase(Ease.InOutSine);
     }
 
     public void SetCameraPos(Vector3 vec)
