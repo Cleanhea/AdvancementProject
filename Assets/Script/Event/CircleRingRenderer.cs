@@ -17,6 +17,7 @@ public class CircleRingRenderer : MonoBehaviour
         ApplyColor();
     }
 
+    // 설정 및 초기화
     void EnsureInit()
     {
         if (lr != null) return;
@@ -24,7 +25,6 @@ public class CircleRingRenderer : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         if (lr == null)
         {
-            Debug.LogError("[CircleRingRenderer] LineRenderer component is missing.", this);
             return;
         }
         lr.useWorldSpace = false;
@@ -73,7 +73,7 @@ public class CircleRingRenderer : MonoBehaviour
             ApplyColor();
         }
     }
-
+    // 변경사항 적용
     void ApplyGeometry()
     {
         EnsureInit();
@@ -90,6 +90,7 @@ public class CircleRingRenderer : MonoBehaviour
         }
     }
 
+    //색상 변경사항 적용
     void ApplyColor()
     {
         EnsureInit();

@@ -210,7 +210,6 @@ public class LobiInput : MonoBehaviour
         {
             go.transform.SetParent(hiddenParent, false);
         }
-        // 표시되지 않게
         go.SetActive(false);
     }
     public IEnumerator MusicSelectSetting()

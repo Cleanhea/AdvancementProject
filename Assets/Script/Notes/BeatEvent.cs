@@ -459,7 +459,7 @@ public class BeatEvent : MonoBehaviour
 
         Pulse(lightList[idx], peak, total);
     }
-
+    //라이트 초기 세팅
     public void SetLightParent(SongName songName)
     {
         switch (songName)

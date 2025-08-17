@@ -41,13 +41,13 @@ public class GameManager : MonoBehaviour
         }
         gameState = GameState.lobi;
     }
+    //세이브 기능
     public void SaveGame()
     {
         if (saveCoroutine != null)
             StopCoroutine(saveCoroutine);
         saveCoroutine = StartCoroutine(SavePoint());
     }
-
     IEnumerator SavePoint()
     {
         SaveState temp = new SaveState();
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         temp.musicTime = ms - 100;
         int copied = 0;
         var snapshot = BeatManager.instance.noteQueue.ToArray();
-        for(int i = 0; i < snapshot.Length; i++)
+        for (int i = 0; i < snapshot.Length; i++)
         {
             temp.remainingNotes.Add(snapshot[i]);
             if ((++copied & 127) == 0)
@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
         saveOK = 0;
     }
 
+    // 로드 기능
     public void RestartGame()
     {
         if (saveCoroutine != null)
@@ -124,10 +125,13 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.PlayMusic("event:/" + BeatManager.instance.Playname, saveState.musicTime);
     }
 
+    // 1차 세이브 포인트 체크
     public void MarkSaveOK()
     {
         saveOK++;
     }
+
+    // 재시작 초기화
     public void DefaultSaveData()
     {
         deathCount = 0;

@@ -59,13 +59,14 @@ public class InGameUIManager : MonoBehaviour
         GameManager.OnRestartRequest -= DeathTextSet;
         AudioManager.OnBeat -= SliderUpdate;
     }
-
+    //퍼즈 토글
     void TogglePause()
     {
         if (isPaused) Resume();
         else Pause();
     }
 
+    //퍼즈기능
     void Pause()
     {
         GameManager.instance.gameState = GameState.pause;
@@ -75,7 +76,7 @@ public class InGameUIManager : MonoBehaviour
         Time.timeScale = 0f;
         DOTween.PauseAll();
     }
-
+    //재시작 기능
     public void Resume()
     {
         GameObject btn = pausePanel.transform.GetChild(0).gameObject;
@@ -84,6 +85,8 @@ public class InGameUIManager : MonoBehaviour
         optionPanel.SetActive(false);
         StartCoroutine(StartResume());
     }
+
+    //재시작 3초 카운트
     IEnumerator StartResume()
     {
         pausePanel.SetActive(false);
@@ -107,6 +110,7 @@ public class InGameUIManager : MonoBehaviour
         DOTween.PlayAll();
     }
 
+    //메인메뉴로 돌아가기
     public void GoMainManu()
     {
         GameManager.instance.DefaultSaveData();
@@ -117,16 +121,19 @@ public class InGameUIManager : MonoBehaviour
         SceneManager.LoadScene("Lobby");
     }
 
+    //게임 종료
     public void QuitGame()
     {
         Application.Quit();
     }
 
+    //세이브 알람
     void SaveAlarmSet()
     {
         StartCoroutine(SaveAlarmGo());
     }
 
+    //세이브 알람 코루틴
     IEnumerator SaveAlarmGo()
     {
         TextMeshProUGUI text = saveText.GetComponent<TextMeshProUGUI>();
@@ -167,6 +174,7 @@ public class InGameUIManager : MonoBehaviour
         saveText.SetActive(false);
     }
 
+    //세이브 연출 애니메이션
     IEnumerator SaveCircleSet()
     {
         float t = 0f;
@@ -185,13 +193,14 @@ public class InGameUIManager : MonoBehaviour
 
         saveCircle.SetActive(false);
     }
-
+    
+    // 초기 음악 이름 띄어주는 함수
     public void SetMusicInformation(SongName songName)
     {
         string name = SplitCamelCase(songName.ToString());
         TextMeshProUGUI text = musicNameInform.GetComponent<TextMeshProUGUI>();
         text.text = name;
-        if(GameManager.instance.isFirstGame)
+        if (GameManager.instance.isFirstGame)
         {
             GameManager.instance.isFirstGame = false;
             StartCoroutine(FadeInOutGuideButton());
@@ -202,6 +211,8 @@ public class InGameUIManager : MonoBehaviour
         deathText.DOFade(1f, 2f);
         StartCoroutine(FadeInMusicInformation());
     }
+
+    // 처음 게임 시작시 버튼 안내 함수
     IEnumerator FadeInOutGuideButton()
     {
         float t = 0f;
@@ -239,6 +250,8 @@ public class InGameUIManager : MonoBehaviour
         }
         GuideButton.SetActive(false);
     }
+
+    // 음악 정보 페이드 인
     IEnumerator FadeInMusicInformation()
     {
         TextMeshProUGUI text = musicNameInform.GetComponent<TextMeshProUGUI>();

@@ -49,6 +49,7 @@ public class NoteCreate : MonoBehaviour
         defaultColor = footHoldCircle.color;
     }
 
+    // 인버전상태 돌입시 업데이트
     void UpdateInversion(bool inversion)
     {
         int spriteIndex = 0;
@@ -102,6 +103,7 @@ public class NoteCreate : MonoBehaviour
         StopAllCoroutines();
     }
 
+    //노트 생성 알고리즘
     IEnumerator CreateNote()
     {
         int spriteIndex = 0;
@@ -181,6 +183,8 @@ public class NoteCreate : MonoBehaviour
         if (isActiveAndEnabled)
             StartCoroutine(SetCircle());
     }
+
+    // 노트 파괴
     public IEnumerator DestroyNote()
     {
         float elapsed = 0f;
@@ -205,6 +209,7 @@ public class NoteCreate : MonoBehaviour
         FootHoldObjectFool.instance.ReturnFootHold(this.gameObject);
     }
 
+    // 시간초과시 게임오버 알고리즘
     IEnumerator SetCircle()
     {
         yield return new WaitForSeconds(clearTime);
@@ -216,6 +221,8 @@ public class NoteCreate : MonoBehaviour
             yield break;
         }
     }
+
+    // 노트 클리어시 동글뱅이 없애버리기
     public IEnumerator SetPointCircle()
     {
         float elapsed = 0f;

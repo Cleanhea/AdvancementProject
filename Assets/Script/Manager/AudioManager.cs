@@ -22,12 +22,18 @@ public class AudioManager : MonoBehaviour
     VCA sfxVCA;
     float sfxVol = 1f;
     public float SFXVolume => sfxVol;
+
+    //지정 사운드들
     public EventReference uiSet;
     public EventReference uiClick;
     public EventReference uiCancel;
     public EventReference goStage;
     public EventReference logo;
+
+
     private FMOD.Studio.EVENT_CALLBACK beatCallback;
+
+
     public EventInstance bgmInstance;
     string currentBGMPath;
     public static event Action<int, int> OnBeat; // bar, beat
@@ -72,6 +78,7 @@ public class AudioManager : MonoBehaviour
         currentBGMPath = eventPath;
     }
 
+    // 현재 마디 콜백 함수
     FMOD.RESULT OnTimelineBeat(EVENT_CALLBACK_TYPE type, IntPtr eventInstPtr, IntPtr paramPtr)
     {
         if (type == EVENT_CALLBACK_TYPE.TIMELINE_BEAT)
@@ -109,6 +116,7 @@ public class AudioManager : MonoBehaviour
         currentBGMPath = null;
     }
 
+    // 볼륨 설정
     public void SetMusicVolume(float v)
     {
         musicVol = Mathf.Clamp01(v);
@@ -117,6 +125,7 @@ public class AudioManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    // 인게임 내에서 볼륨 설정
     public void SetMusicVolumeInGame(float v)
     {
         musicVCA.setVolume(v);
@@ -126,6 +135,7 @@ public class AudioManager : MonoBehaviour
         musicVCA.setVolume(musicVol);
     }
 
+    // 게임 끝났을때 볼륨 페이드 아웃
     public IEnumerator VolumeFadeOut()
     {
         float t = 0f;
@@ -140,12 +150,14 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     #region ------------------SFX-----------------
+    // 효과음 재생
     public void PlaySFX(EventReference sfx)
     {
         if (sfx.IsNull) return;
         RuntimeManager.PlayOneShot(sfx);
     }
 
+    // 효과음 볼륨 설정
     public void SetSFXVolume(float v)
     {
         sfxVol = Mathf.Clamp01(v);

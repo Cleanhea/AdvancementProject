@@ -55,6 +55,8 @@ public class BeatManager : MonoBehaviour
             RestartHandleBeat(bar, beatIndex);
         StartCoroutine(HandleOnBeatGo(bar, beatIndex));
     }
+
+    // 비트 발생시 노트 생성
     IEnumerator HandleOnBeatGo(int bar, int beatIndex) {
         yield return new WaitForSeconds(GameManager.instance.delayTempoOffset);
         while (noteQueue.Count > 0 && noteQueue.Peek().bar == bar && noteQueue.Peek().beat == beatIndex)
