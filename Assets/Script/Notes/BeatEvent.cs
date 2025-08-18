@@ -387,11 +387,11 @@ public class BeatEvent : MonoBehaviour
         }
         PlayerPrefs.Save();
         yield return AudioManager.instance.VolumeFadeOut();
+        
         yield return StartCoroutine(MusicSetCircle(false));
         GameManager.instance.DefaultSaveData();
         GameManager.instance.deathCount = 0;
         GameManager.instance.gameState = GameState.lobi;
-        AudioManager.instance.PlayMusic("event:/Lobi", 0);
         SceneManager.LoadScene("Lobby");
     }
 

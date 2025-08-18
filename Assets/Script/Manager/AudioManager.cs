@@ -5,6 +5,7 @@ using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
 using PimDeWitte.UnityMainThreadDispatcher;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -57,6 +58,22 @@ public class AudioManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Lobby")
+        {
+            PlayMusic("event:/Lobi", 0);
         }
     }
 
@@ -128,10 +145,12 @@ public class AudioManager : MonoBehaviour
     // 인게임 내에서 볼륨 설정
     public void SetMusicVolumeInGame(float v)
     {
+        if (!EnsureVCA(ref musicVCA, MUSIC_VCA_PATH)) return;
         musicVCA.setVolume(v);
     }
     void ApplyMusicVolume()
     {
+        if (!EnsureVCA(ref musicVCA, MUSIC_VCA_PATH)) return;
         musicVCA.setVolume(musicVol);
     }
 
@@ -168,6 +187,7 @@ public class AudioManager : MonoBehaviour
 
     void ApplySFXVolume()
     {
+        if (!EnsureVCA(ref musicVCA, MUSIC_VCA_PATH)) return;
         sfxVCA.setVolume(sfxVol);
     }
 
@@ -176,4 +196,11 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.PlayOneShot(uiSet);
     }
     #endregion
+
+    bool EnsureVCA(ref VCA vca, string path)
+    {
+        if (vca.isValid()) return true;
+        var r = RuntimeManager.StudioSystem.getVCA(path, out vca);
+        return r == FMOD.RESULT.OK && vca.isValid();
+    }
 }
