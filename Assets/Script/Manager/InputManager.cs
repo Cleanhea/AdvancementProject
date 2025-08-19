@@ -57,7 +57,7 @@ public class InputManager : MonoBehaviour
                 }
             }
         }
-        if (KeyCom > 2)
+        if (BeatManager.instance.Playname != SongName.Tutorial && KeyCom > 2)
         {
             Debug.Log("over");
             GameManager.instance.RestartGame(queue.Peek().noteData.type, 0);
