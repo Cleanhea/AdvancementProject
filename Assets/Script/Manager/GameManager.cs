@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public bool isInputEnabled = true;
     Coroutine saveCoroutine;
     bool resetting;//중복호출방지
+    public int KeyCom = 0;
 
     private void Awake()
     {
@@ -140,6 +141,7 @@ public class GameManager : MonoBehaviour
         InGameUIManager.instance.gameoverObjectFalse();
         BeatEvent.instance.SetGameoverCircle(type,1f);
         AudioManager.instance.bgmInstance.setPaused(false);
+        KeyCom = 0;
         Time.timeScale = 1f;
         resetting = false;
     }
@@ -166,5 +168,6 @@ public class GameManager : MonoBehaviour
         saveState.afterInversion = false;
         saveState.globalLightColor = Color.white;
         saveState.remainingNotes.Clear();
+        KeyCom = 0;
     }
 }

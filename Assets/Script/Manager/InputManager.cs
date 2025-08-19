@@ -11,7 +11,6 @@ public class InputManager : MonoBehaviour
     KeyCode[] rightKeys = new KeyCode[4];
     [SerializeField]
     KeyCode ESC = KeyCode.Escape;
-    int KeyCom = 0;
 
     void Update()
     {
@@ -53,11 +52,11 @@ public class InputManager : MonoBehaviour
             {
                 if (Input.GetKeyDown(keys[i]) && i != dir)
                 {
-                    KeyCom++;
+                    GameManager.instance.KeyCom++;
                 }
             }
         }
-        if (BeatManager.instance.Playname != SongName.Tutorial && KeyCom > 2)
+        if (BeatManager.instance.Playname != SongName.Tutorial && GameManager.instance.KeyCom > 2)
         {
             Debug.Log("over");
             GameManager.instance.RestartGame(queue.Peek().noteData.type, 0);
@@ -86,7 +85,7 @@ public class InputManager : MonoBehaviour
                 queue.Peek().noteState = NoteState.Clear;
                 queue.Peek().StartCoroutine(queue.Peek().DestroyNote());
                 queue.Dequeue();
-                KeyCom = 0;
+                GameManager.instance.KeyCom = 0;
             }
             else
             {
