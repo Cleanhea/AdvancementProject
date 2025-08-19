@@ -217,7 +217,7 @@ public class NoteCreate : MonoBehaviour
         if (noteState == NoteState.Available)
         {
             Debug.Log("시간초과로 인한 게임오버");
-            GameManager.instance.RestartGame();
+            GameManager.instance.RestartGame(noteData.type, 1);
             yield break;
         }
     }

@@ -16,7 +16,9 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] GameObject saveCircle;
     [SerializeField] GameObject musicNameInform;
     [SerializeField] GameObject GuideButton;
+    [SerializeField] GameObject gameoverCircle;
     [SerializeField] TextMeshProUGUI deathText;
+    [SerializeField] TextMeshProUGUI gameoverText;
     [SerializeField] Image sliderFill;
     [SerializeField] Image sliderBackGround;
     [SerializeField] Slider songDistanceSlider;
@@ -44,6 +46,7 @@ public class InGameUIManager : MonoBehaviour
         deathText.color = new Color(1f - bg.r, 1f - bg.g, 1f - bg.b);
         sliderFill.color = new Color(1f - bg.r, 1f - bg.g, 1f - bg.b);
         sliderBackGround.color = new Color(bg.r, bg.g, bg.b);
+        gameoverText.color = new Color(1f - bg.r, 1f - bg.g, 1f - bg.b);
     }
     void OnEnable()
     {
@@ -292,6 +295,36 @@ public class InGameUIManager : MonoBehaviour
     public Tween FadeOutDeathText()
     {
         return deathText.DOFade(0f, 1f);
+    }
+    public Sequence gameoverTextSet(int type,string gameover)
+    {
+        Sequence seq = DOTween.Sequence().SetUpdate(true);
+        gameoverText.gameObject.SetActive(true);
+        gameoverCircle.SetActive(true);
+        CircleRingRenderer gameoverCircleColor = gameoverCircle.GetComponent<CircleRingRenderer>();
+        gameoverCircleColor.Color = type == 0 ? Color.red : Color.blue;
+        Color c = gameoverText.color;
+        c.a = 0f;
+        gameoverText.color = c;
+        gameoverText.text = gameover;
+        gameoverCircle.transform.position = BeatEvent.instance.GetCirclePosition(type);
+        CircleRingRenderer circleRingRenderer = gameoverCircle.GetComponent<CircleRingRenderer>();
+        circleRingRenderer.Radius = 0.5f;
+        Tween t1 = gameoverText.DOFade(1f, 1f);
+        Tween t2 = DOTween.To(
+            () => circleRingRenderer.Radius,
+            r => circleRingRenderer.Radius = r,
+            15f,
+            1.5f
+        );
+        seq.Join(t1);
+        seq.Join(t2);
+        return seq;
+    }
+    public void gameoverObjectFalse()
+    {
+        gameoverCircle.SetActive(false);
+        gameoverText.gameObject.SetActive(false);
     }
 
 

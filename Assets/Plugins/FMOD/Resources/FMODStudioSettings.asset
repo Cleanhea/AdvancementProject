@@ -342,6 +342,7 @@ MonoBehaviour:
   MasterBanks:
   - Master
   Banks:
+  - Blocken
   - Click
   - Dubidubidu
   - GoStage

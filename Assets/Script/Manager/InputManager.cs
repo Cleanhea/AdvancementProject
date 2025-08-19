@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour
     KeyCode[] rightKeys = new KeyCode[4];
     [SerializeField]
     KeyCode ESC = KeyCode.Escape;
+    int KeyCom = 0;
 
     void Update()
     {
@@ -44,10 +45,22 @@ public class InputManager : MonoBehaviour
                 if (Input.GetKeyDown(keys[i]) && i != dir)
                 {
                     Debug.Log("wrong key");
-                    GameManager.instance.RestartGame();
+                    GameManager.instance.RestartGame(queue.Peek().noteData.type, 0);
                     return;
                 }
             }
+            if (queue.Peek().noteState == NoteState.Available)
+            {
+                if (Input.GetKeyDown(keys[i]) && i != dir)
+                {
+                    KeyCom++;
+                }
+            }
+        }
+        if (KeyCom > 2)
+        {
+            Debug.Log("over");
+            GameManager.instance.RestartGame(queue.Peek().noteData.type, 0);
         }
         if (Input.GetKeyDown(keys[dir]))
         {
@@ -63,7 +76,7 @@ public class InputManager : MonoBehaviour
                 StartCoroutine(queue.Peek().SetPointCircle());
                 if (noteData.cameraZoom != 0)
                 {
-                    BeatEvent.instance.SetCameraZoom(noteData.cameraZoom,noteData.zoomSpeed);
+                    BeatEvent.instance.SetCameraZoom(noteData.cameraZoom, noteData.zoomSpeed);
                 }
                 BeatEvent.instance.MoveCircle(dir, type);
                 if (noteData.input != null)
@@ -73,13 +86,14 @@ public class InputManager : MonoBehaviour
                 queue.Peek().noteState = NoteState.Clear;
                 queue.Peek().StartCoroutine(queue.Peek().DestroyNote());
                 queue.Dequeue();
+                KeyCom = 0;
             }
             else
             {
                 if (BeatManager.instance.Playname != SongName.Tutorial)
                 {
                     Debug.Log("over");
-                    GameManager.instance.RestartGame();
+                    GameManager.instance.RestartGame(queue.Peek().noteData.type, 0);
                 }
             }
         }

@@ -10,6 +10,7 @@ public enum GameState
     inGame,
     pause,
     option,
+    gameover,
 }
 
 public class GameManager : MonoBehaviour
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     public float delayTempoOffset = 0f;
     public bool isInputEnabled = true;
     Coroutine saveCoroutine;
+    bool resetting;//중복호출방지
 
     private void Awake()
     {
@@ -86,24 +88,36 @@ public class GameManager : MonoBehaviour
     }
 
     // 로드 기능
-    public void RestartGame()
+    public void RestartGame(int type = 0,int gameoverType = 0)//타키입력 0 시간초과 1
     {
+        if (resetting)
+            return;
+        resetting = true;
         if (saveCoroutine != null)
         {
             StopCoroutine(saveCoroutine);
             saveCoroutine = null;
         }
-        StartCoroutine(ResetGame());
+        StartCoroutine(ResetGame(type,gameoverType));
     }
-    IEnumerator ResetGame()
+    IEnumerator ResetGame(int type, int gameoverType)
     {
+        AudioManager.instance.bgmInstance.setPaused(true);
+        gameState = GameState.gameover;
+        Time.timeScale = 0f;
+        string gameoverText = gameoverType == 0 ? "Gameover : 다른 키 입력" : "Gameover : 시간초과";
+        BeatEvent.instance.SetGameoverCircle(type,0f);
+        Sequence seq = InGameUIManager.instance.gameoverTextSet(type, gameoverText);
+        AudioManager.instance.PlaySFX(AudioManager.instance.broken);
+        yield return seq.WaitForCompletion();
+        yield return new WaitForSecondsRealtime(0.5f);
         saveOK = 0;
         deathCount++;
-        OnRestartRequest?.Invoke(deathCount);
         BeatManager.instance.LinkDisable();
+        BeatEvent.instance.StopAllCoroutines();
+        DOTween.KillAll(false);
         SongName playname = BeatManager.instance.Playname;
         BeatEvent.instance.SetCameraPos(new Vector3(saveState.cameraPosition.x, saveState.cameraPosition.y, -10));
-        DOTween.KillAll(false);
         //오브젝트 풀 리셋
         FootHoldObjectFool.instance.ResetQueue();
         AudioManager.instance.StopMusic();
@@ -112,17 +126,22 @@ public class GameManager : MonoBehaviour
         BeatEvent.instance.rightFootHoldQueue.Clear();
         BeatEvent.instance.leftCirclePositionQueue.Clear();
         BeatEvent.instance.rightCirclePositionQueue.Clear();
-        FootHoldObjectFool.instance.AllReturnFootHold();
         BeatEvent.instance.mainCamera.orthographicSize = saveState.CameraZoom;
         BeatEvent.instance.inversion = saveState.isInversion;
         BeatEvent.instance.afterInversion = saveState.afterInversion;
         BeatEvent.instance.SetStageLightActive(saveState.isInversion);
         BeatEvent.instance.globalLight2D.color = saveState.globalLightColor;
-        BeatEvent.instance.StopAllCoroutines();
-        yield return null;
-        BeatManager.instance.BeatStartFromSave(playname, saveState);
         yield return null;
         AudioManager.instance.PlayMusic("event:/" + BeatManager.instance.Playname, saveState.musicTime);
+        yield return null;
+        BeatManager.instance.BeatStartFromSave(playname, saveState);
+        OnRestartRequest?.Invoke(deathCount);
+        gameState = GameState.inGame;
+        InGameUIManager.instance.gameoverObjectFalse();
+        BeatEvent.instance.SetGameoverCircle(type,1f);
+        AudioManager.instance.bgmInstance.setPaused(false);
+        Time.timeScale = 1f;
+        resetting = false;
     }
 
     // 1차 세이브 포인트 체크

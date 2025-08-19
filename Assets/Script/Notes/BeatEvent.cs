@@ -145,7 +145,8 @@ public class BeatEvent : MonoBehaviour
         Color rc = r.color;
         Color lgc = lg.color;
         Color rgc = rg.color;
-        if (gameStart) {
+        if (gameStart)
+        {
             lc.a = 0f;
             rc.a = 0f;
             lgc.a = 0f;
@@ -310,7 +311,17 @@ public class BeatEvent : MonoBehaviour
         leftPoint = startLeftCirclePosition;
         rightPoint = startRightCirclePosition;
     }
-
+    public Vector3 GetCirclePosition(int type)
+    {
+        if (type == 0)
+        {
+            return leftCircle.transform.position;
+        }
+        else
+        {
+            return rightCircle.transform.position;
+        }
+    }
     public Tween MoveGuideCircle(int dir, int type, float duration)
     {
         GameObject guideCircle = leftGuideCircle;
@@ -387,7 +398,7 @@ public class BeatEvent : MonoBehaviour
         }
         PlayerPrefs.Save();
         yield return AudioManager.instance.VolumeFadeOut();
-        
+
         yield return StartCoroutine(MusicSetCircle(false));
         GameManager.instance.DefaultSaveData();
         GameManager.instance.deathCount = 0;
@@ -519,6 +530,13 @@ public class BeatEvent : MonoBehaviour
         {
             stageLight.SetActive(active);
         }
+    }
+    public void SetGameoverCircle(int type,float a)
+    {
+        SpriteRenderer s = type == 0 ? leftCircle.gameObject.GetComponent<SpriteRenderer>() : rightCircle.gameObject.GetComponent<SpriteRenderer>();
+        Color c = s.color;
+        c.a = a;
+        s.color = c;
     }
 #endregion
 }

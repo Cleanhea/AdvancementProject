@@ -30,6 +30,7 @@ public class AudioManager : MonoBehaviour
     public EventReference uiCancel;
     public EventReference goStage;
     public EventReference logo;
+    public EventReference broken;
 
 
     private FMOD.Studio.EVENT_CALLBACK beatCallback;
@@ -73,6 +74,7 @@ public class AudioManager : MonoBehaviour
     {
         if (scene.name == "Lobby")
         {
+            SetMusicVolume(AudioManager.instance.MusicVolume);
             PlayMusic("event:/Lobi", 0);
         }
     }

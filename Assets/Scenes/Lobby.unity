@@ -1866,6 +1866,13 @@ MonoBehaviour:
       Data3: -1852108621
       Data4: 270731903
     Path: event:/Logo
+  broken:
+    Guid:
+      Data1: -746865092
+      Data2: 1224183666
+      Data3: 1879391931
+      Data4: 1357459554
+    Path: event:/Bloken
 --- !u!4 &343200618
 Transform:
   m_ObjectHideFlags: 0

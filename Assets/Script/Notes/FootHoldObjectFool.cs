@@ -45,16 +45,4 @@ public class FootHoldObjectFool : MonoBehaviour
             }
         }
     }
-
-    public void AllReturnFootHold()
-    {
-        foreach (var footHold in footHoldList)
-        {
-            if (footHold.activeSelf)
-            {
-                footHold.SetActive(false);
-                footHoldQueue.Enqueue(footHold);
-            }
-        }
-    }
 }

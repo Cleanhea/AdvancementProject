@@ -39,7 +39,6 @@ public class BeatManager : MonoBehaviour
     public void BeatStartFromSave(SongName songName, SaveState s)
     {
         LinkDisable();
-        notes = NotesLoader.LoadChart(songName);
         bpm = notes.bpm;
         Playname = songName;
         noteQueue = new Queue<Notes>(s.remainingNotes);
